@@ -70,12 +70,14 @@ function portfolio_shortcode($attr) {
 
 } //ends the portfolio_shortcode function
 
+add_action('wp_head',  wp_enqueue_script('jquery') );
 
 // Output the javascript & css for the header here
 
 function portfolio_head() {
 	
 	wp_enqueue_script('jquery');
+	
 	echo '
 <!-- loaded by Portfolio Slideshow Plugin-->
 
