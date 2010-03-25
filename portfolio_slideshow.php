@@ -4,7 +4,7 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://daltonrooney.com/portfolio
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 0.3.2
+Version: 0.3.3
 Author URI: http://daltonrooney.com
 */ 
 
@@ -86,35 +86,43 @@ function portfolio_head() {
 	echo plugins_url( 'portfolio-slideshow/jquery.cycle.min.js' );
 	echo '" type="text/javascript" language="javascript"></script>';
 	echo '
-	<script type="text/javascript"> 
+<script type="text/javascript"> 
+	
 	jQuery(document).ready(function($) {
+	
+		$(document).ready(function() {
 		
-		$(\'.portfolio-slideshow\').cycle({
-			fx: \'fade\', 
-			speed: \'fast\', 
-			timeout: 0, 
-			next: \'.slideshow-next\', 
-			prev: \'.slideshow-prev\', 
-			after: onAfter
+			$(\'.portfolio-slideshow\').each(function() {
+			
+				var p = this.parentNode;
+				$(this).cycle({
+				
+					fx: \'fade\',
+					speed: \'slow\',
+					timeout: 0,
+					next: $(\'a.slideshow-next\', p),
+					prev: $(\'a.slideshow-prev\', p)
+				
+				});
+			
+			});
+		
 		});
 	
-		function onAfter(curr,next,opts) {
-			var caption = (opts.currSlide + 1) + \' of \' + opts.slideCount;
-			$(\'#slideshow-info\').html(caption);
-		}
 	});
-	</script> 
 
-	<style>
-		.slideshow-nav {padding:0 0 6px 0}
-		.slideshow-nav a {text-decoration:underline; color: #444444;}
-		.slideshow-nav a.slideshow-prev {margin: 0 15px 0 0;}
-		.slideshow-nav a.slideshow-next {margin: 0 25px 0 15px;}
-		.slideshow {margin: 0 0 10px 0;}
-	</style>
+</script> 
+
+<style>
+	.slideshow-nav {padding:0 0 6px 0}
+	.slideshow-nav a {text-decoration:underline; color: #444444;}
+	.slideshow-nav a.slideshow-prev {margin: 0 15px 0 0;}
+	.slideshow-nav a.slideshow-next {margin: 0 25px 0 15px;}
+	.slideshow {margin: 0 0 10px 0;}
+</style>
 
 <!-- end Portfolio Slideshow Plugin -->
-';
+'; 
 
 } // ends the javascript & css for head
 
