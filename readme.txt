@@ -4,7 +4,7 @@ Donate link: http://daltonrooney.com/portfolio/support
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery
 Requires at least: 2.8
 Tested up to: 2.9.2
-Stable tag: 0.3.4
+Stable tag: 0.3.5
 
 A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page.
 
@@ -39,6 +39,11 @@ If you would like to change the size of the images system-wide (for example, you
 2. Settings control panel.
 
 == Changelog ==
+
+
+0.3.5 
+
+* Fixed a bug where the slideshow was always at the top of the page, no matter where it is supposed to be in the content editor.
 
 0.3.4
 

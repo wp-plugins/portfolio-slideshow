@@ -4,7 +4,7 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://daltonrooney.com/portfolio
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 0.3.4
+Version: 0.3.5
 Author URI: http://daltonrooney.com
 */ 
 
@@ -29,14 +29,14 @@ function portfolio_shortcode() {
 
 	if (!is_feed()){
 	
-	echo '<div class="slideshow-nav"><a class="slideshow-prev" href="#">Prev</a>|<a class="slideshow-next" href="#">Next</a>';
+	$slideshow = '<div class="slideshow-nav"><a class="slideshow-prev" href="#">Prev</a>|<a class="slideshow-next" href="#">Next</a>';
 	
 	if ( is_page()) //only shows slideshow info if we're on a page
-	{echo '<span id="slideshow-info"></span>';}
+	{ $slideshow .= '<span id="slideshow-info"></span>';}
 	
-	echo '</div>'; } // end if !is_feed
+	$slideshow .= '</div>'; } // end if !is_feed
 	
-	echo '<div class="portfolio-slideshow">';
+	$slideshow .= '<div class="portfolio-slideshow">';
 	
 	$args =  array(
 		'order'          => 'ASC',
@@ -52,26 +52,29 @@ function portfolio_shortcode() {
 	$attachments = get_posts($args);
 	if ($attachments) {
 		foreach ($attachments as $attachment) {
-			echo "<div class='slideshow-next'>";
+			$slideshow .= "<div class='slideshow-next'>";
 			
-			echo wp_get_attachment_image($attachment->ID, $args['size'], false, false);
+			$slideshow .= wp_get_attachment_image($attachment->ID, $args['size'], false, false);
 			
 			$title = $attachment->post_title;
 			if (isset($title)) { 
-				echo '<p class="slideshow-title">'.$title.'</p>'; 
+				$slideshow .= '<p class="slideshow-title">'.$title.'</p>'; 
 			}	
 			
 			$caption = $attachment->post_excerpt;
 			if (isset($caption)) { 
-				echo '<p class="slideshow-caption">'.$caption.'</p>'; 
+				$slideshow .= '<p class="slideshow-caption">'.$caption.'</p>'; 
 			}
 			
-			echo "</div>";
-		} // end slideshow loop
+			$slideshow .= "</div>";
+			
+		
+		}  // end slideshow loop
 	} // end if ($attachments)
 	
-	echo "</div><!-- ends the portfolio-slideshow div-->";
+	$slideshow .= "</div>";
 
+return $slideshow;	
 } //ends the portfolio_shortcode function
 
 
