@@ -4,7 +4,7 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://daltonrooney.com/portfolio
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 0.3.5
+Version: 0.3.6
 Author URI: http://daltonrooney.com
 */ 
 
@@ -23,15 +23,19 @@ $ps_speed = get_option('portfolio_slideshow_transition_speed');
 add_shortcode('portfolio_slideshow', 'portfolio_shortcode');
 
 // define the shortcode function
-function portfolio_shortcode() {
-	
-	global $ps_size;
+function portfolio_shortcode($atts) {
 
+	global $ps_size;
+	
+	extract(shortcode_atts(array(
+		'size' => $ps_size,
+	), $atts));
+		
 	if (!is_feed()){
 	
 	$slideshow = '<div class="slideshow-nav"><a class="slideshow-prev" href="#">Prev</a>|<a class="slideshow-next" href="#">Next</a>';
 	
-	if ( is_page()) //only shows slideshow info if we're on a page
+if (is_page() || is_single()) //only shows slideshow info if we're on a single post or page
 	{ $slideshow .= '<span id="slideshow-info"></span>';}
 	
 	$slideshow .= '</div>'; } // end if !is_feed
@@ -46,7 +50,7 @@ function portfolio_shortcode() {
 		'post_mime_type' => 'image',
 		'post_status'    => null,
 		'numberposts'    => -1,
-		'size'			 => $ps_size
+		'size'			 => $size
 	) ;	
 	
 	$attachments = get_posts($args);
@@ -90,12 +94,59 @@ function portfolio_head() {
 	
 	echo '
 <!-- loaded by Portfolio Slideshow Plugin-->';
-	echo '
+	
+if (is_page() || is_single()) //only shows special features if we're on a single post or page
+	{	echo '
 <script src="';
 	echo plugins_url( 'portfolio-slideshow/jquery.cycle.all.min.js' );
-	echo '" type="text/javascript" language="javascript"></script>';
-	echo '
-<script type="text/javascript"> 
+	echo '" type="text/javascript" language="javascript"></script>
+	<script type="text/javascript"> 
+	jQuery(document).ready(function($) {
+		$(document).ready(function() {
+		
+			$(function() {
+				var index = 0, hash = window.location.hash;
+				if (hash) {
+				index = /\d+/.exec(hash)[0];
+				index = (parseInt(index) || 1) - 1; // slides are zero-based
+			}
+
+			$(\'.portfolio-slideshow\').each(function() {
+				var p = this.parentNode;
+				$(this).cycle({
+					fx: \''. $ps_trans . '\',
+					speed: '. $ps_speed . ',
+					timeout: 0,
+					next: $(\'.slideshow-next\', p),
+					startingSlide: index,
+					prev: $(\'.slideshow-prev\', p),
+					after:     onAfter
+				});
+			});
+		});
+
+function onAfter(curr,next,opts) {
+	window.location.hash = opts.currSlide + 1;
+	var caption = (opts.currSlide + 1) + \' of \' + opts.slideCount;
+	$(\'#slideshow-info\').html(caption);
+}
+
+	}); });
+</script> 
+<style>
+	.slideshow-nav {padding:0 0 6px 0}
+	.slideshow-nav a {text-decoration:underline; color: #444444;}
+	.slideshow-nav a.slideshow-prev {margin: 0 15px 0 0;}
+	.slideshow-nav a.slideshow-next {margin: 0 25px 0 15px;}
+	.slideshow {margin: 0 0 10px 0;}
+</style>
+<!-- end Portfolio Slideshow Plugin -->
+'; }else //show the basic slideshow
+{	echo '
+<script src="';
+	echo plugins_url( 'portfolio-slideshow/jquery.cycle.all.min.js' );
+	echo '" type="text/javascript" language="javascript"></script>
+	<script type="text/javascript"> 
 	jQuery(document).ready(function($) {
 		$(document).ready(function() {
 			$(\'.portfolio-slideshow\').each(function() {
@@ -126,7 +177,7 @@ function onAfter(curr,next,opts) {
 	.slideshow {margin: 0 0 10px 0;}
 </style>
 <!-- end Portfolio Slideshow Plugin -->
-'; 
+'; } //ends the if/else for special features
 } // ends portfolio_head function
 
 add_action('wp_head', 'portfolio_head');
