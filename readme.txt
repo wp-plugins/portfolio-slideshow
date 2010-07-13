@@ -3,8 +3,8 @@ Contributors: daltonrooney
 Donate link: http://daltonrooney.com/portfolio/support
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery
 Requires at least: 2.8
-Tested up to: 2.9.2
-Stable tag: 0.3.9
+Tested up to: 3.0
+Stable tag: 0.3.10
 
 A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page.
 
@@ -99,6 +99,9 @@ A: I do try to add features based on user feedback, but only if I think it will 
 
 == Changelog ==
 
+0.3.10
+
+* Continue to improve the way jQuery is loaded so it is compatible with the most number of plugin/theme combinations. 
 
 0.3.9 
 
@@ -141,8 +144,6 @@ A: I do try to add features based on user feedback, but only if I think it will 
 * Added configuration settings for transition fx and transition time.
 
 * Added status notification in plugin upgrade area
-
-
 
 * Added support for slide info (slide number). Works for pages only.
 
