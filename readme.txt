@@ -3,8 +3,8 @@ Contributors: daltonrooney
 Donate link: http://daltonrooney.com/portfolio/support
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery
 Requires at least: 2.8
-Tested up to: 2.9.2
-Stable tag: 0.3.7
+Tested up to: 3.0
+Stable tag: 0.4.0
 
 A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page.
 
@@ -27,6 +27,14 @@ Autoplay on a per-slideshow basis. Use the timeout attribute in the shortcode li
 [portfolio_slideshow timeout=5000]
 
 Where timeout equals the time per slide in milliseconds. Leave this out for the default manual advance slideshow.
+
+Navigation thumbnails can be displayed (shown on single posts and pages only):
+
+[portfolio_slideshow thumbs=true]
+
+Navigation links can be placed at the bottom:
+
+[portfolio_slideshow nav=bottom]
 
 
 
@@ -52,15 +60,15 @@ A: No, the plugin does not support random folders of images or images on a third
 
 
 
-Q: Why doesn't my slideshow autoplay or show the slide numbers on the homepage?
+Q: Why doesn't my slideshow autoplay, show the slide numbers or thumbnails on the homepage?
 
-A: This is strictly a limitation of my coding ability. I am able to add those features in when there is only one slideshow per page. If there's more than one slideshow per page, autoplay and slide numbers conflict with each other. This is a known problem that I will continue to work on. If you are familiar with jQuery and have any ideas, please drop a line in the forums.
+A: These features conflict when there is more than one slideshow on a page, so they are disabled except when they are displayed on single posts or pages only.
 
 Q: Why isn't my slideshow loading?
 
 
 
-A: Do you see all of the images that are attached to the post, but they're not displayed in a slideshow format? This is often caused by a jQuery conflict. View the HTML source of the page which is supposed to show the slideshow. Do you see more than one copy of jQuery being loaded? This plugin loads the included WordPress version of jQuery, in "No Conflict" mode, which seems to be the right way to do it.
+A: Do you see all of the images that are attached to the post, but they're not displayed in a slideshow format? Or maybe it looks right, but clicking does not advance the slideshow? This is often caused by a jQuery conflict. View the HTML source of the page which is supposed to show the slideshow. Do you see more than one copy of jQuery being loaded? This plugin loads the included WordPress version of jQuery, in "No Conflict" mode, which seems to be the right way to do it.
 
 
 Try disabling other plugins that load jQuery and see if that fixes the problem. You may need to get in touch with the author of that plugin to make sure they are loading jQuery correctly.
@@ -79,7 +87,7 @@ Q: Can you modify the plugin to do X, Y, or Z?
 
 
 
-A: I do try to add features based on user feedback, but only if I think it will benefit the majority of users. Please use the support forum to propose new features and I will add them to the list of ideas. I only work on this plugin in my spare time, which is limited, so unless it is an emergency it will probably take a little while to implement.
+A: Maybe. I do try to add features based on user feedback, but only if I think it will benefit the majority of users. Please use the support forum to propose new features and I will add them to the list of ideas. I only work on this plugin in my spare time, which is limited, so unless it is an emergency it will probably take a little while to implement.
 
 == Screenshots ==
 
@@ -99,6 +107,37 @@ A: I do try to add features based on user feedback, but only if I think it will 
 
 == Changelog ==
 
+
+
+
+0.4.0
+
+* Moved styles to external file instead of loading them inline and fixed validation issue
+
+* Fixed titles display
+
+* Added autoplay option to options panel 
+
+* Added nav position option to shortcode and options panel
+
+* Thumbnails! Enable them in the shortcode or the options panel. 
+
+
+0.3.10
+
+
+
+* Continue to improve the way jQuery is loaded so it is compatible with the most number of plugin/theme combinations. 
+
+0.3.9 
+
+* Bugfix
+
+0.3.8
+
+* Improved compatibility with other cycle based plugins and themes.
+
+* Code cleanup.
 
 0.3.7 
 
@@ -131,8 +170,6 @@ A: I do try to add features based on user feedback, but only if I think it will 
 * Added configuration settings for transition fx and transition time.
 
 * Added status notification in plugin upgrade area
-
-
 
 * Added support for slide info (slide number). Works for pages only.
 
