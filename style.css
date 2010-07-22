@@ -1,5 +1,3 @@
-/* @override http://daltonrooney.com/portfolio-dev/wp-content/plugins/portfolio-slideshow/style.css */
-
 div.portfolio-slideshow div.slideshow-next {display: none;}
 div.portfolio-slideshow div.first.slideshow-next{display: block;}
 div.slideshow-nav {padding:0 0 6px 0}
