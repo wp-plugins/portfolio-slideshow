@@ -4,7 +4,7 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://daltonrooney.com/portfolio
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 0.4.1
+Version: 0.4.3
 Author URI: http://daltonrooney.com
 */ 
 
@@ -33,6 +33,17 @@ $ps_timeout = get_option('portfolio_slideshow_timeout');
 // create the shortcode
 add_shortcode('portfolio_slideshow', 'portfolio_shortcode');
 
+
+
+function add_post_id($content) { // this puts the attachment ID on the media page
+
+   $showlink = "Attachment ID:" . get_the_ID($post->ID, true);
+    $content[] = $showlink;
+    return $content;
+}
+
+add_filter ( 'media_row_actions', 'add_post_id');
+
 // define the shortcode function
 function portfolio_shortcode($atts) {
 
@@ -43,6 +54,8 @@ function portfolio_shortcode($atts) {
 		'timeout' => $ps_timeout,
 		'thumbs' => $ps_thumbs,
 		'nav' => $ps_navpos,
+		'exclude' => '',
+		'include' => ''
 	), $atts));
 	
 //autoplay and hash updating are limited to single posts and pages only. Someday I figure out how to have multiple slideshows running with extras on the same page.
@@ -66,9 +79,9 @@ if (is_page() || is_single())
 					fx: \''. $ps_trans . '\',
 					speed: '. $ps_speed . ',
 					timeout: '. $timeout . ',
-					next: $(\'.slideshow-next\', p),
+					next: $(\'a.slideshow-next\', p),
 					startingSlide: index,
-					prev: $(\'.slideshow-prev\', p),
+					prev: $(\'a.slideshow-prev\', p),
 					after:     onAfter,
 					pager:  \'#slides\',
 					pagerAnchorBuilder: function(idx, slide) {
@@ -117,10 +130,10 @@ if ($nav == "top") { //determine whether the nav goes at the top or the bottom
 	$slideshow = '<div class="slideshow-nav">';
 	
 	if ($timeout!=0) { if (is_page() || is_single()) { //if autoplay is set and we're showing extras, output a pause button
-	$slideshow .='<a class="pause" href="#">Pause</a> ';
+	$slideshow .='<a class="pause" href="javascript: void(0)">Pause</a> ';
 	} }
 	
-	$slideshow .='<a class="slideshow-prev" href="#">Prev</a>|<a class="slideshow-next" href="#">Next</a>';
+	$slideshow .='<a class="slideshow-prev" href="javascript: void(0)">Prev</a>|<a class="slideshow-next" href="javascript: void(0)">Next</a>';
 	
 	if (is_page() || is_single()) //only shows slideshow number if we're showing extras
 	{ $slideshow .= '<span id="slideshow-info"></span>';}
@@ -131,27 +144,53 @@ if ($nav == "top") { //determine whether the nav goes at the top or the bottom
 	
 	if ($nav=="top"){ $slideshow .= '<div class="portfolio-slideshow">'; } else {$slideshow = '<div class="portfolio-slideshow">';}
 	
-	$args =  array(
-		'order'          => 'ASC',
+	$i=1;
+	
+	if ( !empty($include) ) {
+		$include = preg_replace( '/[^0-9,]+/', '', $include );
+		$attachments = get_posts( array('order'          => 'ASC',
 		'orderby' 		 => 'menu_order ID',
 		'post_type'      => 'attachment',
 		'post_parent'    => get_the_ID(),
 		'post_mime_type' => 'image',
 		'post_status'    => null,
 		'numberposts'    => -1,
-		'size'			 => $size
-	) ;	
-	
-	$i=1;
-	$attachments = get_posts($args);
+		'size'			 => $size,
+		'include'		 => $include) );
+		
+	} elseif ( !empty($exclude) ) {
+		$exclude = preg_replace( '/[^0-9,]+/', '', $exclude );
+		$attachments = get_posts( array('order'          => 'ASC',
+		'orderby' 		 => 'menu_order ID',
+		'post_type'      => 'attachment',
+		'post_parent'    => get_the_ID(),
+		'post_mime_type' => 'image',
+		'post_status'    => null,
+		'numberposts'    => -1,
+		'size'			 => $size,
+		'exclude'		 => $exclude) );
+	} else {
+		$attachments = get_posts( array('order'          => 'ASC',
+		'orderby' 		 => 'menu_order ID',
+		'post_type'      => 'attachment',
+		'post_parent'    => get_the_ID(),
+		'post_mime_type' => 'image',
+		'post_status'    => null,
+		'numberposts'    => -1,
+		'size'			 => $size) );
+	}
+
+	if ( empty($attachments) )
+		return '';
+
 	if ($attachments) {
 		foreach ($attachments as $attachment) {
 		if ($i == "1") {
 			$slideshow .= "<div class='first slideshow-next'>";} else {
 			$slideshow .= "<div class='slideshow-next'>";}
-										
-			$slideshow .= wp_get_attachment_image($attachment->ID, $args['size'], false, false);
-						
+			$slideshow .= "<a href=\"javascript: void(0)\" class=\"slideshow-next\">";
+			$slideshow .= wp_get_attachment_image($attachment->ID, $size, false, false);
+			$slideshow .= "</a>";		
 			if ($ps_titles=="true") {
 			$title = $attachment->post_title;
 			if (isset($title)) { 
@@ -180,21 +219,46 @@ if ($thumbs=="true") {
 	$slideshow .= "<div class='slideshow-thumbs'>
 						<ul id='slides'>";
 	
-	$args = array(
-		'order'          => 'ASC',
+	if ( !empty($include) ) {
+		$include = preg_replace( '/[^0-9,]+/', '', $include );
+		$attachments = get_posts( array('order'          => 'ASC',
 		'orderby' 		 => 'menu_order ID',
 		'post_type'      => 'attachment',
 		'post_parent'    => get_the_ID(),
 		'post_mime_type' => 'image',
 		'post_status'    => null,
 		'numberposts'    => -1,
-		'size'			 => thumb,
-	);
+		'size'			 => 'thumbnail',
+		'include'		 => $include) );
+		
+	} elseif ( !empty($exclude) ) {
+		$exclude = preg_replace( '/[^0-9,]+/', '', $exclude );
+		$attachments = get_posts( array('order'          => 'ASC',
+		'orderby' 		 => 'menu_order ID',
+		'post_type'      => 'attachment',
+		'post_parent'    => get_the_ID(),
+		'post_mime_type' => 'image',
+		'post_status'    => null,
+		'numberposts'    => -1,
+		'size'			 => 'thumbnail',
+		'exclude'		 => $exclude) );
+	} else {
+		$attachments = get_posts( array('order'          => 'ASC',
+		'orderby' 		 => 'menu_order ID',
+		'post_type'      => 'attachment',
+		'post_parent'    => get_the_ID(),
+		'post_mime_type' => 'image',
+		'post_status'    => null,
+		'numberposts'    => -1,
+		'size'			 => 'thumbnail') );
+	}
+
+	if ( empty($attachments) )
+		return '';
 	
-	$attachments = get_posts($args);
 	if ($attachments) {
 		foreach ($attachments as $attachment) {
-		$slideshow .="<li><a href=\"#\">";
+		$slideshow .="<li><a href=\"javascript: void(0)\">";
 		$slideshow .= wp_get_attachment_image($attachment->ID, 'thumbnail', false, false);
 		$slideshow .= "</a></li>";		
 		}
@@ -212,10 +276,10 @@ if ($nav == "bottom") { //determine whether the nav goes at the top or the botto
 	$slideshow .= '<div class="slideshow-nav">';
 	
 	if ($timeout!=0) { if (is_page() || is_single()) { //if autoplay is set and we're showing extras, output a pause button
-	$slideshow .='<a class="pause" href="#">Pause</a> ';
+	$slideshow .='<a class="pause" href="javascript: void(0)">Pause</a> ';
 	} }
 	
-	$slideshow .='<a class="slideshow-prev" href="#">Prev</a>|<a class="slideshow-next" href="#">Next</a>';
+	$slideshow .='<a class="slideshow-prev" href="javascript: void(0)">Prev</a>|<a class="slideshow-next" href="javascript: void(0)">Next</a>';
 	
 	if (is_page() || is_single()) //only shows slideshow number if we're showing extras
 	{ $slideshow .= '<span id="slideshow-info"></span>';}
@@ -384,9 +448,25 @@ global $ps_trans, $ps_speed, $ps_size, $ps_support, $ps_titles, $ps_captions, $p
 
 <code>[portfolio_slideshow thumbs=true]</code>
 
+or 
+
+<code>[portfolio_slideshow thumbs=false]</code>
+
 <p><strong>Navigation position:</strong></p>
 
 <code>[portfolio_slideshow nav=bottom]</code>
+
+alternately, disable navigation with
+
+<code>[portfolio_slideshow nav=false]</code>
+
+<p><strong>Include or exclude</strong></p>
+
+<code>[portfolio_slideshow include="1,2,3,4"]</code>
+
+<code>[portfolio_slideshow exclude="1,2,3,4"]</code>
+
+<p>You need to specify the attachment ID, which you can find on the media library page by hovering over the thumbnail. You can only include attachments which are attached to the current post for now.</p>
 
 <h2>Support this plugin</h2>
 
