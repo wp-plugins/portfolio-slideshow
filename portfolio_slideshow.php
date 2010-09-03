@@ -4,7 +4,7 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://daltonrooney.com/portfolio
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 0.4.2
+Version: 0.4.3
 Author URI: http://daltonrooney.com
 */ 
 
@@ -79,9 +79,9 @@ if (is_page() || is_single())
 					fx: \''. $ps_trans . '\',
 					speed: '. $ps_speed . ',
 					timeout: '. $timeout . ',
-					next: $(\'.slideshow-next\', p),
+					next: $(\'a.slideshow-next\', p),
 					startingSlide: index,
-					prev: $(\'.slideshow-prev\', p),
+					prev: $(\'a.slideshow-prev\', p),
 					after:     onAfter,
 					pager:  \'#slides\',
 					pagerAnchorBuilder: function(idx, slide) {
@@ -130,10 +130,10 @@ if ($nav == "top") { //determine whether the nav goes at the top or the bottom
 	$slideshow = '<div class="slideshow-nav">';
 	
 	if ($timeout!=0) { if (is_page() || is_single()) { //if autoplay is set and we're showing extras, output a pause button
-	$slideshow .='<a class="pause" href="#">Pause</a> ';
+	$slideshow .='<a class="pause" href="javascript: void(0)">Pause</a> ';
 	} }
 	
-	$slideshow .='<a class="slideshow-prev" href="#">Prev</a>|<a class="slideshow-next" href="#">Next</a>';
+	$slideshow .='<a class="slideshow-prev" href="javascript: void(0)">Prev</a>|<a class="slideshow-next" href="javascript: void(0)">Next</a>';
 	
 	if (is_page() || is_single()) //only shows slideshow number if we're showing extras
 	{ $slideshow .= '<span id="slideshow-info"></span>';}
@@ -188,9 +188,9 @@ if ($nav == "top") { //determine whether the nav goes at the top or the bottom
 		if ($i == "1") {
 			$slideshow .= "<div class='first slideshow-next'>";} else {
 			$slideshow .= "<div class='slideshow-next'>";}
-										
+			$slideshow .= "<a href=\"javascript: void(0)\" class=\"slideshow-next\">";
 			$slideshow .= wp_get_attachment_image($attachment->ID, $size, false, false);
-						
+			$slideshow .= "</a>";		
 			if ($ps_titles=="true") {
 			$title = $attachment->post_title;
 			if (isset($title)) { 
@@ -258,7 +258,7 @@ if ($thumbs=="true") {
 	
 	if ($attachments) {
 		foreach ($attachments as $attachment) {
-		$slideshow .="<li><a href=\"#\">";
+		$slideshow .="<li><a href=\"javascript: void(0)\">";
 		$slideshow .= wp_get_attachment_image($attachment->ID, 'thumbnail', false, false);
 		$slideshow .= "</a></li>";		
 		}
@@ -276,10 +276,10 @@ if ($nav == "bottom") { //determine whether the nav goes at the top or the botto
 	$slideshow .= '<div class="slideshow-nav">';
 	
 	if ($timeout!=0) { if (is_page() || is_single()) { //if autoplay is set and we're showing extras, output a pause button
-	$slideshow .='<a class="pause" href="#">Pause</a> ';
+	$slideshow .='<a class="pause" href="javascript: void(0)">Pause</a> ';
 	} }
 	
-	$slideshow .='<a class="slideshow-prev" href="#">Prev</a>|<a class="slideshow-next" href="#">Next</a>';
+	$slideshow .='<a class="slideshow-prev" href="javascript: void(0)">Prev</a>|<a class="slideshow-next" href="javascript: void(0)">Next</a>';
 	
 	if (is_page() || is_single()) //only shows slideshow number if we're showing extras
 	{ $slideshow .= '<span id="slideshow-info"></span>';}
@@ -448,9 +448,17 @@ global $ps_trans, $ps_speed, $ps_size, $ps_support, $ps_titles, $ps_captions, $p
 
 <code>[portfolio_slideshow thumbs=true]</code>
 
+or 
+
+<code>[portfolio_slideshow thumbs=false]</code>
+
 <p><strong>Navigation position:</strong></p>
 
 <code>[portfolio_slideshow nav=bottom]</code>
+
+alternately, disable navigation with
+
+<code>[portfolio_slideshow nav=false]</code>
 
 <p><strong>Include or exclude</strong></p>
 

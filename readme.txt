@@ -3,8 +3,8 @@ Contributors: daltonrooney
 Donate link: http://daltonrooney.com/portfolio/support
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery
 Requires at least: 2.8
-Tested up to: 3.0
-Stable tag: 0.4.2
+Tested up to: 3.0.1
+Stable tag: 0.4.3
 
 A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page.
 
@@ -30,11 +30,11 @@ Where timeout equals the time per slide in milliseconds. Leave this out for the 
 
 Navigation thumbnails can be displayed (shown on single posts and pages only):
 
-[portfolio_slideshow thumbs=true]
+[portfolio_slideshow thumbs=true] or [portfolio_slideshow thumbs=false]
 
 Navigation links can be placed at the bottom:
 
-[portfolio_slideshow nav=bottom]
+[portfolio_slideshow nav=bottom] or [portfolio_slideshow nav=false] to disable navigation altogether. Slideshow will still advance with click or autoplay.
 
 Include or exclude
 
@@ -42,7 +42,7 @@ Include or exclude
 
 [portfolio_slideshow exclude="1,2,3,4"]
 
-You need to specify the attachment ID, which you can find on the media library page by hovering over the thumbnail. You can only include attachments which are attached to the current post for now.
+You need to specify the attachment ID, which you can find on the media library page by hovering over the thumbnail. You can only include attachments which are attached to the current post.
 
 == Frequently Asked Questions ==
 
@@ -92,9 +92,15 @@ A: Maybe. I do try to add features based on user feedback, but only if I think i
 
 == Changelog ==
 
+0.4.3
+
+* Links in captions are now clickable.
+
+* Documented nav="false" attribute.
+
 0.4.2
 
-* Include and exclude attributes for shortcode. Thanks to Raoni Del PŽrsio from Central WordPress http://www.centralwordpress.com.br for sponsoring this feature.
+* Include and exclude attributes for shortcode. Thanks to Raoni Del Persio from Central WordPress http://www.centralwordpress.com.br for sponsoring this feature.
 
 0.4.1
 
