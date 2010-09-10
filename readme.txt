@@ -1,10 +1,10 @@
 === Portfolio Slideshow ===
 Contributors: daltonrooney 
 Donate link: http://daltonrooney.com/portfolio/support
-Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery
+Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit
 Requires at least: 2.8
 Tested up to: 3.0.1
-Stable tag: 0.4.3
+Stable tag: 0.5.0
 
 A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page.
 
@@ -16,7 +16,7 @@ To use, upload photos to your post or page using the WordPress media uploader. U
 
 By default, the slideshow will use the large version of the image that WordPress generates when you upload an image. You can change this default in the Settings panel or on a per-slideshow basis. The image sizes available are  "thumbnail", "medium", "large", and "full".
 
-**The shortcode now supports the following attributes:**
+**The shortcode supports the following attributes:**
 
 Image size on a per-slideshow basis. Use the size attribute in the shortcode like this:
 
@@ -26,9 +26,9 @@ Autoplay on a per-slideshow basis. Use the timeout attribute in the shortcode li
 
 [portfolio_slideshow timeout=5000]
 
-Where timeout equals the time per slide in milliseconds. Leave this out for the default manual advance slideshow.
+Where timeout equals the time per slide in milliseconds. Leave this out or set to 0 for the default manual advance slideshow.
 
-Navigation thumbnails can be displayed (shown on single posts and pages only):
+Navigation thumbnails can be displayed:
 
 [portfolio_slideshow thumbs=true] or [portfolio_slideshow thumbs=false]
 
@@ -44,7 +44,9 @@ Include or exclude
 
 You need to specify the attachment ID, which you can find on the media library page by hovering over the thumbnail. You can only include attachments which are attached to the current post.
 
+
 == Frequently Asked Questions ==
+
 
 Q: How do I insert a slideshow into a post or page?
 
@@ -56,15 +58,16 @@ Q: Does the plugin support images not uploaded via the media uploader?
 
 A: No, the plugin does not support random folders of images or images on a third-party site. All images must be uploaded using the media uploader, which creates the database entries the plugin relies on to generate the slideshow. This behavior will not change in future versions of the plugin.
 
+
 Q: Why doesn't my slideshow autoplay, show the slide numbers or thumbnails on the homepage?
 
-A: These features conflict when there is more than one slideshow on a page, so they are disabled except when they are displayed on single posts or pages only.
+A: Make sure you pdate to the latest version! You can now show slide numbers, thumbs, and autoplay on the homepage & in the archives.
 
 Q: Why isn't my slideshow loading?
 
 A: If you can see the first slide, but clicking doesn't do anything, this is often caused by a jQuery library conflict. View the HTML source of the page which is supposed to show the slideshow. Do you see more than one copy of jQuery or the Cycle plugin being loaded? This plugin uses the wp_enqueue() function to load the necessary javascript libraries, which is the generally accepted way to do it. If your theme or other plugins load those same files directly, you will have a conflict.
 
-Try disabling other plugins that load jQuery and see if that fixes the problem. You may need to get in touch with the author of that plugin to make sure they are loading jQuery correctly.
+Try disabling other plugins and switching to the default theme and see if that fixes the problem. You may need to get in touch with the author of that plugin to make sure they are loading jQuery correctly.
 
 One other problem that I've seen is the missing "cycle" plugin. View your source to see if "jquery.cycle.all.min.js" is being loaded. If not, make sure your theme has the line <?php wp_footer() ?> in footer.php, which is where the cycle script is loaded. All themes should have this line, but every once in a while it goes missing.
 
@@ -87,16 +90,37 @@ A: Maybe. I do try to add features based on user feedback, but only if I think i
 3. Insert the slideshow by using this shortcode, exactly as shown. Do not insert the photos into the post.
 
 4. Settings control panel.
-
 5. Finding the attachment ID for your images.
 
 == Changelog ==
 
+
+
+0.5
+
+* Thumbnails, slide numbers, and autoplay now work on all pages, including index (homepage) & category pages.
+
+* Slideshow content area is dynamically resized to conform to actual size of content.
+
+* Fixed display bug with TwentyTen theme
+
+* Fix for bug introduced in 0.4.3 which broke some slideshows.
+
+* Upgraded to latest version of cycle plugin
+
+* Support for descriptions
+
+
 0.4.3
+
+
 
 * Links in captions are now clickable.
 
+
+
 * Documented nav="false" attribute.
+
 
 0.4.2
 
