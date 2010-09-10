@@ -1,5 +1,6 @@
-div.portfolio-slideshow div.slideshow-next {display: none;}
+div.slideshow-next {display: none;}
 div.portfolio-slideshow div.first.slideshow-next{display: block;}
+div.portfolio-slideshow, div.slideshow-nav, div.slideshow-thumbs {display: none;}
 div.slideshow-nav {padding:0 0 6px 0}
 div.slideshow-nav a {text-decoration:underline; color: #444444;}
 div.slideshow-nav a.pause {margin: 0 15px 0 0;}
@@ -9,6 +10,6 @@ div.slideshow-thumbs {width:600px;}
 div.slideshow-thumbs img{width: 75px;height: 75px;}
 div.slideshow-thumbs ul#slides{margin:0 0 0px 0;padding: 0;} 
 div.slideshow-thumbs li {display: block;float: left;list-style-type: none;padding: 0 10px 0 0;}
-#slides a img.attachment-thumbnail {opacity:0.5;filter:alpha(opacity=50)}
-#slides a img.attachment-thumbnail {opacity:0.5;filter:alpha(opacity=50)}
-#slides li a.activeSlide img.attachment-thumbnail, #slides li.activeSlide a img.attachment-thumbnail{opacity:1;filter:alpha(opacity=100)}
+.slides a img.attachment-thumbnail {opacity:0.5;filter:alpha(opacity=50)}
+.slides a img.attachment-thumbnail {opacity:0.5;filter:alpha(opacity=50)}
+.slides li a.activeSlide img.attachment-thumbnail, .slides li.activeSlide a img.attachment-thumbnail{opacity:1;filter:alpha(opacity=100)}
