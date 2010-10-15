@@ -4,11 +4,11 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://daltonrooney.com/portfolio
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 0.5b
+Version: 0.5.2
 Author URI: http://daltonrooney.com
 */ 
 
-$ps_version = "0.5.0";
+$ps_version = "0.5.2";
 
 // add our default options if they're not already there:
 
@@ -24,6 +24,7 @@ add_option("portfolio_slideshow_show_descriptions", 'false');
 add_option("portfolio_slideshow_show_thumbs", 'false');
 add_option("portfolio_slideshow_show_thumbs_hp", 'false');
 add_option("portfolio_slideshow_nav_position", 'top'); 
+add_option("portfolio_slideshow_showhash", 'true'); 
 add_option("portfolio_slideshow_timeout", '0'); 
 
 // now let's grab the options table data
@@ -39,6 +40,7 @@ $ps_thumbs = get_option('portfolio_slideshow_show_thumbs');
 $ps_thumbs_hp = get_option('portfolio_slideshow_show_thumbs_hp');
 $ps_navpos = get_option('portfolio_slideshow_nav_position');
 $ps_timeout = get_option('portfolio_slideshow_timeout');
+$ps_showhash = get_option('portfolio_slideshow_showhash');
 $ps_version = get_option('portfolio_slideshow_version');
 
 function add_post_id($content) { // this puts the attachment ID on the media page
@@ -55,7 +57,7 @@ function portfolio_shortcode($atts) {
 
 	$postid = get_the_ID();
 
-	global $ps_trans, $ps_speed, $ps_size, $ps_titles, $ps_captions, $ps_descriptions, $ps_thumbs, $ps_navpos, $ps_timeout, $ps_thumbs_hp;
+	global $ps_trans, $ps_speed, $ps_size, $ps_titles, $ps_captions, $ps_descriptions, $ps_thumbs, $ps_navpos, $ps_timeout, $ps_thumbs_hp, $ps_showhash;
 	
 	extract(shortcode_atts(array(
 		'size' => $ps_size,
@@ -91,6 +93,7 @@ function portfolio_shortcode($atts) {
 				after:     onAfter,
 				pager:  \'#slides'.$postid.'\',
 				manualTrump: false,
+				cleartypeNoBg: true,
 				pagerAnchorBuilder: function(idx, slide) {
 				// return sel string for existing anchor
 				return \'#slides'.$postid.'  li:eq(\' + (idx) + \') a\'; }
@@ -116,8 +119,8 @@ function portfolio_shortcode($atts) {
 			var $qht = $("p.slideshow-title", this).outerHeight(\'true\');
 			//set the container\'s height to that of the current slide
 			$(this).parent().css("height", $oht + $pht + $ht + $qht - 30);';
-			
-			if (is_page() || is_single()) {
+					
+			if ($ps_showhash=="true" && is_page() || is_single()) {
 	  echo 'window.location.hash = opts.currSlide + 1;';}
 			
 	  echo 'var caption = (opts.currSlide + 1) + \' of \' + opts.slideCount;
@@ -289,8 +292,12 @@ if ($nav == "bottom") { //determine whether the nav goes at the top or the botto
 	$slideshow .= '</div>'; } // end if !is_feed 
 
 } // end if ($nav=="bottom")
-	
+
+
+$slideshow = apply_filters('the_content', $slideshow);	
+
 return $slideshow;	
+
 } //ends the portfolio_shortcode function
 
 
@@ -338,7 +345,7 @@ add_options_page('Portfolio Slideshow', 'Portfolio Slideshow', 6, __FILE__, 'por
 
 function portfolio_slideshow_options_page() {
 
-global $ps_trans, $ps_speed, $ps_size, $ps_support, $ps_titles, $ps_captions, $ps_descriptions, $ps_timeout, $ps_navpos, $ps_thumbs, $ps_thumbs_hp, $ps_version;
+global $ps_trans, $ps_speed, $ps_size, $ps_support, $ps_titles, $ps_captions, $ps_descriptions, $ps_timeout, $ps_navpos, $ps_thumbs, $ps_thumbs_hp, $ps_showhash, $ps_version;
 
 
 
@@ -428,10 +435,20 @@ global $ps_trans, $ps_speed, $ps_size, $ps_support, $ps_titles, $ps_captions, $p
 </td>
 </tr>	
 
+<tr valign="top">
+<th scope="row">Update URL with slide numbers</th>
+<td><select name="portfolio_slideshow_showhash" value="<?php echo get_option('portfolio_slideshow_showhash'); ?>" />
+	<option value="true" <?php if($ps_showhash == "true") echo " selected='selected'";?>>true</option>
+	<option value="false" <?php if($ps_showhash == "false") echo " selected='selected'";?>>false</option>
+</select>
+</td>
+</tr>	
+
+
 </table>
 
 <input type="hidden" name="page_options" value="portfolio_slideshow_size, portfolio_slideshow_transition, portfolio_slideshow_transition_speed, portfolio_slideshow_show_captions, portfolio_slideshow_show_titles,
-portfolio_slideshow_show_descriptions, portfolio_slideshow_timeout, portfolio_slideshow_nav_position, portfolio_slideshow_show_thumbs, portfolio_slideshow_show_thumbs_hp" />
+portfolio_slideshow_show_descriptions, portfolio_slideshow_timeout, portfolio_slideshow_nav_position, portfolio_slideshow_show_thumbs, portfolio_slideshow_show_thumbs_hp, portfolio_slideshow_showhash" />
 <input type="hidden" name="action" value="update" />	
 <p class="submit">
 <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
