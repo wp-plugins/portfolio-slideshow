@@ -101,9 +101,16 @@ A: Maybe. I do try to add features based on user feedback, but only if I think i
 
 == Changelog ==
 
-0.5.2 
 
-* Fixed ClearType background bug in IE when using a CSS image background.
+0.5.2
+
+* Added an option to add a loading gif if your slideshows take a little while to load.
+
+* Disabled transition "none", because of a bug in the cycle plugin. Will be added back in when the author of that plugin fixes the bug. Use the fade transition with a speed of 1ms to simulate the "none" transition.
+
+* Added an option for "Description" field to hold a URL that links the image to an external site.
+
+* Removed some negative padding from the auto-rezise slideshow container calculation. This may cause some themes to display too much space between the image & the page content - if so, you can add some back to your CSS file.
 
 0.5.1 
 
