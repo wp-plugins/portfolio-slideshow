@@ -4,7 +4,7 @@ Donate link: http://daltonrooney.com/portfolio/support
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit
 Requires at least: 2.8
 Tested up to: 3.0.1
-Stable tag: 0.5.3
+Stable tag: 0.5.4
 
 A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page.
 
@@ -101,6 +101,9 @@ A: Maybe. I do try to add features based on user feedback, but only if I think i
 
 == Changelog ==
 
+0.5.4 
+
+* Fixed improper jQuery loading on admin introduced in previous version.
 
 0.5.3
 

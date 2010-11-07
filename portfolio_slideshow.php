@@ -8,7 +8,7 @@ Version: 0.5.3
 Author URI: http://daltonrooney.com
 */ 
 
-$ps_version = "0.5.3";
+$ps_version = "0.5.4";
 
 // add our default options if they're not already there:
 
@@ -339,26 +339,17 @@ return $slideshow;
 
 
 // Output the javascript & css for the header here
-
+if (!is_admin){
    wp_deregister_script('jquery'); 
    wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"), false, '1.4.2', false); 
    wp_enqueue_script('jquery');
-
-//load the simple tooltips for the admin page
-if (is_admin){
-$url = plugins_url( 'portfolio-slideshow/lib/vtip-min.js' );
-$styleurl = plugins_url( 'portfolio-slideshow/lib/css/vtip.css' );
- wp_register_script('vtip', $url, false, '2', true); 
- wp_enqueue_script('vtip');
- wp_register_style('vtip', $styleurl, false, '2.2', 'screen'); 
- wp_enqueue_style('vtip');
-}
-
+ }
 
 //load the cycle script
+if (!is_admin){
  $url = plugins_url( 'portfolio-slideshow/lib/jquery.cycle.all.min.js' );
  wp_register_script('cycle', $url, false, '2.7.3', true); 
- wp_enqueue_script('cycle');
+ wp_enqueue_script('cycle');}
    
 function portfolio_head() {
 	echo '
@@ -381,12 +372,26 @@ add_action('in_plugin_update_message-'.plugin_basename(__FILE__), 'my_plugin_upd
 
 // create the admin menu
 
+function add_portfolio_slideshow_option_page() {
+// hook in the options page function
+add_options_page('Portfolio Slideshow', 'Portfolio Slideshow', 6, 'portfolio-slideshow', 'portfolio_slideshow_options_page');
+}
+
 // hook in the action for the admin options page
 add_action('admin_menu', 'add_portfolio_slideshow_option_page');
 
-function add_portfolio_slideshow_option_page() {
-// hook in the options page function
-add_options_page('Portfolio Slideshow', 'Portfolio Slideshow', 6, __FILE__, 'portfolio_slideshow_options_page');
+if (isset($_GET['page'])) { 
+    if ($_GET['page'] == "portfolio-slideshow") {
+        wp_deregister_script('jquery'); 
+  		wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"), 	false, '1.4.2', false); 
+  		wp_enqueue_script('jquery');
+        $url = plugins_url( 'portfolio-slideshow/lib/vtip-min.js' );
+		$styleurl = plugins_url( 'portfolio-slideshow/lib/css/vtip.css' );
+ 		wp_register_script('vtip', $url, false, '2', true); 
+ 		wp_enqueue_script('vtip');
+		wp_register_style('vtip', $styleurl, false, '2.2', 'screen'); 
+ 		wp_enqueue_style('vtip');
+    }
 }
 
 function portfolio_slideshow_options_page() {
