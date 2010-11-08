@@ -4,11 +4,11 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://daltonrooney.com/portfolio
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 0.5.5
+Version: 0.5.6
 Author URI: http://daltonrooney.com
 */ 
 
-$ps_version = "0.5.5";
+$ps_version = "0.5.6";
 
 // add our default options if they're not already there:
 
@@ -346,10 +346,9 @@ if (!is_admin){
  }
 
 //load the cycle script
-if (!is_admin){
  $url = plugins_url( 'portfolio-slideshow/lib/jquery.cycle.all.min.js' );
  wp_register_script('cycle', $url, false, '2.7.3', true); 
- wp_enqueue_script('cycle');}
+ wp_enqueue_script('cycle');
    
 function portfolio_head() {
 	echo '

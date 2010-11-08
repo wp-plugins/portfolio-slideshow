@@ -4,7 +4,7 @@ Donate link: http://daltonrooney.com/portfolio/support
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit
 Requires at least: 2.8
 Tested up to: 3.0.1
-Stable tag: 0.5.5
+Stable tag: 0.5.6
 
 A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page.
 
@@ -101,19 +101,39 @@ A: Maybe. I do try to add features based on user feedback, but only if I think i
 
 == Changelog ==
 
-0.5.4 
+
+
+0.5.6 
+
+
+
+* Bugfix regarding Cycle plugin.
+
+0.5.5 
+
+
 
 * Fixed improper jQuery loading on admin introduced in previous version.
 
+
 0.5.3
+
+
 
 * Added an option to add a loading gif if your slideshows take a little while to load.
 
+
+
 * Disabled transition "none", because of a bug in the cycle plugin. Will be added back in when the author of that plugin fixes the bug. Use the fade transition with a speed of 1ms to simulate the "none" transition.
+
+
 
 * Added an option for "Description" field to hold a URL that links the image to an external site.
 
-* Removed some negative padding from the auto-rezise slideshow container calculation. This may cause some themes to display too much space between the image & the page content - if so, you can add some back to your CSS file.
+
+
+* Removed some negative padding from the auto-rezise slideshow container calculation. This may cause some themes to display too much space between the image & the page content - if so, you can change the padding via CSS.
+
 
 0.5.1 
 
