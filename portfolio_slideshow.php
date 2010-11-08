@@ -4,11 +4,11 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://daltonrooney.com/portfolio
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 0.5.6
+Version: 0.5.7
 Author URI: http://daltonrooney.com
 */ 
 
-$ps_version = "0.5.6";
+$ps_version = "0.5.7";
 
 // add our default options if they're not already there:
 
@@ -315,7 +315,9 @@ if (is_page() || is_single() || $ps_thumbs_hp == "true")
 if ($nav == "bottom") { //determine whether the nav goes at the top or the bottom
 
 	if (!is_feed()){ //don't output the nav stuff in feeds
-	
+	if($ps_showloader=="true"){ //show the loader.gif if necessary
+			$slideshow .= '<div class="slideshow-holder"></div>';
+		}
 	$slideshow .= '<div class="slideshow-nav'.$postid.' slideshow-nav">';
 	
 	if ($timeout!=0) { //if autoplay is set
