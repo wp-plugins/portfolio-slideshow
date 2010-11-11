@@ -4,7 +4,7 @@ Donate link: http://daltonrooney.com/portfolio/support
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit
 Requires at least: 2.8
 Tested up to: 3.0.1
-Stable tag: 0.5.7
+Stable tag: 0.5.8
 
 A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page.
 
@@ -103,13 +103,22 @@ A: Maybe. I do try to add features based on user feedback, but only if I think i
 
 
 
-0.5.7 Bugfix regarding new loading gif when slideshow navigation is at the bottom.
+0.5.8 
+
+* Bugfix: nav="false" hiding slideshow
+* Bugfix: Option to disable URL hash updating was not working properly
+* Bugfix: No longer applying the content filter to slideshow output, as it was interfering with other plugins.
+
+
+0.5.7 
+
+*Bugfix: new loading gif not working when slideshow navigation is at the bottom.
 
 0.5.6 
 
 
 
-* Bugfix regarding Cycle plugin.
+* Bugfix: Cycle plugin not loading properly.
 
 0.5.5 
 

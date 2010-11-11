@@ -4,11 +4,11 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://daltonrooney.com/portfolio
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 0.5.7
+Version: 0.5.8
 Author URI: http://daltonrooney.com
 */ 
 
-$ps_version = "0.5.7";
+$ps_version = "0.5.8";
 
 // add our default options if they're not already there:
 
@@ -131,20 +131,18 @@ function portfolio_shortcode($atts) {
 			//set the container\'s height to that of the current slide
 			$(this).parent().css("height", $oht + $pht + $ht + $qht);';
 					
-			if ($ps_showhash=="true" && is_page() || is_single()) {
+			if (is_page() || is_single() && $ps_showhash=="true") {
 	  echo 'window.location.hash = opts.currSlide + 1;';}
 			
 	  echo 'var caption = (opts.currSlide + 1) + \' of \' + opts.slideCount;
 			$(\'#slideshow-info'.$postid.'\').html(caption);
 	} }); }); });</script>'; 
+		
+if($ps_showloader=="true"){ //show the loader.gif if necessary
+				$slideshow .= '<div class="slideshow-holder"></div>';}
 
 if ($nav == "top") { //determine whether the nav goes at the top or the bottom
-	
 	if (!is_feed()){ //don't output the nav stuff in feeds
-		
-		if($ps_showloader=="true"){ //show the loader.gif if necessary
-			$slideshow .= '<div class="slideshow-holder"></div>';
-		}
 		
 		$slideshow .= '<div class="slideshow-nav'.$postid.' slideshow-nav">';
 			
@@ -157,7 +155,7 @@ if ($nav == "top") { //determine whether the nav goes at the top or the bottom
 	
 	$slideshow .= '<div id="portfolio-slideshow'.$postid.'" class="portfolio-slideshow">';} 
 else 
-	{$slideshow = '<div id="portfolio-slideshow'.$postid.'" class="portfolio-slideshow">';} // end if nav=top
+	{$slideshow .= '<div id="portfolio-slideshow'.$postid.'" class="portfolio-slideshow">';} // end if nav=top
 	
 	$i=1;
 	
@@ -315,9 +313,7 @@ if (is_page() || is_single() || $ps_thumbs_hp == "true")
 if ($nav == "bottom") { //determine whether the nav goes at the top or the bottom
 
 	if (!is_feed()){ //don't output the nav stuff in feeds
-	if($ps_showloader=="true"){ //show the loader.gif if necessary
-			$slideshow .= '<div class="slideshow-holder"></div>';
-		}
+
 	$slideshow .= '<div class="slideshow-nav'.$postid.' slideshow-nav">';
 	
 	if ($timeout!=0) { //if autoplay is set
@@ -331,9 +327,6 @@ if ($nav == "bottom") { //determine whether the nav goes at the top or the botto
 	$slideshow .= '</div>'; } // end if !is_feed 
 
 } // end if ($nav=="bottom")
-
-
-$slideshow = apply_filters('the_content', $slideshow);	
 
 return $slideshow;	
 
