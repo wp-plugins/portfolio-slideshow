@@ -4,11 +4,11 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://daltonrooney.com/portfolio
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 0.5.8
+Version: 0.5.9
 Author URI: http://daltonrooney.com
 */ 
 
-$ps_version = "0.5.8";
+$ps_version = "0.5.9";
 
 // add our default options if they're not already there:
 
@@ -60,7 +60,7 @@ add_shortcode('portfolio_slideshow', 'portfolio_shortcode');
 // define the shortcode function
 function portfolio_shortcode($atts) {
 
-	$postid = get_the_ID();
+	STATIC $i=1;
 
 	global $ps_trans, $ps_speed, $ps_size, $ps_titles, $ps_captions, $ps_descriptions, $ps_thumbs, $ps_navpos, $ps_timeout, $ps_thumbs_hp, $ps_showhash, $ps_showloader, $ps_descriptionisURL;
 	
@@ -94,33 +94,33 @@ function portfolio_shortcode($atts) {
 				index = (parseInt(index) || 1) - 1; // slides are zero-based
 		} 	
 			
-		$(\'#portfolio-slideshow'.$postid.'\').cycle({
+		$(\'#portfolio-slideshow'.$i.'\').cycle({
 				fx: \''. $ps_trans . '\',
 				speed: '. $ps_speed . ',
 				timeout: '. $timeout . ',
-				next: \'.slideshow-nav'.$postid.' a.slideshow-next\',
+				next: \'.slideshow-nav'.$i.' a.slideshow-next\',
 				startingSlide: index,
-				prev: \'.slideshow-nav'.$postid.' a.slideshow-prev\',
+				prev: \'.slideshow-nav'.$i.' a.slideshow-prev\',
 				after:     onAfter,
-				pager:  \'#slides'.$postid.'\',
+				pager:  \'#slides'.$i.'\',
 				manualTrump: false,
 				cleartypeNoBg: true,
 				pagerAnchorBuilder: function(idx, slide) {
 				// return sel string for existing anchor
-				return \'#slides'.$postid.'  li:eq(\' + (idx) + \') a\'; }
+				return \'#slides'.$i.'  li:eq(\' + (idx) + \') a\'; }
 		});
 	
 
-		$(\'.slideshow-nav'.$postid. ' a.pause\').click(function() { 
-			$(\'#portfolio-slideshow'.$postid.'\').cycle(\'pause\');
-			$(\'.slideshow-nav'.$postid. ' a.pause\').hide();
-			$(\'.slideshow-nav'.$postid. ' a.play\').show();
+		$(\'.slideshow-nav'.$i. ' a.pause\').click(function() { 
+			$(\'#portfolio-slideshow'.$i.'\').cycle(\'pause\');
+			$(\'.slideshow-nav'.$i. ' a.pause\').hide();
+			$(\'.slideshow-nav'.$i. ' a.play\').show();
 		});
 	
-		$(\'.slideshow-nav'.$postid. ' a.play\').click(function() { 
-			$(\'#portfolio-slideshow'.$postid.'\').cycle(\'resume\');
-			$(\'.slideshow-nav'.$postid. ' a.play\').hide();
-			$(\'.slideshow-nav'.$postid. ' a.pause\').show();
+		$(\'.slideshow-nav'.$i. ' a.play\').click(function() { 
+			$(\'#portfolio-slideshow'.$i.'\').cycle(\'resume\');
+			$(\'.slideshow-nav'.$i. ' a.play\').hide();
+			$(\'.slideshow-nav'.$i. ' a.pause\').show();
 		});
 		
 		function onAfter(curr,next,opts) {
@@ -135,7 +135,7 @@ function portfolio_shortcode($atts) {
 	  echo 'window.location.hash = opts.currSlide + 1;';}
 			
 	  echo 'var caption = (opts.currSlide + 1) + \' of \' + opts.slideCount;
-			$(\'#slideshow-info'.$postid.'\').html(caption);
+			$(\'#slideshow-info'.$i.'\').html(caption);
 	} }); }); });</script>'; 
 		
 if($ps_showloader=="true"){ //show the loader.gif if necessary
@@ -144,20 +144,20 @@ if($ps_showloader=="true"){ //show the loader.gif if necessary
 if ($nav == "top") { //determine whether the nav goes at the top or the bottom
 	if (!is_feed()){ //don't output the nav stuff in feeds
 		
-		$slideshow .= '<div class="slideshow-nav'.$postid.' slideshow-nav">';
+		$slideshow .= '<div class="slideshow-nav'.$i.' slideshow-nav">';
 			
 			if ($timeout!=0) { //if autoplay is set
 				$slideshow .='<a class="pause" href="javascript: void(0)">Pause</a><a class="play" style="display:none" href="javascript: void(0)">Play</a>';} // end autoplay
 		
 		$slideshow .= '<a class="slideshow-prev" href="javascript: void(0)">Prev</a>|<a class="slideshow-next" href="javascript: void(0)">Next</a>';
-		$slideshow .= '<span id="slideshow-info'.$postid.'" class="slideshow-info"></span>';
+		$slideshow .= '<span id="slideshow-info'.$i.'" class="slideshow-info"></span>';
 		$slideshow .= '</div>';} // end if !is_feed 
 	
-	$slideshow .= '<div id="portfolio-slideshow'.$postid.'" class="portfolio-slideshow">';} 
+	$slideshow .= '<div id="portfolio-slideshow'.$i.'" class="portfolio-slideshow">';} 
 else 
-	{$slideshow .= '<div id="portfolio-slideshow'.$postid.'" class="portfolio-slideshow">';} // end if nav=top
+	{$slideshow .= '<div id="portfolio-slideshow'.$i.'" class="portfolio-slideshow">';} // end if nav=top
 	
-	$i=1;
+	$slideID=1;
 	
 	if ( !empty($include) ) {
 		$include = preg_replace( '/[^0-9,]+/', '', $include );
@@ -201,9 +201,9 @@ else
 	
 		//begin the slideshow loop
 		foreach ($attachments as $attachment) {
-		if ($i == "1") {
-			$slideshow .= "<div class=\"slideshow-nav".$postid." first slideshow-next\">";} else {
-			$slideshow .= "<div class=\"slideshow-nav".$postid." slideshow-next\">";}
+		if ($slideID == "1") {
+			$slideshow .= "<div class=\"slideshow-nav".$i." first slideshow-next\">";} else {
+			$slideshow .= "<div class=\"slideshow-nav".$i." slideshow-next\">";}
 			
 			//this section sets up the external links if the option is selected
 			
@@ -245,7 +245,7 @@ else
 			
 			$slideshow .= "</div>";
 			
-			$i++;
+			$slideID++;
 					
 		}  // end slideshow loop
 	} // end if ($attachments)
@@ -258,7 +258,7 @@ if (is_page() || is_single() || $ps_thumbs_hp == "true")
 	if ($thumbs=="true") {
 
 	$slideshow .= '<div class="slideshow-thumbs">
-						<ul id="slides'.$postid.'" class="slides">';
+						<ul id="slides'.$i.'" class="slides">';
 	
 	if ( !empty($include) ) {
 		$include = preg_replace( '/[^0-9,]+/', '', $include );
@@ -314,7 +314,7 @@ if ($nav == "bottom") { //determine whether the nav goes at the top or the botto
 
 	if (!is_feed()){ //don't output the nav stuff in feeds
 
-	$slideshow .= '<div class="slideshow-nav'.$postid.' slideshow-nav">';
+	$slideshow .= '<div class="slideshow-nav'.$i.' slideshow-nav">';
 	
 	if ($timeout!=0) { //if autoplay is set
 	$slideshow .='<a class="pause" href="javascript: void(0)">Pause</a><a class="play" style="display:none" href="javascript: void(0)">Play</a>';
@@ -322,11 +322,13 @@ if ($nav == "bottom") { //determine whether the nav goes at the top or the botto
 	
 	$slideshow .='<a class="slideshow-prev" href="javascript: void(0)">Prev</a>|<a class="slideshow-next" href="javascript: void(0)">Next</a>';
 	
-	$slideshow .= '<span id="slideshow-info'.$postid.'" class="slideshow-info"></span>';
+	$slideshow .= '<span id="slideshow-info'.$i.'" class="slideshow-info"></span>';
 	
 	$slideshow .= '</div>'; } // end if !is_feed 
 
 } // end if ($nav=="bottom")
+
+$i++;
 
 return $slideshow;	
 
