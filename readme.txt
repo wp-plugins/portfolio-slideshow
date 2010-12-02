@@ -8,8 +8,6 @@ Stable tag: 0.5.9.1
 
 A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page.
 
-Note: Version 0.5.9 is what I am considering "feature complete." The next version of the plugin will be 1.0, which will include a major refactoring and cleanup of code with no new features. No more inline javascript! 1.0 should be out by the end of 2010.
-
 == Installation ==
 
 Extract the zip file and upload the contents to the wp-content/plugins/ directory of your WordPress installation and then activate the plugin from plugins page. 
@@ -54,7 +52,7 @@ As of 0.5.9, you can insert multiple slideshows per post/page, by including diff
 
 [portfolio_slideshow include="4,5,6"]
 
-Will create two slideshows on the page with two sets of images.
+This example will create two slideshows on the page with two sets of images.
 
 
 == Frequently Asked Questions ==
@@ -105,13 +103,27 @@ A: I won't be adding any new features until 1.0 is released, sometime in late 20
 
 == Changelog ==
 
+
+
+0.5.9.2 
+
+* Bugfix for URL hashes showing up on single pages even when disabled in settings.
+
+* Cleaned up SVN repository
+
 0.5.9.1 
+
+
 
 * Fixed a totally embarrassing bug that was causing jQuery not to load in certain situations.
 
+
 0.5.9
 
+
+
 * Multiple slideshows now possible on a single post/page.
+
 
 0.5.8 
 
