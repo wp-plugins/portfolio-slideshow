@@ -4,11 +4,11 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://daltonrooney.com/portfolio
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 0.5.9.1
+Version: 0.5.9.2
 Author URI: http://daltonrooney.com
 */ 
 
-$ps_version = "0.5.9.1";
+$ps_version = "0.5.9.2";
 
 // add our default options if they're not already there:
 
@@ -131,8 +131,8 @@ function portfolio_shortcode($atts) {
 			//set the container\'s height to that of the current slide
 			$(this).parent().css("height", $oht + $pht + $ht + $qht);';
 					
-			if (is_page() || is_single() && $ps_showhash=="true") {
-	  echo 'window.location.hash = opts.currSlide + 1;';}
+			if ($ps_showhash=="true") { if (is_page() || is_single()) {
+	  echo 'window.location.hash = opts.currSlide + 1;';}}
 			
 	  echo 'var caption = (opts.currSlide + 1) + \' of \' + opts.slideCount;
 			$(\'#slideshow-info'.$i.'\').html(caption);
