@@ -1,14 +1,14 @@
 <?php
 /*
 Plugin Name: Portfolio Slideshow
-Plugin URI: http://daltonrooney.com/wordpress/portfolio-slideshow
+Plugin URI: http://madebyraygun.com/lab/portfolio-slideshow
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 0.5.9.2
-Author URI: http://daltonrooney.com/wordpress
+Version: 0.6.0
+Author URI: http://madebyraygun
 */ 
 
-$ps_version = "0.5.9.2";
+$ps_version = "0.6.0";
 
 // add our default options if they're not already there:
 
@@ -24,7 +24,7 @@ add_option("portfolio_slideshow_show_descriptions", 'false');
 add_option("portfolio_slideshow_show_thumbs", 'false');
 add_option("portfolio_slideshow_show_thumbs_hp", 'false');
 add_option("portfolio_slideshow_nav_position", 'top'); 
-add_option("portfolio_slideshow_showhash", 'true'); 
+add_option("portfolio_slideshow_showhash", 'false'); 
 add_option("portfolio_slideshow_timeout", '0'); 
 add_option("portfolio_slideshow_showloader", 'false'); 
 add_option("portfolio_slideshow_descriptionisURL", 'false'); 
@@ -75,14 +75,13 @@ function portfolio_shortcode($atts) {
 
 	echo '<script type="text/javascript"> 
 	jQuery(document).ready(function($) {
+	
 	$(window).load(function() {';
 	
 	if($ps_showloader=="true"){
 			echo '$(\'div.slideshow-holder\').delay(1500).fadeOut(\'fast\', function() {';}
 
-	echo   '$(\'div.portfolio-slideshow\').fadeIn();
-			$(\'div.slideshow-nav\').fadeIn();
-			$(\'div.slideshow-thumbs\').fadeIn();';
+	echo   '$(\'div.slideshow-wrapper\').css(\'visibility\',\'visible\');';
 			
 	if($ps_showloader=="true"){ 
 			echo '});';}
@@ -98,9 +97,10 @@ function portfolio_shortcode($atts) {
 				fx: \''. $ps_trans . '\',
 				speed: '. $ps_speed . ',
 				timeout: '. $timeout . ',
-				next: \'.slideshow-nav'.$i.' a.slideshow-next\',
+				next: \'#slideshow-wrapper'.$i.' a.slideshow-next\',
 				startingSlide: index,
-				prev: \'.slideshow-nav'.$i.' a.slideshow-prev\',
+				prev: \'#slideshow-wrapper'.$i.' a.slideshow-prev\',
+				before:     onBefore,
 				after:     onAfter,
 				pager:  \'#slides'.$i.'\',
 				manualTrump: false,
@@ -123,13 +123,33 @@ function portfolio_shortcode($atts) {
 			$(\'.slideshow-nav'.$i. ' a.pause\').show();
 		});
 		
+		function onBefore(curr,next,opts) {
+			$("p.slideshow-caption, p.slideshow-title, p.slideshow-description", this).css("visibility", "hidden");
+		}
+		
 		function onAfter(curr,next,opts) {
+			
 			var $ht = $("img",this).attr("height");
-			var $oht = $("p.slideshow-caption", this).outerHeight(\'true\');
-			var $pht = $("p.slideshow-description", this).outerHeight(\'true\');
-			var $qht = $("p.slideshow-title", this).outerHeight(\'true\');
-			//set the container\'s height to that of the current slide
-			$(this).parent().css("height", $oht + $pht + $ht + $qht);';
+			if ($("p.slideshow-caption", this).length ) { 
+				var $oht = $("p.slideshow-caption", this).outerHeight(\'true\');
+			} else {
+    			var $oht = 0;
+			}
+			if ($("p.slideshow-description", this).length ) {
+				var $pht = $("p.slideshow-description", this).outerHeight(\'true\');
+			} else {
+			var $pht = 0;
+    			
+			}
+			if ($("p.slideshow-title", this).length ) { 
+				var $qht = $("p.slideshow-title", this).outerHeight(\'true\'); 
+			} else {
+    			var $qht = 0;
+			} 
+			$(\'#portfolio-slideshow'.$i.'\').css("height", $ht + $oht + $pht + $qht);
+						
+			$("p.slideshow-caption, p.slideshow-title, p.slideshow-description", this).css("visibility", "visible");
+			';
 					
 			if ($ps_showhash=="true") { if (is_page() || is_single()) {
 	  echo 'window.location.hash = opts.currSlide + 1;';}}
@@ -137,9 +157,11 @@ function portfolio_shortcode($atts) {
 	  echo 'var caption = (opts.currSlide + 1) + \' of \' + opts.slideCount;
 			$(\'#slideshow-info'.$i.'\').html(caption);
 	} }); }); });</script>'; 
-		
+
 if($ps_showloader=="true"){ //show the loader.gif if necessary
 				$slideshow .= '<div class="slideshow-holder"></div>';}
+				
+$slideshow .= '<div id="slideshow-wrapper'.$i.'" class="slideshow-wrapper">';	//wrap the whole thing in a div in case we need it.	
 
 if ($nav == "top") { //determine whether the nav goes at the top or the bottom
 	if (!is_feed()){ //don't output the nav stuff in feeds
@@ -201,9 +223,10 @@ else
 	
 		//begin the slideshow loop
 		foreach ($attachments as $attachment) {
-		if ($slideID == "1") {
-			$slideshow .= "<div class=\"slideshow-nav".$i." first slideshow-next\">";} else {
-			$slideshow .= "<div class=\"slideshow-nav".$i." slideshow-next\">";}
+		
+			$slideshow .= '<div id="slideshow-content'.$i.'" class="';
+			if ($slideID == "1") {$slideshow .= "first ";}
+			$slideshow .= 'slideshow-next slideshow-content">';
 			
 			//this section sets up the external links if the option is selected
 			
@@ -225,21 +248,21 @@ else
 			//if titles option is selected
 			if ($ps_titles=="true") {
 			$title = $attachment->post_title;
-			if (isset($title)) { 
+			if (!empty($title)) { 
 				$slideshow .= '<p class="slideshow-title">'.$title.'</p>'; 
 			} }
 			
 			//if captions option is selected
 			if ($ps_captions=="true") {			
 			$caption = $attachment->post_excerpt;
-			if (isset($caption)) { 
+			if (!empty($caption)) { 
 				$slideshow .= '<p class="slideshow-caption">'.$caption.'</p>'; 
 			}}
 			
 			//if descriptions option is selected and we're not using the description field for external links
 			if ($ps_descriptions=="true" && $ps_descriptionisURL !="true") {			
 			$description = $attachment->post_content;
-			if (isset($description)) { 
+			if (!empty($description)) { 
 				$slideshow .= '<p class="slideshow-description">'.$description.'</p>'; 
 			}}
 			
@@ -325,9 +348,9 @@ if ($nav == "bottom") { //determine whether the nav goes at the top or the botto
 	$slideshow .= '<span id="slideshow-info'.$i.'" class="slideshow-info"></span>';
 	
 	$slideshow .= '</div>'; } // end if !is_feed 
-
+	
 } // end if ($nav=="bottom")
-
+	$slideshow .='</div><!--#slideshow-wrapper-->';
 $i++;
 
 return $slideshow;	
@@ -337,20 +360,20 @@ return $slideshow;
 
 // Output the javascript & css for the header here
 if (!is_admin()){
-   wp_deregister_script('jquery'); 
-   wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"), false, '1.4.2', false); 
    wp_enqueue_script('jquery');
  }
 
 //load the cycle script
- $url = plugins_url( 'portfolio-slideshow/lib/jquery.cycle.all.min.js' );
- wp_register_script('cycle', $url, false, '2.7.3', true); 
+ wp_register_script('cycle', plugins_url( 'lib/jquery.cycle.all.min.js', __FILE__ ), false, '2.7.3', true); 
  wp_enqueue_script('cycle');
    
 function portfolio_head() {
 	echo '
 <!-- loaded by Portfolio Slideshow Plugin-->
-<link rel="stylesheet" type="text/css" href="' .  get_bloginfo('wpurl') . '/wp-content/plugins/portfolio-slideshow/portfolio-slideshow.css?ver=0.6.0" />
+<link rel="stylesheet" type="text/css" href="' .  plugins_url( "portfolio-slideshow.css?ver=0.6.0", __FILE__ ) . '" />
+<noscript>
+<link rel="stylesheet" type="text/css" href="' .  plugins_url( "portfolio-slideshow-noscript.css?ver=0.6.0", __FILE__ ) . '" />
+</noscript>
 <!-- end Portfolio Slideshow Plugin -->
 ';
 } // ends portfolio_head function
@@ -378,14 +401,10 @@ add_action('admin_menu', 'add_portfolio_slideshow_option_page');
 
 if (isset($_GET['page'])) { 
     if ($_GET['page'] == "portfolio-slideshow") {
-        wp_deregister_script('jquery'); 
-  		wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"), 	false, '1.4.2', false); 
   		wp_enqueue_script('jquery');
-        $url = plugins_url( 'portfolio-slideshow/lib/vtip-min.js' );
-		$styleurl = plugins_url( 'portfolio-slideshow/lib/css/vtip.css' );
- 		wp_register_script('vtip', $url, false, '2', true); 
+ 		wp_register_script('vtip', plugins_url( 'lib/vtip-min.js', __FILE__ ), false, '2', true); 
  		wp_enqueue_script('vtip');
-		wp_register_style('vtip', $styleurl, false, '2.2', 'screen'); 
+		wp_register_style('vtip', plugins_url( 'lib/css/vtip.css', __FILE__ ), false, '2.2', 'screen'); 
  		wp_enqueue_style('vtip');
     }
 }
@@ -413,8 +432,8 @@ global $ps_trans, $ps_speed, $ps_size, $ps_support, $ps_titles, $ps_captions, $p
 <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1"><br /> 
 </form> 
 
-<p>Another way to help out: I&#8217;ve been using <a href="http://www.a2hosting.com/1107.html">A2 Hosting</a> for years, and they provide fantastic service and support. If you sign up through the link below, I get a referral fee, which helps me maintain this software. Their one-click WordPress install will have you up and running in just a couple of minutes.</p> 
-<p><a  href="http://www.a2hosting.com/1107.html"><img style="margin:10px 0;" src="http://daltonrooney.com/portfolio/wp-content/uploads/2010/01/green_234x60.jpeg" alt="" title="green_234x60" width="234" height="60" class="alignnone size-full wp-image-148" /></a></p> 
+<p>One more thing: we love <a href="http://daltn.com/x/a2">A2 Hosting</a>! We've been using them for years, and they provide the best web host service and support in the industry. If you sign up through the link below, we get a referral fee, which helps us maintain this software. Their one-click WordPress install will have you up and running in just a couple of minutes.</p> 
+<p><a  href="http://daltn.com/x/a2"><img style="margin:10px 0;" src="http://daltonrooney.com/portfolio/wp-content/uploads/2010/01/green_234x60.jpeg" alt="" title="green_234x60" width="234" height="60" class="alignnone size-full wp-image-148" /></a></p> 
 </div>
 
 <form method="post" action="options.php">
@@ -580,8 +599,27 @@ alternately, disable navigation with
 
 <code>[portfolio_slideshow exclude="1,2,3,4"]</code>
 
-<p>You need to specify the attachment ID, which you can find on the <a href="<?php bloginfo('wpurl')?>/wp-admin/upload.php">media library</a> page by hovering over the thumbnail. You can only include attachments which are attached to the current post for now.</p>
+<p>You need to specify the attachment ID, which you can find in your <a href="<?php bloginfo('wpurl')?>/wp-admin/upload.php">Media Library</a> by hovering over the thumbnail. You can only include attachments which are attached to the current post. Do not use these attributes simultaneously, they are mutually exclusive.</p>
 
-<p>You're using Portfolio Slideshow v. <?php echo $ps_version;?> by <a href="http://daltonrooney.com/wordpress">Dalton Rooney</a>.
+<p><strong>Multiple slideshows per post/page:</strong></p>
+
+<p>You can insert multiple slideshows per post/page by including different attachment IDs in your shortcode. </p>
+
+<p>Example:
+<code>[portfolio_slideshow include="1,2,3"]</code><code>[portfolio_slideshow include="4,5,6"]</code>
+This example will create two slideshows on the page with two sets of images. Remember, the attachment ID can be found in your <a href="<?php bloginfo('wpurl')?>/wp-admin/upload.php">Media Library</a> by hovering over the thumbnail. You can only include attachments which are attached to the current post.</p>
+
+
+<h2>Additional features on the settings page:</h2>
+
+<p><strong>Description links image to URL:</strong></p>
+
+By checking this box, you can use the image description field to hold a URL - for example, if you want your slide to link to a portfolio page or to an external site. This disables the "click slide to advance feature" and will cause problems if you've got anything but a URL in the description field, so use it wisely.
+
+<p><strong>Update URL with slide numbers:</strong></p>
+
+On single posts and pages, you can enable this feature to udpate the URL of the page with the slide number. Example: http://example.com/slideshow/#3 will link directly to the third slide in the slideshow.
+
+<p>You're using Portfolio Slideshow v. <?php echo $ps_version;?> by <a href="http://madebyraygun">Raygun</a>.
 </div>
 <?php } ?>
