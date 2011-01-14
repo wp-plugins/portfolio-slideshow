@@ -2,9 +2,9 @@
 Contributors: daltonrooney 
 Donate link: http://madebyraygun.com/donate/
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit
-Requires at least: 2.8
-Tested up to: 3.0.1
-Stable tag: 0.6.0
+Requires at least: 3.0
+Tested up to: 3.0.6
+Stable tag: 1.0.0
 
 A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Degrades gracefully for users without javascript.
 
@@ -23,12 +23,6 @@ By default, the slideshow will use the large version of the image that WordPress
 Image size on a per-slideshow basis. Use the size attribute in the shortcode like this:
 
 [portfolio_slideshow size=thumbnail]
-
-Autoplay on a per-slideshow basis. Use the timeout attribute in the shortcode like this:
-
-[portfolio_slideshow timeout=5000]
-
-Where timeout equals the time per slide in milliseconds. Leave this out or set to 0 for the default manual advance slideshow.
 
 Navigation thumbnails can be displayed:
 
@@ -57,9 +51,11 @@ you can insert multiple slideshows per post/page by including different attachme
 
 [portfolio_slideshow include="4,5,6"]
 
-This example will create two slideshows on the page with two sets of images. Remember, the attachment ID can be found in your Media Library by hovering over the thumbnail. You can only include attachments which are attached to the current post.
+This example will create two slideshows on the page with two sets of images. Remember, the attachment ID can be found in your *Media Library* by hovering over the thumbnail. You can only include attachments which are attached to the current post.
 
 **Additional features from the settings page**
+
+Autoplay: Where timeout equals the time per slide in milliseconds. Leave this set to 0 for the default manual advance slideshow.
 
 Description links image to URL: By checking this box, you can use the image description field to hold a URL - for example, if you want your slide to link to a portfolio page or to an external site. This disables the "click slide to advance feature" and will cause problems if you've got anything but a URL in the description field, so use it wisely.
 
@@ -116,6 +112,12 @@ A: I won't be adding any new features until 1.0 is released, sometime in early 2
 == Changelog ==
 
 
+1.0.0
+
+* Removed most inline Javascript.
+* Refactored a lot of PHP code.
+* Autoplay no longer supported on a per/slideshow basis. Enable/disable via options panel only.
+* Reorganized options panel a bit.
 
 0.6.0 
 
@@ -123,7 +125,7 @@ A: I won't be adding any new features until 1.0 is released, sometime in early 2
 * Fixed height calculation bug for first slide
 * Fixed overlapping text during transitions for captions and descriptions.
 * Fixed loading.gif display in Chrome & Firefox when scrollHorz transition is enabled.
-*Added noscript stylesheet so slideshow degrades gracefully to for users without javascript.
+* Added noscript stylesheet so slideshow degrades gracefully to for users without javascript.
 * Improved documentation
 
 0.5.9.2 

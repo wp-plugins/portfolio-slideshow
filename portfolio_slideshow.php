@@ -4,11 +4,11 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://madebyraygun.com/lab/portfolio-slideshow
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 0.6.0
+Version: 1.0.0
 Author URI: http://madebyraygun.com
 */ 
 
-$ps_version = "0.6.0";
+$ps_version = "1.0.0";
 
 // add our default options if they're not already there:
 
@@ -74,89 +74,16 @@ function portfolio_shortcode($atts) {
 	), $atts));
 
 	echo '<script type="text/javascript"> 
-	jQuery(document).ready(function($) {
-	
-	$(window).load(function() {';
-	
-	if($ps_showloader=="true"){
-			echo '$(\'div.slideshow-holder\').delay(1500).fadeOut(\'fast\', function() {';}
-
-	echo   '$(\'div.slideshow-wrapper\').css(\'visibility\',\'visible\');';
-			
-	if($ps_showloader=="true"){ 
-			echo '});';}
-		
-	echo   '$(function() {
-				var index = 0, hash = window.location.hash;
-				if (hash) {
-				index = /\d+/.exec(hash)[0];
-				index = (parseInt(index) || 1) - 1; // slides are zero-based
-		} 	
-			
-		$(\'#portfolio-slideshow'.$i.'\').cycle({
-				fx: \''. $ps_trans . '\',
-				speed: '. $ps_speed . ',
-				timeout: '. $timeout . ',
-				next: \'#slideshow-wrapper'.$i.' a.slideshow-next\',
-				startingSlide: index,
-				prev: \'#slideshow-wrapper'.$i.' a.slideshow-prev\',
-				before:     onBefore,
-				after:     onAfter,
-				pager:  \'#slides'.$i.'\',
-				manualTrump: false,
-				cleartypeNoBg: true,
-				pagerAnchorBuilder: function(idx, slide) {
-				// return sel string for existing anchor
-				return \'#slides'.$i.'  li:eq(\' + (idx) + \') a\'; }
-		});
-	
-
-		$(\'.slideshow-nav'.$i. ' a.pause\').click(function() { 
-			$(\'#portfolio-slideshow'.$i.'\').cycle(\'pause\');
-			$(\'.slideshow-nav'.$i. ' a.pause\').hide();
-			$(\'.slideshow-nav'.$i. ' a.play\').show();
-		});
-	
-		$(\'.slideshow-nav'.$i. ' a.play\').click(function() { 
-			$(\'#portfolio-slideshow'.$i.'\').cycle(\'resume\');
-			$(\'.slideshow-nav'.$i. ' a.play\').hide();
-			$(\'.slideshow-nav'.$i. ' a.pause\').show();
-		});
-		
-		function onBefore(curr,next,opts) {
-			$("p.slideshow-caption, p.slideshow-title, p.slideshow-description", this).css("visibility", "hidden");
-		}
-		
-		function onAfter(curr,next,opts) {
-			
-			var $ht = $("img",this).attr("height");
-			if ($("p.slideshow-caption", this).length ) { 
-				var $oht = $("p.slideshow-caption", this).outerHeight(\'true\');
-			} else {
-    			var $oht = 0;
-			}
-			if ($("p.slideshow-description", this).length ) {
-				var $pht = $("p.slideshow-description", this).outerHeight(\'true\');
-			} else {
-			var $pht = 0;
-    			
-			}
-			if ($("p.slideshow-title", this).length ) { 
-				var $qht = $("p.slideshow-title", this).outerHeight(\'true\'); 
-			} else {
-    			var $qht = 0;
-			} 
-			$(\'#portfolio-slideshow'.$i.'\').css("height", $ht + $oht + $pht + $qht);
-						
-			$("p.slideshow-caption, p.slideshow-title, p.slideshow-description", this).css("visibility", "visible");
-			';
-					
-			if ($ps_showhash=="true") { if (is_page() || is_single()) {
-	  echo 'window.location.hash = opts.currSlide + 1;';}}
-			
-	  echo 'var caption = (opts.currSlide + 1) + \' of \' + opts.slideCount;
-			$(\'#slideshow-info'.$i.'\').html(caption);
-	} }); }); });</script>'; 
+		/* <![CDATA[ */
+		var portfolioSlideshowOptions = {
+			psTrans: '.$ps_trans.',
+			psSpeed: '.$ps_speed.',
+			psHash: '.$ps_showhash.',
+			psLoader: '.$ps_showloader.',
+			psTimeout: '.$ps_timeout.'
+		};
+		/* ]]> */
+	</script>'; 
 
 if($ps_showloader=="true"){ //show the loader.gif if necessary
 				$slideshow .= '<div class="slideshow-holder"></div>';}
@@ -366,13 +293,16 @@ if (!is_admin()){
 //load the cycle script
  wp_register_script('cycle', plugins_url( 'lib/jquery.cycle.all.min.js', __FILE__ ), false, '2.7.3', true); 
  wp_enqueue_script('cycle');
+ 
+ wp_register_script('portfolio_slideshow', plugins_url( 'lib/portfolio_slideshow.min.js', __FILE__ ), false, '2.7.3', true); 
+ wp_enqueue_script('portfolio_slideshow.js');
    
 function portfolio_head() {
 	echo '
 <!-- loaded by Portfolio Slideshow Plugin-->
-<link rel="stylesheet" type="text/css" href="' .  plugins_url( "portfolio-slideshow.css?ver=0.6.0", __FILE__ ) . '" />
+<link rel="stylesheet" type="text/css" href="' .  plugins_url( "portfolio-slideshow.css?ver=1.0.0", __FILE__ ) . '" />
 <noscript>
-<link rel="stylesheet" type="text/css" href="' .  plugins_url( "portfolio-slideshow-noscript.css?ver=0.6.0", __FILE__ ) . '" />
+<link rel="stylesheet" type="text/css" href="' .  plugins_url( "portfolio-slideshow-noscript.css?ver=1.0.0", __FILE__ ) . '" />
 </noscript>
 <!-- end Portfolio Slideshow Plugin -->
 ';
@@ -417,36 +347,6 @@ global $ps_trans, $ps_speed, $ps_size, $ps_support, $ps_titles, $ps_captions, $p
 
 // Output the options page ?>
 <div class="wrap" style="width:500px">
-
-
-<h2>Support this plugin</h2>
-
-<div<?php if ($ps_support=="true"){echo ' style="display:none"';}?>>
-
-<p>Donations for this software are welcome:</p> 
-
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post"> 
-<input type="hidden" name="cmd" value="_s-xclick"> 
-<input type="hidden" name="hosted_button_id" value="2ANTEK4HG6XCW"> 
-<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"> 
-<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1"><br /> 
-</form> 
-
-<p>One more thing: we love <a href="http://daltn.com/x/a2">A2 Hosting</a>! We've been using them for years, and they provide the best web host service and support in the industry. If you sign up through the link below, we get a referral fee, which helps us maintain this software. Their one-click WordPress install will have you up and running in just a couple of minutes.</p> 
-<p><a  href="http://daltn.com/x/a2"><img style="margin:10px 0;" src="http://daltonrooney.com/portfolio/wp-content/uploads/2010/01/green_234x60.jpeg" alt="" title="green_234x60" width="234" height="60" class="alignnone size-full wp-image-148" /></a></p> 
-</div>
-
-<form method="post" action="options.php">
-<?php wp_nonce_field('update-options'); ?>
-<input type="checkbox" name="portfolio_slideshow_show_support" value="true"<?php if ($ps_support=="true"){echo ' checked="checked"';}?>> I have donated to the plugin, don't show ads.<br />
-<input type="hidden" name="page_options" value="portfolio_slideshow_show_support" />
-<input type="hidden" name="action" value="update" />	
-
-<p class="submit">
-<input type="submit" class="button-primary" value="<?php _e('Save') ?>" />
-</p>
-
-</form>
 
 <h2>Portfolio Slideshow Options</h2>
 <p>Options changed here become the default for all slideshows. Most options can also be changed on a per-slideshow basis by using the slideshow attributes.</p>
@@ -563,6 +463,35 @@ portfolio_slideshow_show_descriptions, portfolio_slideshow_timeout, portfolio_sl
 </p>
 </form>
 
+<h2>Support this plugin</h2>
+
+<div<?php if ($ps_support=="true"){echo ' style="display:none"';}?>>
+
+<p>Donations for this software are welcome:</p> 
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post"> 
+<input type="hidden" name="cmd" value="_s-xclick"> 
+<input type="hidden" name="hosted_button_id" value="2ANTEK4HG6XCW"> 
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"> 
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1"><br /> 
+</form> 
+
+<p>One more thing: we love <a href="http://daltn.com/x/a2">A2 Hosting</a>! We've been using them for years, and they provide the best web host service and support in the industry. If you sign up through the link below, we get a referral fee, which helps us maintain this software. Their one-click WordPress install will have you up and running in just a couple of minutes.</p> 
+<p><a  href="http://daltn.com/x/a2"><img style="margin:10px 0;" src="http://daltonrooney.com/portfolio/wp-content/uploads/2010/01/green_234x60.jpeg" alt="" title="green_234x60" width="234" height="60" class="alignnone size-full wp-image-148" /></a></p> 
+</div>
+
+<form method="post" action="options.php">
+<?php wp_nonce_field('update-options'); ?>
+<input type="checkbox" name="portfolio_slideshow_show_support" value="true"<?php if ($ps_support=="true"){echo ' checked="checked"';}?>> I have donated to the plugin, don't show ads.<br />
+<input type="hidden" name="page_options" value="portfolio_slideshow_show_support" />
+<input type="hidden" name="action" value="update" />	
+
+<p class="submit">
+<input type="submit" class="button-primary" value="<?php _e('Save') ?>" />
+</p>
+
+</form>
+
 <h2>Shortcode Attributes</h2>
 
 <p>The following attributes are available to modify the slideshow behavior on an individual basis. Options are the same as above. </p>
@@ -570,12 +499,6 @@ portfolio_slideshow_show_descriptions, portfolio_slideshow_timeout, portfolio_sl
 <p><strong>Image size:</strong></p>
 
 <code>[portfolio_slideshow size=thumbnail]</code>
-
-<p><strong>Autoplay:</strong></p>
-
-<code>[portfolio_slideshow timeout=5000]</code>
-
-<p>Where timeout equals the time per slide in milliseconds.</p>
 
 <p><strong>Show thumbnails</strong> (shown on single posts and pages only):</p>
 
@@ -608,7 +531,6 @@ alternately, disable navigation with
 <p>Example:
 <code>[portfolio_slideshow include="1,2,3"]</code><code>[portfolio_slideshow include="4,5,6"]</code>
 This example will create two slideshows on the page with two sets of images. Remember, the attachment ID can be found in your <a href="<?php bloginfo('wpurl')?>/wp-admin/upload.php">Media Library</a> by hovering over the thumbnail. You can only include attachments which are attached to the current post.</p>
-
 
 <h2>Additional features on the settings page:</h2>
 
