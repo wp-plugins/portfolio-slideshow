@@ -135,7 +135,7 @@ function portfolio_shortcode($atts) {
 		$ps_nav .='<a class="pause" href="javascript: void(0)">Pause</a><a class="play" style="display:none" href="javascript: void(0)">Play</a>';} // end autoplay
 		
 		$ps_nav .= '<a class="slideshow-prev" href="javascript: void(0)">Prev</a><span class="sep">|</span><a class="slideshow-next" href="javascript: void(0)">Next</a>';
-		$ps_nav .= '<span class="slideshow-info'.$i.'" class="slideshow-info"></span>';
+		$ps_nav .= '<span class="slideshow-info'.$i.' slideshow-info"></span>';
 		$ps_nav .= '</div>
 		';	
 	
@@ -191,7 +191,7 @@ function portfolio_shortcode($atts) {
 		//begin the slideshow loop
 		foreach ($attachments as $attachment) {
 			
-			$slideshow .= '<div id="slideshow-content" class="';
+			$slideshow .= '<div class="';
 			if ($slideID != "1") {$slideshow .= "not-first ";}
 			$slideshow .= 'slideshow-next slideshow-content">
 			';
@@ -327,7 +327,7 @@ if( !is_admin()){
  wp_enqueue_script('cycle');
  
  //our script
- wp_register_script('portfolio-slideshow', plugins_url( 'lib/portfolio-slideshow.js', __FILE__ ), false, '1.0.0', true); 
+ wp_register_script('portfolio-slideshow', plugins_url( 'lib/portfolio-slideshow.js', __FILE__ ), false, '1.0.1', true); 
  wp_enqueue_script('portfolio-slideshow');
  
 function portfolio_head() {
