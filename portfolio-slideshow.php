@@ -4,13 +4,11 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://madebyraygun.com/lab/portfolio-slideshow
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 1.0
+Version: 1.0.1
 Author URI: http://madebyraygun.com
 */ 
 
-$ps_version = "1.0";
-
-
+$ps_version = "1.0.1";
 
 // Get the admin page
 require('portfolio-slideshow-admin.php');
@@ -121,9 +119,10 @@ function portfolio_shortcode($atts) {
 		
 	if($ps_showloader=="true"){ //show the loader.gif if necessary
 					$slideshow .= '<div class="slideshow-holder"></div>';}
-				
+	
+	$jindex = $i - 1;
 	$slideshow .= 
-	'<script type="text/javascript">/* <![CDATA[ */ psTimeout['.$i.']= '.$timeout.';psTrans['.$i.']= \''.$trans.'\',psNoWrap['.$i.']= '.$nowrap.';psSpeed['.$i.']= '.$speed.';/* ]]> */</script>';
+	'<script type="text/javascript">/* <![CDATA[ */ psTimeout['.$jindex.']='.$timeout.';psTrans['.$jindex.']=\''.$trans.'\';psNoWrap['.$jindex.']='.$nowrap.';psSpeed['.$jindex.']='.$speed.';/* ]]> */</script>';
 
 			
 	$slideshow .= '<div id="slideshow-wrapper'.$i.'" class="slideshow-wrapper">
@@ -336,7 +335,7 @@ function portfolio_head() {
 	<!-- Portfolio Slideshow-->
 	<link rel="stylesheet" type="text/css" href="' .  plugins_url( "portfolio-slideshow.css?ver=1.0.0", __FILE__ ) . '" />
 	<noscript><link rel="stylesheet" type="text/css" href="' .  plugins_url( "portfolio-slideshow-noscript.css?ver=1.0.0", __FILE__ ) . '" /></noscript>
-	<script type="text/javascript">/* <![CDATA[ */var psTimeout = []; var psTrans = []; var psSpeed = []; var psNoWrap = [];/* ]]> */</script>
+	<script type="text/javascript">/* <![CDATA[ */var psTimeout = new Array(); var psTrans =  new Array(); var psSpeed =  new Array(); var psNoWrap =  new Array();/* ]]> */</script>
 	<!--//Portfolio Slideshow-->
 	';
 } // end portfolio_head 

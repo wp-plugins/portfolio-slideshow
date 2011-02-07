@@ -4,7 +4,7 @@ Donate link: http://madebyraygun.com/donate/
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit
 Requires at least: 3.0
 Tested up to: 3.0.4
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Degrades gracefully for users without javascript.
 
@@ -134,11 +134,11 @@ If you would like to change the size of the images system-wide (for example, you
 
 == Changelog ==
 
+1.0.1 
 
+* Fixed problem with multiple slideshows per page.
 
 1.0.0
-
-
 
 * Removed most inline Javascript.
 * Major refactoring of code.
@@ -152,7 +152,7 @@ If you would like to change the size of the images system-wide (for example, you
 * Added dedicated field for image links
 * Next & Previous navigation links are not shown if wrapping is disabled.
 
-0.6.0 
+0.6 series
 
 * Change how jQuery is loaded so error is not generated on HTTPS sites.
 * Fixed height calculation bug for first slide
@@ -161,187 +161,69 @@ If you would like to change the size of the images system-wide (for example, you
 * Added noscript stylesheet so slideshow degrades gracefully to for users without javascript.
 * Improved documentation
 
-0.5.9.2 
+0.5 series
 
 * Bugfix for URL hashes showing up on single pages even when disabled in settings.
-
-
 * Cleaned up SVN repository
-
-0.5.9.1 
-
-
-
 * Fixed a totally embarrassing bug that was causing jQuery not to load in certain situations.
-
-
-0.5.9
-
-
-
 * Multiple slideshows now possible on a single post/page.
-
-
-0.5.8 
-
 * Bugfix: nav="false" hiding slideshow
 * Bugfix: Option to disable URL hash updating was not working properly
 * Bugfix: No longer applying the content filter to slideshow output, as it was interfering with other plugins.
-
-
-0.5.7 
-
 * Bugfix: new loading gif not working when slideshow navigation is at the bottom.
-
-0.5.6 
-
-
-
 * Bugfix: Cycle plugin not loading properly.
-
-0.5.5 
-
 * Fixed improper jQuery loading on admin introduced in previous version.
-
-0.5.3
-
 * Added an option to add a loading gif if your slideshows take a little while to load.
-
 * Disabled transition "none", because of a bug in the cycle plugin. Will be added back in when the author of that plugin fixes the bug. Use the fade transition with a speed of 1ms to simulate the "none" transition.
-
-
-
 * Added an option for "Description" field to hold a URL that links the image to an external site.
-
-
-
 * Removed some negative padding from the auto-rezise slideshow container calculation. This may cause some themes to display too much space between the image & the page content - if so, you can change the padding via CSS.
-
-
-0.5.1 
-
 * Option to disable URL updating (slide number hashes in URL)
-
-0.5
-
 * Thumbnails, slide numbers, and autoplay now work on all pages, including index (homepage) & category pages.
-
 * Slideshow content area is dynamically resized to conform to actual size of content.
-
 * Fixed display bug with TwentyTen theme
-
 * Fix for bug introduced in 0.4.3 which broke some slideshows.
-
 * Upgraded to latest version of cycle plugin
-
 * Support for descriptions
 
-
-0.4.3
-
-
+0.4 series
 
 * Links in captions are now clickable.
-
-
-
 * Documented nav="false" attribute.
-
-
-0.4.2
-
 * Include and exclude attributes for shortcode. Thanks to Raoni Del Persio from Central WordPress http://www.centralwordpress.com.br for sponsoring this feature.
-
-0.4.1
-
-* Teeny tiny bugfix
-
-0.4.0
-
 * Moved styles to external file instead of loading them inline and fixed validation issue
-
 * Fixed titles display
-
 * Added autoplay option to options panel 
-
 * Added nav position option to shortcode and options panel
-
 * Thumbnails! Enable them in the shortcode or the options panel. 
 
-0.3.10
-
+0.3 series
 
 * Continue to improve the way jQuery is loaded so it is compatible with the most number of plugin/theme combinations. 
-
-0.3.9 
-
-* Bugfix
-
-0.3.8
-
+* Bugfixes
 * Improved compatibility with other cycle based plugins and themes.
-
 * Code cleanup.
-
-0.3.7 
-
 * Clarified FAQs and added additional screenshots
-
 * Added ability to hide donation request
-
 * Added autoplay support via shortcode attribute "timeout", defaults to 0. (Thanks Rino3000 in the WP forums for the idea)
-
 * Added capability to turn off titles and captions by default
-
 * Eliminated the flash of unstyled content that is sometimes shown if a page is slow to load.
-
-0.3.6
-
 * Added the size attribute to the shortcode so you can select the size of the images on a per-slideshow basis. 
-
 * Added image permalinks so you can link to a specific image in the slideshow. (Pages and single posts only)
-
 * Added support for slide numbering on single posts as well as pages.
-
-0.3.5 
-
 * Fixed a bug where the slideshow was always at the top of the page, no matter where it is supposed to be in the content editor.
-
-0.3.4
-
 * Slideshow navigation no longer appears in the RSS feed. Images are embedded in the feed sequentially.
-
 * Added configuration settings for transition fx and transition time.
-
 * Added status notification in plugin upgrade area
-
 * Added support for slide info (slide number). Works for pages only.
-
-0.3.3 
-
 * Fixed issue where multiple slideshows on the same page did not advance properly.
-
-0.3.2 
-
-* Javascript & typo fix
-
-0.3.1 
-
 * Small javascript fix
-
-0.3  
-
 * Added settings panel to select image size. 
 * Added support for image titles as well as captions.
-
 * Fixed small issue related to slideshow order if the menu order isn't explicity set.
-
 
 0.2: 
 
 * First public release.
-
-
 
 0.1: 
 
