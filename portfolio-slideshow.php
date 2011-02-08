@@ -4,11 +4,11 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://madebyraygun.com/lab/portfolio-slideshow
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 1.0.1
+Version: 1.0.2
 Author URI: http://madebyraygun.com
 */ 
 
-$ps_version = "1.0.1";
+$ps_version = "1.0.2";
 
 // Get the admin page
 require('portfolio-slideshow-admin.php');
@@ -31,7 +31,8 @@ add_option("portfolio_slideshow_nowrap", '');
 add_option("portfolio_slideshow_showhash", ''); 
 add_option("portfolio_slideshow_timeout", '0'); 
 add_option("portfolio_slideshow_showloader", ''); 
-add_option("portfolio_slideshow_descriptionisURL", ''); 
+add_option("portfolio_slideshow_descriptionisURL", '');
+add_option("portfolio_slideshow_jquery_version", '1.4.4');
 
 // now let's grab the options table data
 $ps_version = get_option('portfolio_slideshow_version'); 
@@ -51,6 +52,8 @@ $ps_showhash = get_option('portfolio_slideshow_showhash');
 $ps_version = get_option('portfolio_slideshow_version');
 $ps_showloader = get_option('portfolio_slideshow_showloader');
 $ps_descriptionisURL = get_option('portfolio_slideshow_descriptionisURL');
+$ps_jquery = get_option('portfolio_slideshow_jquery_version');
+
 
 //set up defaults if these fields are empty
 if (empty($ps_showloader)) {$ps_showloader = "false";}
@@ -316,10 +319,29 @@ function portfolio_shortcode($atts) {
 // Output the javascript & css here
 
 //jQuery, obvs.
+
+
+
 if( !is_admin()){
-   wp_deregister_script('jquery'); 
-   wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"), false, '1.4.4', false); 
-   wp_enqueue_script('jquery');
+   
+	switch ($ps_jquery) {
+	
+	case "1.4.2" :	
+		wp_deregister_script('jquery'); 
+		wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"), false, '1.4.2', false); 
+		wp_enqueue_script('jquery');
+		break;
+	
+	case "disabled" :
+		// do nothing
+		break;
+		
+	default :
+		wp_deregister_script('jquery'); 
+		wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"), false, '1.4.4', false); 
+		wp_enqueue_script('jquery');
+		break;
+	}
 }
 
 //malsup cycle script

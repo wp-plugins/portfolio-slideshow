@@ -24,7 +24,7 @@ if (isset($_GET['page'])) { //don't love this, but the officially supported way 
 
 function portfolio_slideshow_options_page() {
 	
-	global $ps_trans, $ps_speed, $ps_size, $ps_support, $ps_titles, $ps_captions, $ps_descriptions, $ps_timeout, $ps_navpos, $ps_thumbs, $ps_thumbs_hp, $ps_showhash, $ps_version, $ps_showloader, $ps_nowrap, $ps_descriptionisURL;
+	global $ps_trans, $ps_speed, $ps_size, $ps_support, $ps_titles, $ps_captions, $ps_descriptions, $ps_timeout, $ps_navpos, $ps_thumbs, $ps_thumbs_hp, $ps_showhash, $ps_version, $ps_showloader, $ps_nowrap, $ps_descriptionisURL, $ps_jquery;
 	
 	// Output the options page ?>
 	<div class="wrap" style="width:500px">
@@ -128,12 +128,23 @@ function portfolio_slideshow_options_page() {
 	<th scope="row">Update URL with slide numbers<span class="vtip" title='You can enable this feature to udpate the URL of the you page with the slide number. Example: http://example.com/slideshow/#3 will link directly to the third slide in the slideshow.'>?</span></th>
 	<td><input type="checkbox" name="portfolio_slideshow_showhash" value="true" <?php if ($ps_showhash=="true") {echo' checked="checked"'; }?>/>
 	</td>
+	</tr>
+	
+	<tr valign="top">
+	<th scope="row">jQuery version<span class="vtip" title="If you're having trouble with the Javascript effects, you can try an older version of jQuery, or disable it altogether. This sometimes helps if you have plugins or themes that rely on their own version of jQuery. Note that the container height calculations for the slideshow rely on features in 1.4.4, so you may experience issues with your container height if you change this from the default.">?</span></th>
+	<td><select name="portfolio_slideshow_jquery_version" value="<?php echo get_option('portfolio_slideshow_jquery_version'); ?>" />
+		<option value="1.4.4" <?php if($ps_jquery == "1.4.4") echo " selected='selected'";?>>1.4.4</option>
+		<option value="1.4.2" <?php if($ps_jquery == "1.4.2") echo " selected='selected'";?>>1.4.2</option>
+		<option value="disabled" <?php if($ps_jquery == disabled) echo " selected='selected'";?>>disabled</option>
+	</select>
+	</td>
 	</tr>	
+	
 	
 	</table>
 	
 	<input type="hidden" name="page_options" value="portfolio_slideshow_size, portfolio_slideshow_transition, portfolio_slideshow_transition_speed, portfolio_slideshow_nowrap, portfolio_slideshow_show_captions, portfolio_slideshow_show_titles,
-	portfolio_slideshow_show_descriptions, portfolio_slideshow_timeout, portfolio_slideshow_nav_position, portfolio_slideshow_show_thumbs, portfolio_slideshow_show_thumbs_hp, portfolio_slideshow_showhash, portfolio_slideshow_descriptionisURL, portfolio_slideshow_showloader" />
+	portfolio_slideshow_show_descriptions, portfolio_slideshow_timeout, portfolio_slideshow_nav_position, portfolio_slideshow_show_thumbs, portfolio_slideshow_show_thumbs_hp, portfolio_slideshow_showhash, portfolio_slideshow_descriptionisURL, portfolio_slideshow_showloader, portfolio_slideshow_jquery_version" />
 	<input type="hidden" name="action" value="update" />	
 	<p class="submit">
 	<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
