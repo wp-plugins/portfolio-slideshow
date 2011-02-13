@@ -3,12 +3,13 @@ Contributors: daltonrooney
 Donate link: http://madebyraygun.com/donate/
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit
 Requires at least: 3.0
-Tested up to: 3.0.4
-Stable tag: 1.0.2
+Tested up to: 3.1
+Stable tag: 1.0.3
 
 A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Degrades gracefully for users without javascript.
 
-Please note: A lot has changed in version 1.0. We've tested it extensively but we recommend that you test the plugin out on a test account before installing it on your main site. 
+For more advanced features be sure to check out our new plugin, [Portfolio Slideshow Pro](http://madebyraygun.com/lab/portfolio-slideshow)
+
 
 == Installation ==
 
@@ -133,6 +134,11 @@ If you would like to change the size of the images system-wide (for example, you
 6. Adding an external URL to a slide.
 
 == Changelog ==
+
+1.0.3 
+
+* Small CSS fix for themes with max-width attribute on images
+* Added information about Portfolio Slideshow Pro
 
 1.0.2
 
