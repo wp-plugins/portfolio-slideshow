@@ -4,11 +4,11 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://madebyraygun.com/lab/portfolio-slideshow
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 1.0.3
+Version: 1.0.4
 Author URI: http://madebyraygun.com
 */ 
 
-$ps_version = "1.0.3";
+$ps_version = "1.0.4";
 
 // Get the admin page
 require('portfolio-slideshow-admin.php');
@@ -347,16 +347,17 @@ if( !is_admin()){
 //malsup cycle script
  wp_register_script('cycle', plugins_url( 'lib/jquery.cycle.all.min.js', __FILE__ ), false, '2.7.3', true); 
  wp_enqueue_script('cycle');
- 
+
  //our script
- wp_register_script('portfolio-slideshow', plugins_url( 'lib/portfolio-slideshow.js', __FILE__ ), false, '1.0.1', true); 
+ wp_register_script('portfolio-slideshow', plugins_url( 'lib/portfolio-slideshow.js', __FILE__ ), false, $ps_version, true); 
  wp_enqueue_script('portfolio-slideshow');
  
 function portfolio_head() {
+	global $ps_version;
 	echo '
 	<!-- Portfolio Slideshow-->
-	<link rel="stylesheet" type="text/css" href="' .  plugins_url( "portfolio-slideshow.css?ver=1.0.0", __FILE__ ) . '" />
-	<noscript><link rel="stylesheet" type="text/css" href="' .  plugins_url( "portfolio-slideshow-noscript.css?ver=1.0.0", __FILE__ ) . '" /></noscript>
+	<link rel="stylesheet" type="text/css" href="' .  plugins_url( "portfolio-slideshow.css?ver=", __FILE__ ) . $ps_version . '" />
+	<noscript><link rel="stylesheet" type="text/css" href="' .  plugins_url( "portfolio-slideshow-noscript.css?ver=". $ps_version, __FILE__ ) . '" /></noscript>
 	<script type="text/javascript">/* <![CDATA[ */var psTimeout = new Array(); var psTrans =  new Array(); var psSpeed =  new Array(); var psNoWrap =  new Array();/* ]]> */</script>
 	<!--//Portfolio Slideshow-->
 	';

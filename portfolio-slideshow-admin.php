@@ -129,7 +129,7 @@ function portfolio_slideshow_options_page() {
 	</tr>	
 	
 	<tr valign="top">
-	<th scope="row">Update URL with slide numbers<span class="vtip" title='You can enable this feature to udpate the URL of the you page with the slide number. Example: http://example.com/slideshow/#3 will link directly to the third slide in the slideshow.'>?</span></th>
+	<th scope="row">Update URL with slide numbers<span class="vtip" title='You can enable this feature to udpate the URL of the page with the slide number. Example: http://example.com/slideshow/#3 will link directly to the third slide in the slideshow.'>?</span></th>
 	<td><input type="checkbox" name="portfolio_slideshow_showhash" value="true" <?php if ($ps_showhash=="true") {echo' checked="checked"'; }?>/>
 	</td>
 	</tr>
