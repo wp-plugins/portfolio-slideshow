@@ -4,11 +4,11 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://madebyraygun.com/lab/portfolio-slideshow
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 1.0.4
+Version: 1.1.0
 Author URI: http://madebyraygun.com
 */ 
 
-$ps_version = "1.0.4";
+$ps_version = "1.1.0";
 
 // Get the admin page
 require('portfolio-slideshow-admin.php');
