@@ -164,6 +164,8 @@ function portfolio_slideshow_options_page() {
 	
 	<h3>General usage</h3>
 	
+	<iframe src="http://player.vimeo.com/video/20679115?byline=0&amp;color=ffffff" width="601" height="338" frameborder="0"></iframe><p><a href="http://vimeo.com/20679115">Portfolio Slideshow Pro demo</a> from <a href="http://vimeo.com/madebyraygun">Raygun</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+	
 	<p>To use the plugin, upload your photos to a post or page using the WordPress media uploader. Use the [portfolio_slideshow] shortcode to display the slideshow in your page or post.</p>
 		
 	<img src="<?php echo plugins_url( 'screenshot-2.png', __FILE__ );?>" alt="" title="portfolio-slideshow screenshot 2" width="405" height="200" class="size-full wp-image-660" /><p class="wp-caption-text">Use the media uploader to add, sort, and delete your photos.</p>
