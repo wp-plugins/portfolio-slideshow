@@ -4,11 +4,11 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://madebyraygun.com/lab/portfolio-slideshow
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 1.1.1
+Version: 1.1.2
 Author URI: http://madebyraygun.com
 */ 
 
-$ps_version = "1.1.1";
+$ps_version = "1.1.2";
 
 // Get the admin page
 require('portfolio-slideshow-admin.php');
@@ -70,6 +70,30 @@ function add_post_id($content) {
 add_filter ( 'media_row_actions', 'add_post_id');
 
 
+
+//action link http://www.wpmods.com/adding-plugin-action-links
+
+function ps_action_links($links, $file) {
+    static $this_plugin;
+ 
+    if (!$this_plugin) {
+        $this_plugin = plugin_basename(__FILE__);
+    }
+ 
+    // check to make sure we are on the correct plugin
+    if ($file == $this_plugin) {
+        // the anchor tag and href to the URL we want. For a "Settings" link, this needs to be the url of your settings page
+        $settings_link = '<a href="' . get_bloginfo('wpurl') . '/wp-admin/options-general.php?page=portfolio-slideshow">Settings</a>';
+        // add the link to the list
+        array_unshift($links, $settings_link);
+    }
+ 
+    return $links;
+}
+
+add_filter('plugin_action_links', 'ps_action_links', 10, 2);
+
+
 //Adds custom fields to attachment page. Props Frank Bültge, http://bueltge.de/ ref: http://wpengineer.com/2076/add-custom-field-attachment-in-wordpress/
 
 if ($ps_descriptionisURL == "true") {
@@ -120,12 +144,13 @@ function portfolio_shortcode($atts) {
 		'include' => ''
 	), $atts));
 		
-	if($ps_showloader=="true"){ //show the loader.gif if necessary
+	if( !is_feed() && $ps_showloader=="true"){ //show the loader.gif if necessary
 					$slideshow .= '<div class="slideshow-holder"></div>';}
 	
 	$jindex = $i - 1;
-	$slideshow .= 
-	'<script type="text/javascript">/* <![CDATA[ */ psTimeout['.$jindex.']='.$timeout.';psTrans['.$jindex.']=\''.$trans.'\';psNoWrap['.$jindex.']='.$nowrap.';psSpeed['.$jindex.']='.$speed.';/* ]]> */</script>';
+	
+	if ( !is_feed() ) { $slideshow .= 
+	'<script type="text/javascript">/* <![CDATA[ */ psTimeout['.$jindex.']='.$timeout.';psTrans['.$jindex.']=\''.$trans.'\';psNoWrap['.$jindex.']='.$nowrap.';psSpeed['.$jindex.']='.$speed.';/* ]]> */</script>'; } 
 
 			
 	$slideshow .= '<div id="slideshow-wrapper'.$i.'" class="slideshow-wrapper">
@@ -142,7 +167,7 @@ function portfolio_shortcode($atts) {
 		$ps_nav .= '</div>
 		';	
 	
-	if ($nav == "top" && $count > 1) { 
+	if ( !is_feed() && $nav == "top" && $count > 1) { 
 		$slideshow .= $ps_nav;
 	}
 
@@ -251,7 +276,7 @@ function portfolio_shortcode($atts) {
 	$slideshow .= "</div><!--#portfolio-slideshow-->";
 	
 	//here come the thumbnails!
-	if (is_singular() && $thumbs=="true" && $count > 1 || !is_singular() && $ps_thumbs_hp == "true" && $count > 1) {
+	if ( !is_feed() && is_singular() && $thumbs=="true" && $count > 1 || !is_feed() && !is_singular() && $ps_thumbs_hp == "true" && $count > 1) {
 		$slideshow .= '<div class="slideshow-thumbs">
 							<ul id="slides'.$i.'" class="slides">';
 		
@@ -305,7 +330,7 @@ function portfolio_shortcode($atts) {
 	
 	}  //end thumbs
 
-	if ($nav == "bottom") { 
+	if ( !is_feed() && $nav == "bottom" && $count > 1) { 
 		$slideshow .= $ps_nav;
 	}
 

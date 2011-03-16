@@ -271,7 +271,7 @@ function portfolio_slideshow_options_page() {
 </div><!--#tabs-->
 
 	<a href="http://madebyraygun.com"><img style="margin-top:30px;" src="<?php echo plugins_url( 'lib/images/logo.png', __FILE__ );?>" width="225" height="70" alt="Made by Raygun" /></a>
-	<p>You're using Portfolio Slideshow v. <?php echo $ps_version;?>, made by <a href="http://madebyraygun">Raygun</a>. Check out our <a href="http://madebyraygun.com/lab/" target="_blank">other plugins</a>, and if you have any problems, stop by our <a href="http://madebyraygun.com/support/forum/" target="_blank">support forum</a>!
+	<p><code>You're using Portfolio Slideshow v. <?php echo $ps_version;?>, made by <a href="http://madebyraygun">Raygun</a>. Check out our <a href="http://madebyraygun.com/lab/" target="_blank">other plugins</a>, and if you have any problems, stop by our <a href="http://madebyraygun.com/support/forum/" target="_blank">support forum</a>!</code></p>
 	</div>
 	<?php 
 } //options page ?>
