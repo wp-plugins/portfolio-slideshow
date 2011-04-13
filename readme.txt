@@ -147,8 +147,10 @@ If you would like to change the size of the images system-wide (for example, you
 == Changelog ==
 
 1.1.3 
-* Internationalization (Thanks, Diana Cury!)
+
+* Internationalization & Brazilian Portuguese translation (Thanks, Diana Cury!)
 * You can add any parent ID to the shortcode to specify a different set of images
+* Fix for blank slides
 
 1.1.2
 
