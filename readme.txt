@@ -4,11 +4,15 @@ Donate link: http://madebyraygun.com/donate/
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 
 A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Degrades gracefully for users without javascript.
 
 For more advanced features be sure to check out our new plugin, [Portfolio Slideshow Pro](http://madebyraygun.com/lab/portfolio-slideshow)
+
+Thanks for internationalization!
+
+Portuguese: Diana K. Cury
 
 
 == Installation ==
@@ -22,6 +26,11 @@ To use the plugin, upload your photos to your post or page using the WordPress m
 By default, the slideshow will use the large version of the image that WordPress generates when you upload an image. You can change this default in the Settings panel or on a per-slideshow basis. The image sizes available are  "thumbnail", "medium", "large", and "full".
 
 **The shortcode supports the following attributes:**
+
+
+To select a different page parent ID to select the images: 
+
+[portfolio_slideshow id=xxx]
 
 Image size on a per-slideshow basis. Use the size attribute in the shortcode like this:
 
@@ -136,6 +145,10 @@ If you would like to change the size of the images system-wide (for example, you
 6. Adding an external URL to a slide.
 
 == Changelog ==
+
+1.1.3 
+* Internationalization (Thanks, Diana Cury!)
+* You can add any parent ID to the shortcode to specify a different set of images
 
 1.1.2
 

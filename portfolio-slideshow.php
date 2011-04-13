@@ -4,11 +4,23 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://madebyraygun.com/lab/portfolio-slideshow
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 1.1.2
+Version: 1.1.3
 Author URI: http://madebyraygun.com
-*/ 
+*/
 
-$ps_version = "1.1.2";
+$ps_version = "1.1.3";
+
+//Define static variables
+define("PORT_SLDPLUGINPATH", "/" . plugin_basename( dirname(__FILE__) ) . "/");
+
+define("PORT_SLDPLUGINFULLURL", WP_PLUGIN_URL . PORT_SLDPLUGINPATH );
+
+//get ready for local
+$currentLocale = get_locale();
+if(!empty($currentLocale)) {
+	//load local
+	load_plugin_textdomain( 'port_slide', PORT_SLDPLUGINFULLURL . 'lang', PORT_SLDPLUGINPATH . 'lang' );
+}
 
 // Get the admin page
 require('portfolio-slideshow-admin.php');
@@ -16,23 +28,25 @@ require('portfolio-slideshow-admin.php');
 // add our default options if they're not already there:
 
 if (get_option('portfolio_slideshow_version')  != $ps_version) {
-    update_option('portfolio_slideshow_version', $ps_version);}
-add_option("portfolio_slideshow_size", 'full'); 
-add_option("portfolio_slideshow_transition", 'fade'); 
-add_option("portfolio_slideshow_transition_speed", '400'); 
-add_option("portfolio_slideshow_show_support", 'false'); 
-add_option("portfolio_slideshow_show_titles", 'true'); 
-add_option("portfolio_slideshow_show_captions", 'true'); 
-add_option("portfolio_slideshow_show_descriptions", 'false'); 
-add_option("portfolio_slideshow_show_thumbs", 'false');
-add_option("portfolio_slideshow_show_thumbs_hp", 'false');
-add_option("portfolio_slideshow_nav_position", 'top'); 
-add_option("portfolio_slideshow_nowrap", '');
-add_option("portfolio_slideshow_showhash", ''); 
-add_option("portfolio_slideshow_timeout", '0'); 
-add_option("portfolio_slideshow_showloader", ''); 
-add_option("portfolio_slideshow_descriptionisURL", '');
-add_option("portfolio_slideshow_jquery_version", '1.4.4');
+    
+    update_option('portfolio_slideshow_version', $ps_version);
+	add_option("portfolio_slideshow_size", 'full'); 
+	add_option("portfolio_slideshow_transition", 'fade'); 
+	add_option("portfolio_slideshow_transition_speed", '400'); 
+	add_option("portfolio_slideshow_show_support", 'false'); 
+	add_option("portfolio_slideshow_show_titles", 'true'); 
+	add_option("portfolio_slideshow_show_captions", 'true'); 
+	add_option("portfolio_slideshow_show_descriptions", 'false'); 
+	add_option("portfolio_slideshow_show_thumbs", 'false');
+	add_option("portfolio_slideshow_show_thumbs_hp", 'false');
+	add_option("portfolio_slideshow_nav_position", 'top'); 
+	add_option("portfolio_slideshow_nowrap", '');
+	add_option("portfolio_slideshow_showhash", ''); 
+	add_option("portfolio_slideshow_timeout", '0'); 
+	add_option("portfolio_slideshow_showloader", ''); 
+	add_option("portfolio_slideshow_descriptionisURL", '');
+	add_option("portfolio_slideshow_jquery_version", '1.4.4');
+}
 
 // now let's grab the options table data
 $ps_version = get_option('portfolio_slideshow_version'); 
@@ -54,13 +68,11 @@ $ps_showloader = get_option('portfolio_slideshow_showloader');
 $ps_descriptionisURL = get_option('portfolio_slideshow_descriptionisURL');
 $ps_jquery = get_option('portfolio_slideshow_jquery_version');
 
-
 //set up defaults if these fields are empty
 if (empty($ps_showloader)) {$ps_showloader = "false";}
 if (empty($ps_descriptionisURL)) {$ps_descriptionisURL = "false";}
 if (empty($ps_showhash)) {$ps_showhash = "false";}
 if (empty($ps_nowrap)) {$ps_nowrap = "0";}
-
 
 // put the attachment ID on the media page
 function add_post_id($content) { 
@@ -68,8 +80,6 @@ function add_post_id($content) {
     $content[] = $showlink;
     return $content;}
 add_filter ( 'media_row_actions', 'add_post_id');
-
-
 
 //action link http://www.wpmods.com/adding-plugin-action-links
 
@@ -94,27 +104,27 @@ function ps_action_links($links, $file) {
 add_filter('plugin_action_links', 'ps_action_links', 10, 2);
 
 
-//Adds custom fields to attachment page. Props Frank Bültge, http://bueltge.de/ ref: http://wpengineer.com/2076/add-custom-field-attachment-in-wordpress/
+//Adds custom fields to attachment page. Via Frank Bültge, http://bueltge.de/ ref: http://wpengineer.com/2076/add-custom-field-attachment-in-wordpress/
 
 if ($ps_descriptionisURL == "true") {
 	
 	function ps_image_attachment_fields_to_edit($form_fields, $post) {  
 		$form_fields["ps_image_link"] = array(  
-			"label" => __("Slideshow image links to URL:"),  
+			"label" => __('Slideshow image links to URL:', 'port_slide'),
 			"input" => "text",
 			"value" => get_post_meta($post->ID, "_ps_image_link", true)  
 		);        
 		return $form_fields;  
 	}  
 	
-	function ps_image_attachment_fields_to_save($post, $attachment) {    
-		if( isset($attachment['ps_image_link']) ){  
-			update_post_meta($post['ID'], '_ps_image_link', $attachment['ps_image_link']);  
+	function ps_image_attachment_fields_to_save($post, $attachment) {
+		if( isset($attachment['ps_image_link']) ){
+			update_post_meta($post['ID'], '_ps_image_link', $attachment['ps_image_link']);
 		}  
 		return $post;  
 	}  
 	
-	add_filter("attachment_fields_to_edit", "ps_image_attachment_fields_to_edit", null, 2); 
+	add_filter("attachment_fields_to_edit", "ps_image_attachment_fields_to_edit", null, 2);
 	add_filter("attachment_fields_to_save", "ps_image_attachment_fields_to_save", null, 2);
 }
 
@@ -127,8 +137,7 @@ function portfolio_shortcode($atts) {
 	STATIC $i=1;
 	
 	//count the attachments
-	$attachments = get_children(array('post_parent' => get_the_ID()));
-	$count = count($attachments);
+	
 
 	global $ps_trans, $ps_speed, $ps_size, $ps_titles, $ps_captions, $ps_descriptions, $ps_thumbs, $ps_navpos, $ps_timeout, $ps_thumbs_hp, $ps_showhash, $ps_showloader, $ps_descriptionisURL, $ps_nowrap;
 	
@@ -140,9 +149,15 @@ function portfolio_shortcode($atts) {
 		'timeout' => $ps_timeout,
 		'thumbs' => $ps_thumbs,
 		'nav' => $ps_navpos,
+		'id' => '',
 		'exclude' => '',
 		'include' => ''
 	), $atts));
+	
+	if ( empty ( $id ) ) { $id = get_the_ID(); }
+	
+	$attachments = get_children( array ( 'post_parent' => $id, 'post_type' => 'attachment', 'post_mime_type' => 'image' ) );
+	$count = count( $attachments );
 		
 	if( !is_feed() && $ps_showloader=="true"){ //show the loader.gif if necessary
 					$slideshow .= '<div class="slideshow-holder"></div>';}
@@ -151,7 +166,6 @@ function portfolio_shortcode($atts) {
 	
 	if ( !is_feed() ) { $slideshow .= 
 	'<script type="text/javascript">/* <![CDATA[ */ psTimeout['.$jindex.']='.$timeout.';psTrans['.$jindex.']=\''.$trans.'\';psNoWrap['.$jindex.']='.$nowrap.';psSpeed['.$jindex.']='.$speed.';/* ]]> */</script>'; } 
-
 			
 	$slideshow .= '<div id="slideshow-wrapper'.$i.'" class="slideshow-wrapper">
 	';	//wrap the whole thing in a div for styling	
@@ -160,9 +174,9 @@ function portfolio_shortcode($atts) {
 
 		$ps_nav .= '<div class="slideshow-nav'.$i.' slideshow-nav">';
 		if ($timeout !=0) { //if autoplay is set
-		$ps_nav .='<a class="pause" href="javascript: void(0)">Pause</a><a class="play" style="display:none" href="javascript: void(0)">Play</a>';} // end autoplay
-		
-		$ps_nav .= '<a class="slideshow-prev" href="javascript: void(0)">Prev</a><span class="sep">|</span><a class="slideshow-next" href="javascript: void(0)">Next</a>';
+		$ps_nav .='<a class="pause" href="javascript: void(0)">' . __('Pause', 'port_slide') . '</a><a class="play" style="display:none" href="javascript: void(0)">' . __('Play', 'port_slide') . '</a>';} // end autoplay
+
+		$ps_nav .= '<a class="slideshow-prev" href="javascript: void(0)">' . __('Prev', 'port_slide') . '</a><span class="sep">|</span><a class="slideshow-next" href="javascript: void(0)">' . __('Next', 'port_slide') . '</a>';
 		$ps_nav .= '<span class="slideshow-info'.$i.' slideshow-info"></span>';
 		$ps_nav .= '</div>
 		';	
@@ -170,31 +184,30 @@ function portfolio_shortcode($atts) {
 	if ( !is_feed() && $nav == "top" && $count > 1) { 
 		$slideshow .= $ps_nav;
 	}
-
 		
 	$slideshow .= '<div id="portfolio-slideshow'.$i.'" class="portfolio-slideshow">
 	';
 
 	$slideID=1;
 	
-	if ( !empty($include) ) {
+	if ( !empty( $include ) ) {
 		$include = preg_replace( '/[^0-9,]+/', '', $include );
 		$attachments = get_posts( array('order'          => 'ASC',
 		'orderby' 		 => 'menu_order ID',
 		'post_type'      => 'attachment',
-		'post_parent'    => get_the_ID(),
+		'post_parent'    => $id,
 		'post_mime_type' => 'image',
 		'post_status'    => null,
 		'numberposts'    => -1,
 		'size'			 => $size,
 		'include'		 => $include) );
 		
-	} elseif ( !empty($exclude) ) {
+	} elseif ( !empty( $exclude ) ) {
 		$exclude = preg_replace( '/[^0-9,]+/', '', $exclude );
 		$attachments = get_posts( array('order'          => 'ASC',
 		'orderby' 		 => 'menu_order ID',
 		'post_type'      => 'attachment',
-		'post_parent'    => get_the_ID(),
+		'post_parent'    => $id,
 		'post_mime_type' => 'image',
 		'post_status'    => null,
 		'numberposts'    => -1,
@@ -204,7 +217,7 @@ function portfolio_shortcode($atts) {
 		$attachments = get_posts( array('order'          => 'ASC',
 		'orderby' 		 => 'menu_order ID',
 		'post_type'      => 'attachment',
-		'post_parent'    => get_the_ID(),
+		'post_parent'    => $id,
 		'post_mime_type' => 'image',
 		'post_status'    => null,
 		'numberposts'    => -1,
@@ -242,7 +255,6 @@ function portfolio_shortcode($atts) {
 			if ($nav == "middle" && $count > 1) { 
 				$slideshow .= $ps_nav;
 			}
-
 
 			//if titles option is selected
 			if ($ps_titles=="true") {
@@ -285,7 +297,7 @@ function portfolio_shortcode($atts) {
 			$attachments = get_posts( array('order'          => 'ASC',
 			'orderby' 		 => 'menu_order ID',
 			'post_type'      => 'attachment',
-			'post_parent'    => get_the_ID(),
+			'post_parent'    => $id,
 			'post_mime_type' => 'image',
 			'post_status'    => null,
 			'numberposts'    => -1,
@@ -297,7 +309,7 @@ function portfolio_shortcode($atts) {
 			$attachments = get_posts( array('order'          => 'ASC',
 			'orderby' 		 => 'menu_order ID',
 			'post_type'      => 'attachment',
-			'post_parent'    => get_the_ID(),
+			'post_parent'    => $id,
 			'post_mime_type' => 'image',
 			'post_status'    => null,
 			'numberposts'    => -1,
@@ -307,7 +319,7 @@ function portfolio_shortcode($atts) {
 			$attachments = get_posts( array('order'          => 'ASC',
 			'orderby' 		 => 'menu_order ID',
 			'post_type'      => 'attachment',
-			'post_parent'    => get_the_ID(),
+			'post_parent'    => $id,
 			'post_mime_type' => 'image',
 			'post_status'    => null,
 			'numberposts'    => -1,
@@ -342,10 +354,6 @@ function portfolio_shortcode($atts) {
 } //ends the portfolio_shortcode function
 
 // Output the javascript & css here
-
-//jQuery, obvs.
-
-
 
 if( !is_admin()){
    

@@ -1,0 +1,428 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Portfolio Slideshow v.0.5.9.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-03-30 02:23-0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Diana K. Cury <dianakac@gmail.cin>\n"
+"Language-Team: Diana K. Cury <dianakac@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: portfolio-slideshow-admin.php:37
+#@ port_slide
+msgid "Thanks for downloading Portfolio Slideshow! If you like it, please be sure to give us a positive rating in the <a href=\"http://wordpress.org/extend/plugins/portfolio-slideshow/\">WordPress repository</a>, it means a lot to us."
+msgstr "Obrigado por usar o plugin Portfolio Slideshow! Se você gostou, por favor vote positivamente em nossa página no <a href=\"http://wordpress.org/extend/plugins/portfolio-slideshow/\">Respositório WordPress</a>, isso significa muito para nós."
+
+#: portfolio-slideshow-admin.php:38
+#@ port_slide
+msgid "If you like Portfolio Slideshow but need more advanced slideshow features, check out our newest plugin, <a href=\"http://madebyraygun.com/lab/portfolio-slideshow\">Portfolio Slideshow Pro</a>."
+msgstr "Se você gostou do plugin Portfolio Slideshow mas precisa de recursos mais avançados, confira nosso novíssimo <a href=\"http://madebyraygun.com/lab/portfolio-slideshow\">Portfolio Slideshow Pro</a>."
+
+#: portfolio-slideshow-admin.php:41
+#@ port_slide
+msgid "Portfolio Slideshow"
+msgstr "Portfolio Slideshow"
+
+#: portfolio-slideshow-admin.php:51
+#@ port_slide
+msgid "Slideshow Settings"
+msgstr "Configurações do Slide"
+
+#: portfolio-slideshow-admin.php:52
+#@ port_slide
+msgid "Documentation"
+msgstr "Documentação"
+
+#: portfolio-slideshow-admin.php:57
+#@ port_slide
+msgid "Options changed here become the default for all slideshows. Most options can also be changed on a per-slideshow basis by using the slideshow attributes."
+msgstr "Opções determinadas aqui se tornam o padrão para todos os slides. A maioria das opções também podem ser mudadas no slide usando atributos individuais."
+
+#: portfolio-slideshow-admin.php:59
+#@ port_slide
+msgid "Slideshow Display"
+msgstr "Exibição do Slide"
+
+#: portfolio-slideshow-admin.php:62
+#@ port_slide
+msgid "Slideshow Size"
+msgstr "Tamanho do Slide"
+
+#: portfolio-slideshow-admin.php:62
+#@ port_slide
+msgid "The slideshow size refers to the default image sizes that WordPress creates when you upload an image. You can customize these image sizes in the Media Settings control panel."
+msgstr "O tamanho do slideshow se refere ao tamanho padrão das imagens que o WordPress cria quando você faz o upload da imagem. Você pode personalizar estas medidas em Configurações > Mídia."
+
+#: portfolio-slideshow-admin.php:65
+#@ port_slide
+msgid "thumbnail"
+msgstr "Miniatura"
+
+#: portfolio-slideshow-admin.php:66
+#@ port_slide
+msgid "medium"
+msgstr "Médio"
+
+#: portfolio-slideshow-admin.php:67
+#@ port_slide
+msgid "large"
+msgstr "Grande"
+
+#: portfolio-slideshow-admin.php:68
+#@ port_slide
+msgid "full"
+msgstr "Total"
+
+#: portfolio-slideshow-admin.php:71
+#@ port_slide
+msgid "Transition Effects"
+msgstr "Efeitos de Transição"
+
+#: portfolio-slideshow-admin.php:74
+#@ port_slide
+msgid "Fade"
+msgstr "Suavizar"
+
+#: portfolio-slideshow-admin.php:75
+#@ port_slide
+msgid "Scroll Horizontaly"
+msgstr "Rolar Horizontalmente"
+
+#: portfolio-slideshow-admin.php:78
+#@ port_slide
+msgid "Transition Speed"
+msgstr "Velocidade de Transição"
+
+#: portfolio-slideshow-admin.php:92
+#@ port_slide
+msgid "Captions and titles"
+msgstr "Legendas e Títulos"
+
+#: portfolio-slideshow-admin.php:94
+#@ port_slide
+msgid "Show Titles"
+msgstr "Mostrar Títulos"
+
+#: portfolio-slideshow-admin.php:96
+#@ port_slide
+msgid "Show Captions"
+msgstr "Mostrar Legendas"
+
+#: portfolio-slideshow-admin.php:98
+#@ port_slide
+msgid "Show Descriptions"
+msgstr "Mostrar Descrição"
+
+#: portfolio-slideshow-admin.php:104
+#@ port_slide
+msgid "Slideshow Behavior"
+msgstr "Comportamento do Slider"
+
+#: portfolio-slideshow-admin.php:107
+#@ port_slide
+msgid "Autoplay timeout"
+msgstr "Tempo de Auto-execução"
+
+#: portfolio-slideshow-admin.php:107
+#@ port_slide
+msgid "Anything other than 0 here will turn on autoplay by default. Time is displayed in ms&mdash;e.g. 1000 = 1 second per slide."
+msgstr "Qualquer valor diferente de 0 ativa a auto-execução por padrão. O tempo é mostrado em milissegundos; ou seja, 1000 = 1 segundo/cada slide."
+
+#: portfolio-slideshow-admin.php:110
+#@ port_slide
+msgid "Show loading animation"
+msgstr "Mostrar animação de carregamento"
+
+#: portfolio-slideshow-admin.php:110
+#@ port_slide
+msgid "If you've got a slow connection or lots of images, sometimes the slideshow can take a little while to load. Selecting this option will include a loading gif to show that something is happening. You may want to adjust the padding on the image to center it for your slideshow."
+msgstr "Em conexões lentas ou quando há muitas imagens, às vezes o slide pode levar algum tempo para carregar. Selecione esta opção para incluir uma imagem animada (.gif) representativa do carregamento. Você também pode ajustar a tabulação da imagem para ficar centralizada na área do slide."
+
+#: portfolio-slideshow-admin.php:113
+#@ port_slide
+msgid "Disable slideshow wrapping"
+msgstr "Desabilitar envolver do slide"
+
+#: portfolio-slideshow-admin.php:113
+#@ port_slide
+msgid "Play through to the beginning after it gets to the end, or simply stop"
+msgstr "Executar o slide novamente do início ao fim e recomeçar em seguida, ou parar"
+
+#: portfolio-slideshow-admin.php:116
+#@ port_slide
+msgid "Allow links to external URLs"
+msgstr "Permitir links para URLs externa"
+
+#: portfolio-slideshow-admin.php:116
+#@ port_slide
+msgid "Checking this box allows you to add URLs to your images. For example, if you want your slide to link to a portfolio page or to an external site, you would use this feature. This feature disables the <em>click slide to advance</em> function and will cause problems if you've got anything but a URL in the field, so use it wisely."
+msgstr "Marcar esta opção permite adicionar URLs a suas imagens. Por exemplo, se quer que o slide seja um link para uma página de portifólio ou site externo, você deve usar este recurso. Este recurso desativa <em>clicar no slide para avançar</em> e pode causar problemas se inserir qualquer coisa que não uma URL no campo, por isso, use com cautela."
+
+#: portfolio-slideshow-admin.php:119
+#@ port_slide
+msgid "Update URL with slide numbers"
+msgstr "Atualizar URL com números do Slide"
+
+#: portfolio-slideshow-admin.php:119
+#@ port_slide
+msgid "You can enable this feature to udpate the URL of the page with the slide number. Example: http://example.com/slideshow/#3 will link directly to the third slide in the slideshow."
+msgstr "Ative este recurso para atualizar a URL da página com o número do slide. Por exemplo: http://exemplo.com/slideshow/#3 criará um link para a terceira imagem do slide."
+
+#: portfolio-slideshow-admin.php:123
+#@ port_slide
+msgid "Navigation"
+msgstr "Navegação"
+
+#: portfolio-slideshow-admin.php:126
+#@ port_slide
+msgid "Navigation Position"
+msgstr "Posição da Navegação"
+
+#: portfolio-slideshow-admin.php:128
+#@ port_slide
+msgid "top"
+msgstr "Topo"
+
+#: portfolio-slideshow-admin.php:129
+#@ port_slide
+msgid "below images"
+msgstr "Abaixo das Imagens"
+
+#: portfolio-slideshow-admin.php:130
+#@ port_slide
+msgid "bottom"
+msgstr "Abaixo"
+
+#: portfolio-slideshow-admin.php:131
+#: portfolio-slideshow-admin.php:150
+#@ port_slide
+msgid "disabled"
+msgstr "Desativado"
+
+#: portfolio-slideshow-admin.php:135
+#@ port_slide
+msgid "Show thumbnails on single posts/pages"
+msgstr "Mostrar miniaturas em páginas e postagens individuais"
+
+#: portfolio-slideshow-admin.php:138
+#@ port_slide
+msgid "Show thumbnails on homepage/archive pages"
+msgstr "Mostrar miniaturas na Página Inicial e em arquivos"
+
+#: portfolio-slideshow-admin.php:143
+#@ port_slide
+msgid "Diagnostics"
+msgstr "Diagnósticos"
+
+#: portfolio-slideshow-admin.php:146
+#@ port_slide
+msgid "jQuery version"
+msgstr "Versão de jQuery"
+
+#: portfolio-slideshow-admin.php:146
+#@ port_slide
+msgid "If you're having trouble with the Javascript effects, you can try an older version of jQuery, or disable it altogether. This sometimes helps if you have plugins or themes that rely on their own version of jQuery. Note that the container height calculations for the slideshow rely on features in 1.4.4, so you may experience issues with your container height if you change this from the default."
+msgstr "Se você estiver tendo problemas com os efeitos em Javascript, você pode tentar uma versão mais antiga de jQuery, ou mesmo desativá-lo. Isso geralmente ajuda se você tem plugins e temas que possuem suas próprias versões de jQuery. Observe que o cálculo da altura do contêiner do slide se apoia em recursos do 1.4.4, então talvez tenha alguma situação relacionada a altura do contêiner se mudar isso do padrão "
+
+#: portfolio-slideshow-admin.php:160
+#@ default
+msgid "Save Changes"
+msgstr "Salvar Mudanças"
+
+#: portfolio-slideshow-admin.php:169
+#@ port_slide
+msgid "General usage"
+msgstr "Uso Geral"
+
+#: portfolio-slideshow-admin.php:172
+#@ port_slide
+msgid "Portfolio Slideshow Pro demo"
+msgstr "Demo do Portfolio Slideshow Pro"
+
+#: portfolio-slideshow-admin.php:172
+#@ port_slide
+msgid "from"
+msgstr "de"
+
+#: portfolio-slideshow-admin.php:172
+#@ port_slide
+msgid "on"
+msgstr "no"
+
+#: portfolio-slideshow-admin.php:174
+#@ port_slide
+msgid "To use the plugin, upload your photos to a post or page using the WordPress media uploader. Use the [portfolio_slideshow] shortcode to display the slideshow in your page or post."
+msgstr "Para usar o plugin, faça upload de suas fotos em uma postagem ou página usando o recurso de upload do WordPress. Use o shortcode [portfolio_slideshow] para mostrar o slideshow na postagem ou página."
+
+#: portfolio-slideshow-admin.php:177
+#@ port_slide
+msgid "Use the media uploader to add, sort, and delete your photos."
+msgstr "Use o recurso de envio de mídia para adicionar, organizar e excluir suas imagens."
+
+#: portfolio-slideshow-admin.php:180
+#@ port_slide
+msgid "Insert the slideshow by using this shortcode, exactly as shown. Do not insert the photos into the post."
+msgstr "Insira o slide usando este shortcode, exatamente como mostrado abaixo. Não é necessário inserir as imagens no texto da postagem."
+
+#: portfolio-slideshow-admin.php:182
+#@ port_slide
+msgid "Shortcode Attributes"
+msgstr "Atributos do Shortcode"
+
+#: portfolio-slideshow-admin.php:183
+#@ port_slide
+msgid "If you would like to customize your slideshows on a per-slideshow basis, you can add the following attributes to the shortcode, which will temporarily override the defaults."
+msgstr "Se você quer personalizar o slide individualmente, você pode adicionar os seguitnes atributos no shortcode, o que faz com que ignore as opções gerais."
+
+#: portfolio-slideshow-admin.php:184
+#@ port_slide
+msgid "To change the <strong>image size</strong> you would use the size attribute in the shortcode like this:"
+msgstr "Para mudar o <strong>tamanho das imagens</strong>, você deve usar o atributo de tamanho no shortcode, desse jeito:"
+
+#: portfolio-slideshow-admin.php:188
+#@ port_slide
+msgid "Image transition Effects"
+msgstr "Efeitos de Transição de Imagem"
+
+#: portfolio-slideshow-admin.php:192
+#@ port_slide
+msgid "(Top secret! You can use this shortcode attribute to supply any transition effect supported by jQuery Cycle, even if they're not in the plugin! List of supported transitions <a href=\"http://jquery.malsup.com/cycle/begin.html\">here</a>."
+msgstr "Você pode usar este atributo de shortcode para preencher qualquer efeito de transição suportado por jQuery Cycle, mesmo que não estejam listados no plugin! Veja a lista de efeitos de transição suportadas <a href=\"http://jquery.malsup.com/cycle/begin.html\">aqui</a>."
+
+#: portfolio-slideshow-admin.php:194
+#@ port_slide
+msgid "Show titles, captions, or descriptions:"
+msgstr "Mostrar títulos, legendas ou descrição"
+
+#: portfolio-slideshow-admin.php:197
+#@ port_slide
+msgid "(use false to disable)"
+msgstr "(use <em>false</em> para desativar)"
+
+#: portfolio-slideshow-admin.php:199
+#@ port_slide
+msgid "Autoplay Timeout"
+msgstr "Tempo para Auto-execução"
+
+#: portfolio-slideshow-admin.php:203
+#@ port_slide
+msgid "Disable Slideshow Wrapping"
+msgstr "Desativar continuidade do Slide"
+
+#: portfolio-slideshow-admin.php:207
+#@ port_slide
+msgid "or enable it like this:"
+msgstr "ou ative desse jeito:"
+
+#: portfolio-slideshow-admin.php:211
+#@ port_slide
+msgid "Show thumbnails:"
+msgstr "Mostrar miniaturas:"
+
+#: portfolio-slideshow-admin.php:215
+#@ port_slide
+msgid "or:"
+msgstr "ou:"
+
+#: portfolio-slideshow-admin.php:219
+#@ port_slide
+msgid "Navigation position:"
+msgstr "Posição da Navegação"
+
+#: portfolio-slideshow-admin.php:223
+#@ port_slide
+msgid "alternately, disable navigation with"
+msgstr "alternativamente, desativar a navegação com"
+
+#: portfolio-slideshow-admin.php:227
+#@ port_slide
+msgid "Include or exclude slides:"
+msgstr "Include ou Exclude slides:"
+
+#: portfolio-slideshow-admin.php:233
+#@ port_slide
+msgid "You need to specify the attachment ID, which you can find in your"
+msgstr "Você precisa especificar o ID do anexo, ele pode ser encontrado na"
+
+#: portfolio-slideshow-admin.php:233
+#: portfolio-slideshow-admin.php:245
+#@ port_slide
+msgid "Media Library"
+msgstr "Biblioteca de Mídia"
+
+#: portfolio-slideshow-admin.php:233
+#@ port_slide
+msgid "by hovering over the thumbnail. You can only include attachments which are attached to the current post. Do not use these attributes simultaneously, they are mutually exclusive."
+msgstr "ao mover o cursor do mouse sobre as miniaturas. Você só pode incluir anexos que estão na postagem. Não use estes dois atributos ao mesmo tempo, eles são mutuamente exclusivos."
+
+#: portfolio-slideshow-admin.php:235
+#@ port_slide
+msgid "Multiple slideshows per post/page:"
+msgstr "Múltiplos slides por postagem/página:"
+
+#: portfolio-slideshow-admin.php:237
+#@ port_slide
+msgid "you can insert multiple slideshows per post/page by including different attachment ids in your shortcode."
+msgstr "você pode inserir múltiplos slides por postagem/página ao incluir diferentes IDs de anexos no shortcode."
+
+#: portfolio-slideshow-admin.php:239
+#@ port_slide
+msgid "Example:"
+msgstr "Exemplo:"
+
+#: portfolio-slideshow-admin.php:245
+#@ port_slide
+msgid "This example will create two slideshows on the page with two sets of images. Remember, the attachment ID can be found in your"
+msgstr "Este exemplo criará dois slides na página com duas imagens cada. Lembre-se, o ID de cada anexo pode ser encontrado na"
+
+#: portfolio-slideshow-admin.php:245
+#@ port_slide
+msgid "by hovering over the thumbnail. You can only include attachments which are attached to the current post."
+msgstr "ao mover o cursor do mouse sobre as miniaturas. Você só pode incluir anexos que estão na postagem."
+
+#: portfolio-slideshow-admin.php:251
+#@ port_slide
+msgid "You're using Portfolio Slideshow v."
+msgstr "Você está usando o Portfolio Slideshow v."
+
+#: portfolio-slideshow-admin.php:251
+#@ port_slide
+msgid "Check out our <a href=\"http://madebyraygun.com/lab/\" target=\"_blank\">other plugins</a>, and if you have any problems, stop by our <a href=\"http://madebyraygun.com/support/forum/\" target=\"_blank\">support forum</a>!"
+msgstr "Confira nossos <a href=\"http://madebyraygun.com/lab/\" target=\"_blank\">outros plugins</a>,  e se tiver algum problema, visite nosso <a href=\"http://madebyraygun.com/support/forum/\" target=\"_blank\">Fórum de Suporte</a>! (em inglês)<br /><small><a href=\"http://arquivo.tk\">Localização pt_BR por Diana K. Cury</a></small>"
+
+#: portfolio-slideshow.php:120
+#@ port_slide
+msgid "Slideshow image links to URL:"
+msgstr "Link para URL na Imagem do Slide:"
+
+#: portfolio-slideshow.php:180
+#@ port_slide
+msgid "Pause"
+msgstr "Pausar"
+
+#: portfolio-slideshow.php:180
+#@ port_slide
+msgid "Play"
+msgstr "Animar!"
+
+#: portfolio-slideshow.php:182
+#@ port_slide
+msgid "Prev"
+msgstr "Anterior"
+
+#: portfolio-slideshow.php:182
+#@ port_slide
+msgid "Next"
+msgstr "Seguinte"
+
