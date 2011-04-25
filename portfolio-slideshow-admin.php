@@ -10,18 +10,15 @@ function add_portfolio_slideshow_option_page() {
 // hook in the action for the admin options page
 add_action('admin_menu', 'add_portfolio_slideshow_option_page');
 
-if (isset($_GET['page'])) { //don't love this, but the officially supported way wasn't working
-
-    if ($_GET['page'] == "portfolio-slideshow") {
-  		wp_enqueue_script('jquery');
- 		wp_register_script('vtip', plugins_url( 'lib/vtip-min.js', __FILE__ ), false, '2', true); 
- 		wp_enqueue_script('jquery-ui-core');
- 		wp_enqueue_script('jquery-ui-tabs');
- 		wp_register_script('portfolio-slideshow-admin', plugins_url( 'lib/portfolio-slideshow-admin.js', __FILE__ ), false, '2', true); 
- 		wp_enqueue_script('portfolio-slideshow-admin');
-		wp_register_style('portfolio-slideshow-admin', plugins_url( 'lib/portfolio-slideshow-admin.css', __FILE__ ), false, '2.2', 'screen'); 
- 		wp_enqueue_style('portfolio-slideshow-admin');
-    }
+if ($_GET['page'] == "portfolio-slideshow") {
+	wp_enqueue_script('jquery');
+	wp_register_script('vtip', plugins_url( 'lib/vtip-min.js', __FILE__ ), false, '2', true); 
+	wp_enqueue_script('jquery-ui-core');
+	wp_enqueue_script('jquery-ui-tabs');
+	wp_register_script('portfolio-slideshow-admin', plugins_url( 'lib/portfolio-slideshow-admin.js', __FILE__ ), false, '2', true); 
+	wp_enqueue_script('portfolio-slideshow-admin');
+wp_register_style('portfolio-slideshow-admin', plugins_url( 'lib/portfolio-slideshow-admin.css', __FILE__ ), false, '2.2', 'screen'); 
+	wp_enqueue_style('portfolio-slideshow-admin');
 }
 
 function portfolio_slideshow_options_page() {

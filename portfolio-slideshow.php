@@ -4,15 +4,14 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://madebyraygun.com/lab/portfolio-slideshow
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 1.1.3
+Version: 1.1.4
 Author URI: http://madebyraygun.com
 */
 
-$ps_version = "1.1.3";
 
 //Define static variables
+define("PORTFOLIO_SLIDESHOW_VERSION", "1.1.4");
 define("PORT_SLDPLUGINPATH", "/" . plugin_basename( dirname(__FILE__) ) . "/");
-
 define("PORT_SLDPLUGINFULLURL", WP_PLUGIN_URL . PORT_SLDPLUGINPATH );
 
 //get ready for local
@@ -23,13 +22,16 @@ if(!empty($currentLocale)) {
 }
 
 // Get the admin page
-require('portfolio-slideshow-admin.php');
+if ( is_admin() ) { 
+	require('portfolio-slideshow-admin.php');
+}	
 
 // add our default options if they're not already there:
 
-if (get_option('portfolio_slideshow_version')  != $ps_version) {
-    
-    update_option('portfolio_slideshow_version', $ps_version);
+register_activation_hook( __FILE__, 'ps_install' );
+
+function ps_install() { // add and update our default options upon activation    
+    update_option( 'portfolio_slideshow_version', PORTFOLIO_SLIDESHOW_VERSION);
 	add_option("portfolio_slideshow_size", 'full'); 
 	add_option("portfolio_slideshow_transition", 'fade'); 
 	add_option("portfolio_slideshow_transition_speed", '400'); 
@@ -46,7 +48,7 @@ if (get_option('portfolio_slideshow_version')  != $ps_version) {
 	add_option("portfolio_slideshow_showloader", ''); 
 	add_option("portfolio_slideshow_descriptionisURL", '');
 	add_option("portfolio_slideshow_jquery_version", '1.4.4');
-}
+} //end ps_install() function
 
 // now let's grab the options table data
 $ps_version = get_option('portfolio_slideshow_version'); 
@@ -114,6 +116,7 @@ if ($ps_descriptionisURL == "true") {
 			"input" => "text",
 			"value" => get_post_meta($post->ID, "_ps_image_link", true)  
 		);        
+		
 		return $form_fields;  
 	}  
 	
@@ -134,11 +137,10 @@ add_shortcode('portfolio_slideshow', 'portfolio_shortcode');
 // define the shortcode function
 function portfolio_shortcode($atts) {
 	
-	STATIC $i=1;
+	STATIC $i=0;
 	
 	//count the attachments
 	
-
 	global $ps_trans, $ps_speed, $ps_size, $ps_titles, $ps_captions, $ps_descriptions, $ps_thumbs, $ps_navpos, $ps_timeout, $ps_thumbs_hp, $ps_showhash, $ps_showloader, $ps_descriptionisURL, $ps_nowrap;
 	
 	extract(shortcode_atts(array(
@@ -162,7 +164,7 @@ function portfolio_shortcode($atts) {
 	if( !is_feed() && $ps_showloader=="true"){ //show the loader.gif if necessary
 					$slideshow .= '<div class="slideshow-holder"></div>';}
 	
-	$jindex = $i - 1;
+	$jindex = $i;
 	
 	if ( !is_feed() ) { $slideshow .= 
 	'<script type="text/javascript">/* <![CDATA[ */ psTimeout['.$jindex.']='.$timeout.';psTrans['.$jindex.']=\''.$trans.'\';psNoWrap['.$jindex.']='.$nowrap.';psSpeed['.$jindex.']='.$speed.';/* ]]> */</script>'; } 
