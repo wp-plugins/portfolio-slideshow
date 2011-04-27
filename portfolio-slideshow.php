@@ -4,13 +4,13 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://madebyraygun.com/lab/portfolio-slideshow
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 1.1.4
+Version: 1.1.5
 Author URI: http://madebyraygun.com
 */
 
 
 //Define static variables
-define("PORTFOLIO_SLIDESHOW_VERSION", "1.1.4");
+define("PORTFOLIO_SLIDESHOW_VERSION", "1.1.5");
 define("PORT_SLDPLUGINPATH", "/" . plugin_basename( dirname(__FILE__) ) . "/");
 define("PORT_SLDPLUGINFULLURL", WP_PLUGIN_URL . PORT_SLDPLUGINPATH );
 
@@ -28,9 +28,9 @@ if ( is_admin() ) {
 
 // add our default options if they're not already there:
 
-register_activation_hook( __FILE__, 'ps_install' );
 
-function ps_install() { // add and update our default options upon activation    
+
+if (get_option( 'portfolio_slideshow_version' )  < PORTFOLIO_SLIDESHOW_VERSION ) { // add and update our default options if version numbers don't match
     update_option( 'portfolio_slideshow_version', PORTFOLIO_SLIDESHOW_VERSION);
 	add_option("portfolio_slideshow_size", 'full'); 
 	add_option("portfolio_slideshow_transition", 'fade'); 
@@ -48,7 +48,7 @@ function ps_install() { // add and update our default options upon activation
 	add_option("portfolio_slideshow_showloader", ''); 
 	add_option("portfolio_slideshow_descriptionisURL", '');
 	add_option("portfolio_slideshow_jquery_version", '1.4.4');
-} //end ps_install() function
+} //end update
 
 // now let's grab the options table data
 $ps_version = get_option('portfolio_slideshow_version'); 
