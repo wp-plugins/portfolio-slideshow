@@ -4,13 +4,13 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://madebyraygun.com/lab/portfolio-slideshow
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 1.1.5
+Version: 1.1.6
 Author URI: http://madebyraygun.com
 */
 
 
 //Define static variables
-define("PORTFOLIO_SLIDESHOW_VERSION", "1.1.5");
+define("PORTFOLIO_SLIDESHOW_VERSION", "1.1.6");
 define("PORT_SLDPLUGINPATH", "/" . plugin_basename( dirname(__FILE__) ) . "/");
 define("PORT_SLDPLUGINFULLURL", WP_PLUGIN_URL . PORT_SLDPLUGINPATH );
 
@@ -339,8 +339,7 @@ function portfolio_shortcode($atts) {
 			}
 		}
 		
-		$slideshow .= "</ul></div><!-- end thumbs-->
-		<br style=\"clear:both\" />";
+		$slideshow .= "</ul></div><!-- end thumbs-->";
 	
 	}  //end thumbs
 
@@ -357,7 +356,7 @@ function portfolio_shortcode($atts) {
 
 // Output the javascript & css here
 
-if( !is_admin()){
+if ( !is_admin() ) {
    
 	switch ($ps_jquery) {
 	
@@ -377,15 +376,15 @@ if( !is_admin()){
 		wp_enqueue_script('jquery');
 		break;
 	}
+
+	//malsup cycle script
+	 wp_register_script('cycle', plugins_url( 'lib/jquery.cycle.all.min.js', __FILE__ ), false, '2.7.3', true);
+	 wp_enqueue_script('cycle');
+
+	 //our script
+	 wp_register_script('portfolio-slideshow', plugins_url( 'lib/portfolio-slideshow.js', __FILE__ ), false, $ps_version, true); 
+	 wp_enqueue_script('portfolio-slideshow');
 }
-
-//malsup cycle script
- wp_register_script('cycle', plugins_url( 'lib/jquery.cycle.all.min.js', __FILE__ ), false, '2.7.3', true); 
- wp_enqueue_script('cycle');
-
- //our script
- wp_register_script('portfolio-slideshow', plugins_url( 'lib/portfolio-slideshow.js', __FILE__ ), false, $ps_version, true); 
- wp_enqueue_script('portfolio-slideshow');
  
 function portfolio_head() {
 	global $ps_version;
