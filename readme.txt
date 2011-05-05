@@ -3,8 +3,8 @@ Contributors: daltonrooney
 Donate link: http://madebyraygun.com/donate/
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit
 Requires at least: 3.0
-Tested up to: 3.1
-Stable tag: 1.1.6
+Tested up to: 3.1.2
+Stable tag: 1.1.7
 
 A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Degrades gracefully for users without javascript.
 
@@ -146,6 +146,9 @@ If you would like to change the size of the images system-wide (for example, you
 
 == Changelog ==
 
+1.1.7
+
+* CSS: Fix for menu compatibility with Duster theme.
 
 1.1.6 
 
