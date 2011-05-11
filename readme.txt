@@ -4,7 +4,7 @@ Donate link: http://madebyraygun.com/donate/
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit
 Requires at least: 3.0
 Tested up to: 3.1.2
-Stable tag: 1.1.7
+Stable tag: 1.1.8
 
 A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Degrades gracefully for users without javascript.
 
@@ -145,6 +145,12 @@ If you would like to change the size of the images system-wide (for example, you
 6. Adding an external URL to a slide.
 
 == Changelog ==
+
+
+1.1.8 
+
+* Bugfix: Show titles, show caps, show descriptions shortcode attributes weren't working.
+* PHP: General code cleanup
 
 1.1.7
 
