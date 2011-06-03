@@ -4,13 +4,13 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://madebyraygun.com/lab/portfolio-slideshow
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 1.1.8
+Version: 1.1.9
 Author URI: http://madebyraygun.com
 */
 
 
 //Define static variables
-define( "PORTFOLIO_SLIDESHOW_VERSION", "1.1.8" );
+define( "PORTFOLIO_SLIDESHOW_VERSION", "1.1.9" );
 define( "PORT_SLDPLUGINPATH", "/" . plugin_basename( dirname(__FILE__) ) . "/" );
 define( "PORT_SLDPLUGINFULLURL", WP_PLUGIN_URL . PORT_SLDPLUGINPATH );
 
@@ -27,8 +27,6 @@ if ( is_admin() ) {
 }	
 
 // add our default options if they're not already there:
-
-
 
 if ( get_option( 'portfolio_slideshow_version' )  < PORTFOLIO_SLIDESHOW_VERSION ) { // add and update our default options if version numbers don't match
     update_option( 'portfolio_slideshow_version', PORTFOLIO_SLIDESHOW_VERSION);
@@ -77,64 +75,73 @@ if ( ! $ps_showhash ) {$ps_showhash = "false";}
 if ( ! $ps_nowrap ) {$ps_nowrap = "0";}
 
 // put the attachment ID on the media page
-function add_post_id( $content ) { 
-   $showlink = "Attachment ID:" . get_the_ID( $post->ID, true );
-    $content[] = $showlink;
-    return $content;}
-add_filter ( 'media_row_actions', 'add_post_id' );
+if ( ! function_exists( 'add_post_id' ) ) {
+		function add_post_id( $content ) { 
+	   		$showlink = "Attachment ID:" . get_the_ID( $post->ID, true );
+	    	$content[] = $showlink;
+	    	return $content; }
+		
+		add_filter ( 'media_row_actions', 'add_post_id' );
+}
 
 //action link http://www.wpmods.com/adding-plugin-action-links
-function ps_action_links( $links, $file ) {
-    static $this_plugin;
- 
-    if ( ! $this_plugin ) {
-        $this_plugin = plugin_basename(__FILE__);
-    }
- 
-    // check to make sure we are on the correct plugin
-    if ( $file == $this_plugin ) {
-        // the anchor tag and href to the URL we want. For a "Settings" link, this needs to be the url of your settings page
-        $settings_link = '<a href="' . get_bloginfo( 'wpurl' ) . '/wp-admin/options-general.php?page=portfolio-slideshow">Settings</a>';
-        // add the link to the list
-        array_unshift($links, $settings_link);
-    }
- 
-    return $links;
+if ( ! function_exists( 'ps_action_links' ) ) {
+	function ps_action_links( $links, $file ) {
+	    static $this_plugin;
+	 
+	    if ( ! $this_plugin ) {
+	        $this_plugin = plugin_basename(__FILE__);
+	    }
+	 
+	    // check to make sure we are on the correct plugin
+	    if ( $file == $this_plugin ) {
+	        // the anchor tag and href to the URL we want. For a "Settings" link, this needs to be the url of your settings page
+	        $settings_link = '<a href="' . get_bloginfo( 'wpurl' ) . '/wp-admin/options-general.php?page=portfolio-slideshow">Settings</a>';
+	        // add the link to the list
+	        array_unshift($links, $settings_link);
+	    }
+	 
+	    return $links;
+	}
+
+	add_filter( 'plugin_action_links', 'ps_action_links', 10, 2 );
 }
 
-add_filter( 'plugin_action_links', 'ps_action_links', 10, 2 );
 
+if ( ! function_exists( 'ps_image_attachment_fields_to_edit' ) ) {
 
-//Adds custom fields to attachment page. Via Frank Bültge, http://bueltge.de/ ref: http://wpengineer.com/2076/add-custom-field-attachment-in-wordpress/
+	//Adds custom fields to attachment page. Via Frank Bültge, http://bueltge.de/ ref: http://wpengineer.com/2076/add-custom-field-attachment-in-wordpress/
 
-if ( $ps_descriptionisURL == "true" ) {
-	
-	function ps_image_attachment_fields_to_edit( $form_fields, $post ) {  
-		$form_fields["ps_image_link"] = array(  
-			"label" => __( 'Slideshow image links to URL:', 'port_slide' ),
-			"input" => "text",
-			"value" => get_post_meta( $post->ID, "_ps_image_link", true )  
-		);        
+	if ( $ps_descriptionisURL == "true" ) {
 		
-		return $form_fields;  
-	}  
-	
-	function ps_image_attachment_fields_to_save( $post, $attachment ) {
-		if( isset( $attachment['ps_image_link']) ){
-			update_post_meta( $post['ID'], '_ps_image_link', $attachment['ps_image_link'] );
+		function ps_image_attachment_fields_to_edit( $form_fields, $post ) {  
+			$form_fields["ps_image_link"] = array(  
+				"label" => __( 'Slideshow image links to URL:', 'port_slide' ),
+				"input" => "text",
+				"value" => get_post_meta( $post->ID, "_ps_image_link", true )  
+			);        
+			
+			return $form_fields;  
 		}  
-		return $post;  
-	}  
-	
-	add_filter( "attachment_fields_to_edit", "ps_image_attachment_fields_to_edit", null, 2 );
-	add_filter( "attachment_fields_to_save", "ps_image_attachment_fields_to_save", null, 2 );
-}
+		
+		function ps_image_attachment_fields_to_save( $post, $attachment ) {
+			if( isset( $attachment['ps_image_link']) ){
+				update_post_meta( $post['ID'], '_ps_image_link', $attachment['ps_image_link'] );
+			}  
+			return $post;  
+		}  
+		
+		add_filter( "attachment_fields_to_edit", "ps_image_attachment_fields_to_edit", null, 2 );
+		add_filter( "attachment_fields_to_save", "ps_image_attachment_fields_to_save", null, 2 );
+	}
+}	
 
 // create the shortcode
-add_shortcode( 'portfolio_slideshow', 'portfolio_shortcode' );
+add_shortcode( 'portfolio_slideshow', 'portfolio_slideshow_shortcode' );
 
 // define the shortcode function
-function portfolio_shortcode($atts) {
+
+function portfolio_slideshow_shortcode($atts) {
 	
 	STATIC $i=0;
 	
@@ -395,26 +402,32 @@ if ( !is_admin() ) {
 	 //our script
 	 wp_register_script( 'portfolio-slideshow', plugins_url( 'lib/portfolio-slideshow.js', __FILE__ ), false, $ps_version, true); 
 	 wp_enqueue_script( 'portfolio-slideshow' );
+
+	 //our style 
+	wp_register_style( 'portfolio_slideshow', plugins_url( "portfolio-slideshow.css", __FILE__ ), false, $ps_version, 'screen' );
+	wp_enqueue_style( 'portfolio_slideshow' );
 }
- 
-function portfolio_head() {
-	global $ps_version;
-	echo '
-	<!-- Portfolio Slideshow-->
-	<link rel="stylesheet" type="text/css" href="' .  plugins_url( "portfolio-slideshow.css?ver=", __FILE__ ) . $ps_version . '" />
-	<noscript><link rel="stylesheet" type="text/css" href="' .  plugins_url( "portfolio-slideshow-noscript.css?ver=". $ps_version, __FILE__ ) . '" /></noscript>
-	<script type="text/javascript">/* <![CDATA[ */var psTimeout = new Array(); var psTrans =  new Array(); var psSpeed =  new Array(); var psNoWrap =  new Array();/* ]]> */</script>
-	<!--//Portfolio Slideshow-->
-	';
-} // end portfolio_head 
 
-add_action( 'wp_head', 'portfolio_head' );
+if ( ! function_exists( 'portfolio_head' ) ) { 
+	function portfolio_head() {
+		global $ps_version;
+		echo '
+		<!-- Portfolio Slideshow-->
+		<noscript><link rel="stylesheet" type="text/css" href="' .  plugins_url( "portfolio-slideshow-noscript.css?ver=". $ps_version, __FILE__ ) . '" /></noscript>
+		<script type="text/javascript">/* <![CDATA[ */var psTimeout = new Array(); var psTrans =  new Array(); var psSpeed =  new Array(); var psNoWrap =  new Array();/* ]]> */</script>
+		<!--//Portfolio Slideshow-->
+		';
+	} // end portfolio_head 
+	add_action( 'wp_head', 'portfolio_head' );
+} 
 
-function portfolio_foot() {
-	// Set up js variables
-	global $ps_trans, $ps_speed, $ps_timeout, $ps_showhash, $ps_showloader, $ps_nowrap;
-	//$ps_showhash should always be false on any non-singular page
-	if (!is_singular()) {$ps_showhash = "false";}
-echo '<script type="text/javascript">/* <![CDATA[ */var portfolioSlideshowOptions = {psHash: \''.$ps_showhash.'\',psLoader: \''.$ps_showloader.'\'};/* ]]> */</script>'; }    
+if ( ! function_exists( 'portfolio_foot' ) ) {
+	function portfolio_foot() {
+		// Set up js variables
+		global $ps_trans, $ps_speed, $ps_timeout, $ps_showhash, $ps_showloader, $ps_nowrap;
+		//$ps_showhash should always be false on any non-singular page
+		if (!is_singular()) {$ps_showhash = "false";}
+	echo '<script type="text/javascript">/* <![CDATA[ */var portfolioSlideshowOptions = {psHash: \''.$ps_showhash.'\',psLoader: \''.$ps_showloader.'\'};/* ]]> */</script>'; }    
 
-add_action( 'wp_footer', 'portfolio_foot' );
+	add_action( 'wp_footer', 'portfolio_foot' );
+}	
