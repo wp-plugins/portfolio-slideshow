@@ -6,9 +6,11 @@ Requires at least: 3.0
 Tested up to: 3.1.3
 Stable tag: 1.1.9
 
-A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Degrades gracefully for users without javascript.
+Easily add a clean and simple javascript slideshow to your site. The slideshow integrates well into any design, with lots of options for power users, too. 
 
-For more advanced features be sure to check out our new plugin, [Portfolio Slideshow Pro](http://madebyraygun.com/lab/portfolio-slideshow)
+For more advanced features be sure to check out our premium version of the plugin, [Portfolio Slideshow Pro](http://madebyraygun.com/lab/portfolio-slideshow/).
+
+If you have any problems getting the plugin to work, please post to the forum and let us help before leaving a negative review! Most problems are caused by incorrectly coded themes or plugins, and can be solved quite easily.
 
 Thanks for internationalization!
 
@@ -27,7 +29,6 @@ By default, the slideshow will use the large version of the image that WordPress
 
 **The shortcode supports the following attributes:**
 
-
 To select a different page parent ID to select the images: 
 
 [portfolio_slideshow id=xxx]
@@ -40,7 +41,7 @@ Image transition on a per-slideshow basis like this:
 
 [portfolio_slideshow trans=scrollHorz]
 
-(Top secret! You can use this shortcode attribute to supply any transition effect supported by jQuery Cycle, even if they're not in the plugin! List of supported transitions [here](http://jquery.malsup.com/cycle/begin.html).
+(You can use this shortcode attribute to supply any transition effect supported by jQuery Cycle, even if they're not in the plugin! List of supported transitions [here](http://jquery.malsup.com/cycle/begin.html).
 
 Autoplay timeout on a per-slideshow basis like this:
 
