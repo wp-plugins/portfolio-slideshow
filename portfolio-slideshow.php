@@ -4,13 +4,13 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://madebyraygun.com/lab/portfolio-slideshow
 Description: A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Use shortcode [portfolio_slideshow] to activate.
 Author: Dalton Rooney
-Version: 1.1.9
+Version: 1.2.0
 Author URI: http://madebyraygun.com
 */
 
 
 //Define static variables
-define( "PORTFOLIO_SLIDESHOW_VERSION", "1.1.9" );
+define( "PORTFOLIO_SLIDESHOW_VERSION", "1.2.0" );
 define( "PORT_SLDPLUGINPATH", "/" . plugin_basename( dirname(__FILE__) ) . "/" );
 define( "PORT_SLDPLUGINFULLURL", WP_PLUGIN_URL . PORT_SLDPLUGINPATH );
 
@@ -45,7 +45,7 @@ if ( get_option( 'portfolio_slideshow_version' )  < PORTFOLIO_SLIDESHOW_VERSION 
 	add_option( "portfolio_slideshow_timeout", '0' ); 
 	add_option( "portfolio_slideshow_showloader", '' ); 
 	add_option( "portfolio_slideshow_descriptionisURL", '' );
-	add_option( "portfolio_slideshow_jquery_version", '1.4.4' );
+	add_option( "portfolio_slideshow_jquery_version", '1.6.1' );
 } //end update
 
 // now let's grab the options table data
@@ -378,9 +378,9 @@ if ( !is_admin() ) {
    
 	switch ($ps_jquery) {
 	
-	case "1.4.2" :	
+	case "1.4.4" :	
 		wp_deregister_script( 'jquery' ); 
-		wp_register_script( 'jquery', ( "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" ), false, '1.4.2', false); 
+		wp_register_script( 'jquery', ( "http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" ), false, '1.4.4', false); 
 		wp_enqueue_script( 'jquery' );
 		break;
 	
@@ -390,13 +390,13 @@ if ( !is_admin() ) {
 		
 	default :
 		wp_deregister_script( 'jquery' ); 
-		wp_register_script( 'jquery', ( "http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" ), false, '1.4.4', false); 
+		wp_register_script( 'jquery', ( "http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" ), false, '1.6.1', false); 
 		wp_enqueue_script( 'jquery' );
 		break;
 	}
 
 	//malsup cycle script
-	 wp_register_script( 'cycle', plugins_url( 'lib/jquery.cycle.all.min.js', __FILE__ ), false, '2.7.3', true);
+	 wp_register_script( 'cycle', plugins_url( 'lib/jquery.cycle.all.min.js', __FILE__ ), false, '2.99', true);
 	 wp_enqueue_script( 'cycle' );
 
 	 //our script

@@ -1,17 +1,17 @@
 === Portfolio Slideshow ===
 Contributors: daltonrooney 
-Donate link: http://madebyraygun.com/donate/
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit
 Requires at least: 3.0
-Tested up to: 3.1.3
-Stable tag: 1.1.9
+Tested up to: 3.2
+Stable tag: 1.2.0
 
-A shortcode that inserts a clean and simple jQuery + cycle powered slideshow of all image attachments on a post or page. Degrades gracefully for users without javascript.
+Easily add a clean and simple javascript slideshow to your site. The slideshow integrates well into any design, with lots of options for power users, too. 
 
-For more advanced features be sure to check out our new plugin, [Portfolio Slideshow Pro](http://madebyraygun.com/lab/portfolio-slideshow)
+For more advanced features be sure to check out our premium version of the plugin, [Portfolio Slideshow Pro](http://madebyraygun.com/lab/portfolio-slideshow/).
+
+If you have any problems getting the plugin to work, please post to the forum and let us help before leaving a negative review! Most problems are caused by incorrectly coded themes or plugins, and can be solved quite easily.
 
 Thanks for internationalization!
-
 Portuguese: Diana K. Cury
 
 
@@ -27,7 +27,6 @@ By default, the slideshow will use the large version of the image that WordPress
 
 **The shortcode supports the following attributes:**
 
-
 To select a different page parent ID to select the images: 
 
 [portfolio_slideshow id=xxx]
@@ -40,7 +39,7 @@ Image transition on a per-slideshow basis like this:
 
 [portfolio_slideshow trans=scrollHorz]
 
-(Top secret! You can use this shortcode attribute to supply any transition effect supported by jQuery Cycle, even if they're not in the plugin! List of supported transitions [here](http://jquery.malsup.com/cycle/begin.html).
+(You can use this shortcode attribute to supply any transition effect supported by jQuery Cycle, even if they're not in the plugin! List of supported transitions [here](http://jquery.malsup.com/cycle/begin.html).
 
 Autoplay timeout on a per-slideshow basis like this:
 
@@ -146,10 +145,17 @@ If you would like to change the size of the images system-wide (for example, you
 
 == Changelog ==
 
+
+1.2.0
+
+* Fixed slideshow overlap with page content in some themes.
+* Updated to the latest version of Mike Alsup's Cycle script (1.99).
+* Updated to jQuery 1.6.1 as default.
+
+
 1.1.9
 
 * Changed source order of scripts & CSS for better performance in IE
-
 * Added checks to ensure this plugin and the Pro version don't conflict if they're both installed at the same time.
 
 1.1.8 
@@ -199,26 +205,14 @@ If you would like to change the size of the images system-wide (for example, you
 * Updated hash detection for edge cases
 * CSS padding for pause/play text
 
-1.0.4 
+1.0 series
 
 * Non-numerical hashes in the URL no longer break the slideshow. 
 * CSS change related to which slides are shown on page load. 
-
-1.0.3 
-
 * Small CSS fix for themes with max-width attribute on images
 * Added information about Portfolio Slideshow Pro
-
-1.0.2
-
 * Added ability to select your jQuery version. May help with some people experiencing problems with jQuery effects related to inclusion of 1.4.4.
-
-1.0.1 
-
 * Fixed problem with multiple slideshows per page.
-
-1.0.0
-
 * Removed most inline Javascript.
 * Major refactoring of code.
 * Loading Google version of jQuery 1.4.4 for better performance.

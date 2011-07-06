@@ -5,7 +5,7 @@
 if ( ! function_exists( 'add_portfolio_slideshow_option_page' ) ) {
 	function add_portfolio_slideshow_option_page() {
 		// hook in the options page function
-		add_options_page('Portfolio Slideshow', 'Portfolio Slideshow', 6, 'portfolio-slideshow', 'portfolio_slideshow_options_page');
+		add_options_page( 'Portfolio Slideshow', 'Portfolio Slideshow', 'manage_options', 'portfolio-slideshow', 'portfolio_slideshow_options_page' );
 	}
 }
 
@@ -139,10 +139,10 @@ if ( ! function_exists( 'portfolio_slideshow_options_page' ) ) {
 		<h3><?php _e ('Diagnostics', 'port_slide'); ?></h3>
 
 			<ul class="options">
-				<li><label><?php _e ('jQuery version', 'port_slide'); ?> <span class="vtip" title="<?php _e ('If you\'re having trouble with the Javascript effects, you can try an older version of jQuery, or disable it altogether. This sometimes helps if you have plugins or themes that rely on their own version of jQuery. Note that the container height calculations for the slideshow rely on features in 1.4.4, so you may experience issues with your container height if you change this from the default.', 'port_slide'); ?>">?</span></label>
+				<li><label><?php _e ('jQuery version', 'port_slide'); ?> <span class="vtip" title="<?php _e ('If you\'re having trouble with the Javascript effects, you can try an older version of jQuery, or disable it altogether. This sometimes helps if you have plugins or themes that rely on their own version of jQuery. You may experience issues with certain display properties if you change this from the default.', 'port_slide'); ?>">?</span></label>
 				<select name="portfolio_slideshow_jquery_version" value="<?php echo get_option('portfolio_slideshow_jquery_version'); ?>" >
+					<option value="1.6.1" <?php if($ps_jquery == "1.6.1") echo " selected='selected'";?>>1.6.1</option>
 					<option value="1.4.4" <?php if($ps_jquery == "1.4.4") echo " selected='selected'";?>>1.4.4</option>
-					<option value="1.4.2" <?php if($ps_jquery == "1.4.2") echo " selected='selected'";?>>1.4.2</option>
 					<option value="disabled" <?php if($ps_jquery == disabled) echo " selected='selected'";?>><?php _e ('disabled', 'port_slide'); ?></option>
 				</select>
 				</li>
@@ -166,6 +166,8 @@ if ( ! function_exists( 'portfolio_slideshow_options_page' ) ) {
 
 		<iframe src="http://player.vimeo.com/video/20679115?byline=0&amp;color=ffffff" width="601" height="338" frameborder="0"></iframe>
 	  <p><a href="http://vimeo.com/20679115"><?php _e ('Portfolio Slideshow Pro demo', 'port_slide'); ?></a> <?php _e ('from', 'port_slide'); ?> <a href="http://vimeo.com/madebyraygun">Raygun</a> <?php _e ('on', 'port_slide'); ?> <a href="http://vimeo.com">Vimeo</a>.</p>
+	  	
+	  	<p><?php _e ('Please note that the video demonstration includes advanced features from <a href="Portfolio Slideshow Pro"></a> that are not available in the free version. Be sure to take a look at the documentation below for specific usage for this version.', 'port_slide'); ?></p>
 
 		<p><?php _e ('To use the plugin, upload your photos to a post or page using the WordPress media uploader. Use the [portfolio_slideshow] shortcode to display the slideshow in your page or post.', 'port_slide'); ?></p>
 
