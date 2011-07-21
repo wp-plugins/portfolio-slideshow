@@ -3,9 +3,9 @@ Contributors: daltonrooney
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 
-Easily add a clean and simple javascript slideshow to your site. The slideshow integrates well into any design, with lots of options for power users, too. 
+Easily add a clean and simple javascript slideshow to your site. The slideshow integrates well into any design, supports fluid-width themes, and offers lots of options for power users, too. 
 
 For more advanced features be sure to check out our premium version of the plugin, [Portfolio Slideshow Pro](http://madebyraygun.com/lab/portfolio-slideshow/).
 
@@ -101,7 +101,6 @@ On single posts and pages, you can enable this feature to udpate the URL of the 
 
 == Frequently Asked Questions ==
 
-
 Q: How do I insert a slideshow into a post or page?
 
 A: Upload your photos to the post or page using the media uploader. The media uploader also allows you to assign titles and captions, sort, and delete photos. Then add the shortcode [portfolio_slideshow] where you want the slideshow to appear in the page. See screenshots 2 and 3 for an example.
@@ -145,6 +144,10 @@ If you would like to change the size of the images system-wide (for example, you
 
 == Changelog ==
 
+1.2.1
+
+* Compatibility with fluid-width themes like TwentyEleven. Slideshows now resize dynamically depending on window size.
+* IE fix for squished image display in TwentyEleven.
 
 1.2.0
 

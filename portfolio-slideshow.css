@@ -30,12 +30,23 @@ div.portfolio-slideshow .not-first {
 	display: none
 }
 
-div.slideshow-content {
-	
+
+.slideshow-content img {
+	margin: 0!important;
+	border: none!important;
+	padding: 0!important;
+	max-width: none!important
 }
 
-div.portfolio-slideshow div.first .slideshow-next{
-	display: inline
+.slideshow-content.fade img {
+	max-width: 100%!important;
+	width: auto;
+	height: auto;
+}
+
+
+div.slideshow-content.fade {
+	width: 100%
 }
 
 div.slideshow-nav{

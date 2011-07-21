@@ -65,11 +65,11 @@ if ( ! function_exists( 'portfolio_slideshow_options_page' ) ) {
 					<option value="full" <?php if($ps_size == full) echo " selected='selected'";?>><?php _e ('full', 'port_slide'); ?></option>
 				</select></li>
 
-				<li><label><?php _e ('Transition Effects', 'port_slide'); ?></label>
+				<li><label><?php _e ('Transition Effects', 'port_slide'); ?><span class="vtip" title="<?php _e ('If you use a fluid-width theme and want the images to scale properly, choose the fade transition.', 'port_slide'); ?>">?</span></label>
 
 				<select name="portfolio_slideshow_transition" value="<?php echo get_option('portfolio_slideshow_transition'); ?>" >
 					<option value="fade" <?php if($ps_trans == fade) echo " selected='selected'";?>><?php _e ('Fade', 'port_slide'); ?></option>
-					<option value="scrollHorz" <?php if($ps_trans == scrollHorz) echo " selected='selected'";?>><?php _e ('Scroll Horizontaly', 'port_slide'); ?></option>
+					<option value="scrollHorz*" <?php if($ps_trans == scrollHorz) echo " selected='selected'";?>><?php _e ('Scroll Horizontaly', 'port_slide'); ?></option>
 				</select></li>
 
 				<li><label><?php _e ('Transition Speed', 'port_slide'); ?></label>
