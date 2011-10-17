@@ -3,7 +3,7 @@ Contributors: daltonrooney
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 
 Easily add a clean and simple javascript slideshow to your site. The slideshow integrates well into any design, supports fluid-width themes, and offers lots of options for power users, too. 
 
@@ -143,6 +143,10 @@ If you would like to change the size of the images system-wide (for example, you
 6. Adding an external URL to a slide.
 
 == Changelog ==
+
+1.2.2
+
+* Minor CSS fix for thumbnails.
 
 1.2.1
 
