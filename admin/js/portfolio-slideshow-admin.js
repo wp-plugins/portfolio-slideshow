@@ -3,4 +3,15 @@ this.vtip=function(){this.xOffset=-10;this.yOffset=10;$(".vtip").unbind().hover(
 
 $(function() {
 	$( "#tabs" ).tabs();
+
+	$('select#portfolio_slideshow_options_click').parent().parent().next().attr('id', 'click-target'); 
+	
+	clickVal = $('select#portfolio_slideshow_options_click').val();
+	if ( clickVal != "openurl" ) { $('#click-target').addClass("hidden"); }
+
+	$('select#portfolio_slideshow_options_click').change(function() {
+		clickVal = $('select#portfolio_slideshow_options_click').val();
+		if ( clickVal != "openurl" ) { $('#click-target').addClass("hidden"); } else { $('#click-target').removeClass("hidden"); }		
+	});
+	
 });
