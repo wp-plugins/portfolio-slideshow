@@ -1,6 +1,10 @@
 <?php 
 
-if (get_option( "portfolio_slideshow_options['version']" )  < PORTFOLIO_SLIDESHOW_VERSION ) { // If the version numbers don't match, run the upgrade script
+$ps_options =  get_option( "portfolio_slideshow_options" );
+
+
+
+if ( $ps_options['version']  < PORTFOLIO_SLIDESHOW_VERSION ) { // If the version numbers don't match, run the upgrade script
 	require ( PORTFOLIO_SLIDESHOW_PATH . 'inc/upgrader.php' );
 }
 

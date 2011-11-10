@@ -1,12 +1,6 @@
 <?php 
 
-/* Create the cache directory for the TimThumb images */
-$target = WP_CONTENT_DIR . '/cache';
- if( !is_dir( $target) ) {
-	wp_mkdir_p( $target );
-}
-
-if ( get_option( 'portfolio_slideshow_options' ) === false ) { //If the 1.4 options don't exist yet, run the older upgrade script first.
+if ( get_option( 'portfolio_slideshow_options' ) === false ) { //If the 1.3 options don't exist yet, run the older upgrade script first.
 
 	$version = get_option( 'portfolio_slideshow_version' );
 		
@@ -32,7 +26,7 @@ if ( get_option( 'portfolio_slideshow_options' ) === false ) { //If the 1.4 opti
 			
 		} // end 
 
-		if ( $ps_version < "1.3.5" ) { // next we're going to do the options settings upgrade for 1.3.5
+		if ( $ps_version < "1.3.0" ) { // next we're going to do the options settings upgrade for 1.3
 			
 			//First we're going to make sure all of our checkbox options are mapped properly to the new boolean values:
 			
@@ -238,23 +232,9 @@ if ( get_option( 'portfolio_slideshow_options' ) === false ) { //If the 1.4 opti
 	
 		update_option( 'portfolio_slideshow_options', $ps_options );
 	} 
-} else { // If we've already 1.4 or above, run the standard upgrade script
 	
-	$ps_options = get_option( 'portfolio_slideshow_options' );
+} else { // If we've already 1.3 or above, run the standard upgrade script
 	
-	if ( $ps_options['version'] < '1.4.1' ) { //added a new option in 1.4.1
-		$ps_options['allowfluid'] = "false"; 
-	}
-	
-	if ( $ps_options['version'] < '1.4.6' ) { //added a new option in 1.4.6
-		$ps_options['touchswipe'] = "true"; 
-		$ps_options['keyboardnav'] = "true"; 
-	}
-	
-	if ( $ps_options['version'] < '1.4.8' ) { //added a new option in 1.4.8
-		$ps_options['cycle'] = "true";
-	}
-
 	$ps_options['version'] = PORTFOLIO_SLIDESHOW_VERSION;
 	update_option( 'portfolio_slideshow_options', $ps_options );		
 }	
