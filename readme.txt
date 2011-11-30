@@ -3,7 +3,7 @@ Contributors: daltonrooney
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit, mobile, iphone
 Requires at least: 3.0
 Tested up to: 3.2.1
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 
 Easily add a clean and simple javascript slideshow to your site. The slideshow integrates well into any design, supports fluid-width themes, and offers lots of options for power users, too. 
 
@@ -186,6 +186,10 @@ Attention upgraders! The plugin has been completely re-written based on our Port
 
 == Changelog ==
 
+1.3.2
+
+* Fix for "click to advance" problem in new installations. 
+
 1.3.1 
 
 * Fix for some settings not being saved in the admin panel.
@@ -222,55 +226,31 @@ Attention upgraders! The plugin has been completely re-written based on our Port
 
 1.1.9
 
-* Changed source order of scripts & CSS for better performance in IE
-* Added checks to ensure this plugin and the Pro version don't conflict if they're both installed at the same time.
-
-1.1.8 
-
-* Bugfix: Show titles, show caps, show descriptions shortcode attributes weren't working.
-* PHP: General code cleanup
-
-1.1.7
-
-* CSS: Fix for menu compatibility with Duster theme.
-
-1.1.6 
-
-* JS: only loading scripts on public side to avoid conflict with admin dashboard.
-* CSS: Used clearfix instead of break to end the slideshow
 
 
-1.1.5
-
-* Changed update logic because options tables were being updated on activation but not on upgrade. (Change in behavior of register_activation_hook in 3.1)
-
-1.1.4
-
-* Only load admin functions & update tables when necessary
-* JS: Slideshows load faster (used document.ready instead of window.load)
-* CSS: Added top margin to thumbnails
-
-1.1.3 
-
-* Internationalization & Brazilian Portuguese translation (Thanks, Diana Cury!)
-* You can add any parent ID to the shortcode to specify a different set of images
-* Fix for blank slides
-
-1.1.2
-
-* Removed slideshow-related extras from feed.
-* Minor CSS updates for theme compatibility.
-* Add settings link to plugin activation page.
-
-1.1.1
-
-* New documentation video included within admin page
-
-1.1.0
+1.1 series
 
 * New admin menu
 * Updated hash detection for edge cases
 * CSS padding for pause/play text
+* Changed source order of scripts & CSS for better performance in IE
+* Added checks to ensure this plugin and the Pro version don't conflict if they're both installed at the same time.
+* Bugfix: Show titles, show caps, show descriptions shortcode attributes weren't working.
+* PHP: General code cleanup
+* CSS: Fix for menu compatibility with Duster theme.
+* JS: only loading scripts on public side to avoid conflict with admin dashboard.
+* CSS: Used clearfix instead of break to end the slideshow
+* Changed update logic because options tables were being updated on activation but not on upgrade. (Change in behavior of register_activation_hook in 3.1)
+* Only load admin functions & update tables when necessary
+* JS: Slideshows load faster (used document.ready instead of window.load)
+* CSS: Added top margin to thumbnails
+* Internationalization & Brazilian Portuguese translation (Thanks, Diana Cury!)
+* You can add any parent ID to the shortcode to specify a different set of images
+* Fix for blank slides
+* Removed slideshow-related extras from feed.
+* Minor CSS updates for theme compatibility.
+* Add settings link to plugin activation page.
+* New documentation video included within admin page
 
 1.0 series
 
