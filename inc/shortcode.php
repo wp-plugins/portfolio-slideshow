@@ -248,7 +248,7 @@ function portfolio_slideshow_pro_shortcode( $atts ) {
 
 				case "openurl" :
 					$imagelink = get_post_meta( $attachment->ID, '_ps_image_link', true );
-					if ( $imagelink ) { $imagelink = $imagelink . '" target="' . $ps_options['click_target']; }
+					if ( $imagelink ) { $imagelink = $imagelink . '" target="' . $ps_options['click_target']; } else { $imagelink = 'javascript: void(0);" class="slideshow-next';}
 					break;
 
 				default :
@@ -256,7 +256,7 @@ function portfolio_slideshow_pro_shortcode( $atts ) {
 					break;	
 			}		
 			
-if ( $nowrap == "true" && $ps_count - 1 != $slideID || $nowrap == "false" || $nowrap == "true" && $click == "lightbox" ) { $slideshow .= '<a href="'.$imagelink.'">';}
+if ( $nowrap == "true" && $ps_count - 1 != $slideID || $nowrap != "true" ) { $slideshow .= '<a href="'.$imagelink.'">';}
 			
 /*
  * This is the part of the loop that actually returns the images
@@ -282,7 +282,7 @@ if ( $nowrap == "true" && $ps_count - 1 != $slideID || $nowrap == "false" || $no
  * That's it for the images
  */			
 			
-			if ( $nowrap == "true" && $ps_count - 1 != $slideID || $nowrap == "false" || $nowrap == "true" && $click == "lightbox"  ) { 
+			if ( $nowrap == "true" && $ps_count - 1 != $slideID || $nowrap !="true" ) { 
 						$slideshow .= "</a>";
 			}		
 		

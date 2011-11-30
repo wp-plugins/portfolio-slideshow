@@ -1,9 +1,9 @@
 === Portfolio Slideshow ===
 Contributors: daltonrooney 
-Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit, mobile, iphone
+Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit, mobile, iphone, slider
 Requires at least: 3.0
 Tested up to: 3.2.1
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 
 Easily add a clean and simple javascript slideshow to your site. The slideshow integrates well into any design, supports fluid-width themes, and offers lots of options for power users, too. 
 
@@ -186,6 +186,9 @@ Attention upgraders! The plugin has been completely re-written based on our Port
 
 == Changelog ==
 
+1.3.3 
+
+* External links weren't opening in some situations.
 1.3.2
 
 * Fix for "click to advance" problem in new installations. 
@@ -222,10 +225,6 @@ Attention upgraders! The plugin has been completely re-written based on our Port
 * Fixed slideshow overlap with page content in some themes.
 * Updated to the latest version of Mike Alsup's Cycle script (1.99).
 * Updated to jQuery 1.6.1 as default.
-
-
-1.1.9
-
 
 
 1.1 series
