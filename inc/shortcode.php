@@ -1,10 +1,10 @@
 <?php
 
 // create the shortcode
-add_shortcode( 'portfolio_slideshow', 'portfolio_slideshow_pro_shortcode' );
+add_shortcode( 'portfolio_slideshow', 'portfolio_slideshow_shortcode' );
 
 // define the shortcode function
-function portfolio_slideshow_pro_shortcode( $atts ) {
+function portfolio_slideshow_shortcode( $atts ) {
 	
 	STATIC $i=0;
 
@@ -65,14 +65,6 @@ function portfolio_slideshow_pro_shortcode( $atts ) {
 	
 	global $ps_count;
 	$ps_count = count( $attachments );
-
-	// override the per-slide timeout if a full-slideshow duration is set
-	if ( $duration ) { $timeout = ( $duration * 1000 ) / $ps_count; }
-
-	// if we don't have enough images to show the carousel, disable it
-	if ( $carouselsize >= $ps_count ) { 
-		$carousel = "false";
-	}
 		
 	// Navigation
 	if ( ! is_feed() && $ps_count > 1 ) { //no need for navigation if there's only one slide

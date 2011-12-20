@@ -94,7 +94,7 @@ if ( get_option( 'portfolio_slideshow_options' ) === false ) { //If the 1.3 opti
 			
 			$jquery = get_option( "portfolio_slideshow_jquery_version" );
 			if ( $jquery == "1.4.4" ) {
-				update_option( "portfolio_slideshow_jquery_version", "1.6.1" );
+				update_option( "portfolio_slideshow_jquery_version", "1.7.1" );
 			}
 
 			$nowrap = get_option( "portfolio_slideshow_nowrap" );
@@ -147,42 +147,6 @@ if ( get_option( 'portfolio_slideshow_options' ) === false ) { //If the 1.3 opti
 			);	
 
 			update_option( 'portfolio_slideshow_options', $ps_options );
-
-			/* We'll create a notification message for these someday and allow users to do it manually.
-
-			delete_option( 'portfolio_slideshow_version');
-			delete_option( "portfolio_slideshow_size" );
-			delete_option( "portfolio_slideshow_custom_width" );
-			delete_option( "portfolio_slideshow_custom_height" );
-			delete_option( "portfolio_slideshow_transition" );
-			delete_option( "portfolio_slideshow_transition_speed" ); 
-			delete_option( "portfolio_slideshow_show_titles" ); 
-			delete_option( "portfolio_slideshow_show_captions" ); 
-			delete_option( "portfolio_slideshow_display_centered" ); 
-			delete_option( "portfolio_slideshow_show_descriptions" ); 
-			delete_option( "portfolio_slideshow_pager_position" );
-			delete_option( "portfolio_slideshow_pager_style");
-			delete_option( "portfolio_slideshow_thumb_size" );
-			delete_option( "portfolio_slideshow_random" );
-			delete_option( "portfolio_slideshow_carousel" );
-			delete_option( "portfolio_slideshow_carousel_size" );
-			delete_option( "portfolio_slideshow_thumbnail_margin" );
-			delete_option( "portfolio_slideshow_thumbnail_toggle" );
-			delete_option( "portfolio_slideshow_nav_position" ); 
-			delete_option( "portfolio_slideshow_nav_style" ); 
-			delete_option( "portfolio_slideshow_nowrap" );
-			delete_option( "portfolio_slideshow_showhash" ); 
-			delete_option( "portfolio_slideshow_image_click" ); 
-			delete_option( "portfolio_slideshow_click_target" ); 
-			delete_option( "portfolio_slideshow_timeout" );
-			delete_option( "portfolio_slideshow_autoplay" ); 
-			delete_option( "portfolio_slideshow_exclude_featured" ); 
-			delete_option( "portfolio_slideshow_showloader" ); 
-			delete_option( "portfolio_slideshow_descriptionisURL" );
-			delete_option( "portfolio_slideshow_jquery_version" );
-			delete_option( "portfolio_slideshow_fancybox" );
-			delete_option( "portfolio_slideshow_license" );	
-			delete_option( "portfolio_slideshow_custom_post_type" ); */	
 		}
 	
 	} else { //New options don't exist and we're not upgrading from a previous version
@@ -222,7 +186,7 @@ if ( get_option( 'portfolio_slideshow_options' ) === false ) { //If the 1.3 opti
 				'autoplay'	=>	'false', 
 				'exclude_featured'	=>	"false", 
 				'showloader'	=>	"false",
-				'jquery'	=>	'1.6.1',
+				'jquery'	=>	'1.7.1',
 				'fancybox'	=>	"true",
 				'cycle'	=>	"true",
 				'load_scripts'	=>	"true", 
@@ -233,7 +197,13 @@ if ( get_option( 'portfolio_slideshow_options' ) === false ) { //If the 1.3 opti
 		update_option( 'portfolio_slideshow_options', $ps_options );
 	} 
 	
-} else { // If we've already 1.3 or above, run the standard upgrade script
+} else { // If we've already at 1.3 or above, run the standard upgrade script
+	
+	if ( $ps_options['version'] < '1.3.4' ) {
+		if ( $ps_options['jquery'] = '1.6.1' ) {
+			$ps_options['jquery'] = '1.7.1';
+		}
+	} 
 	
 	$ps_options['version'] = PORTFOLIO_SLIDESHOW_VERSION;
 	update_option( 'portfolio_slideshow_options', $ps_options );		

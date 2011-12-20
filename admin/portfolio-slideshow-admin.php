@@ -8,17 +8,6 @@ function portfolio_slideshow_add_page() {
 	add_options_page( 'Portfolio Slideshow', 'Portfolio Slideshow', 'manage_options', 'portfolio_slideshow', 'portfolio_slideshow_option_page' );
 }
 
-if ( isset( $_GET['page'] ) && $_GET['page'] == "portfolio_slideshow" ) {
-	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'jquery-ui-core' );
-	wp_enqueue_script( 'jquery-ui-tabs' );
-	wp_register_script( 'portfolio-slideshow-admin', plugins_url( 'js/portfolio-slideshow-admin.js', __FILE__ ), false, $options['version'], true); 
-	wp_enqueue_script( 'portfolio-slideshow-admin' );
-	wp_register_style( 'portfolio-slideshow-admin', plugins_url( 'css/portfolio-slideshow-admin.css', __FILE__ ), false, $options['version'], 'screen' ); 
-	wp_enqueue_style( 'portfolio-slideshow-admin' );
-}
-
-
 // Draw the option page
 function portfolio_slideshow_option_page() {
 global $psp_errors;	
@@ -570,7 +559,7 @@ function portfolio_slideshow_jquery_input() {
 	$options = get_option( 'portfolio_slideshow_options' );?>
 	
 	<select name="portfolio_slideshow_options[jquery]" value="<?php echo $options[jquery]; ?>" />
-		<option value="1.6.1" <?php if ( $options['jquery'] == "1.6.1" ) echo " selected='selected'";?>>1.6.1</option>
+		<option value="1.7.1" <?php if ( $options['jquery'] == "1.7.1" ) echo " selected='selected'";?>>1.7.1</option>
 		<option value="1.4.4" <?php if ( $options['jquery'] == "1.4.4" ) echo " selected='selected'";?>>1.4.4</option>
 		<option value="disabled" <?php if ( $options['jquery'] == "disabled" ) echo " selected='selected'";?>>disabled</option>
 	</select>
@@ -604,22 +593,10 @@ function portfolio_slideshow_validate_options( $input ) {
 	
 	if ( ! $input['speed'] )
     $input['speed'] = '400';
-    
-    if ( ! $input['infotxt'] )
-    $input['infotxt'] = 'of';
-    
+        
     if ( ! $input['timeout'] )
     $input['timeout'] = '3000';
-    
-    if ( ! $input['thumbsize'] )
-    $input['thumbsize'] = '75';
-    
-    if ( ! $input['thumbnailmargin'] )
-    $input['thumbnailmargin'] = '8';
-    
-    if ( ! $input['carouselsize'] )
-    $input['carouselsize'] = '7';  
-	
+    	
 	if ( ! isset( $input['showtitles'] ) )
     $input['showtitles'] = null;
 	$input['showtitles'] = ( $input['showtitles'] == "true" ? "true" : "false" );
