@@ -2,8 +2,6 @@
 
 $ps_options =  get_option( "portfolio_slideshow_options" );
 
-
-
 if ( $ps_options['version']  < PORTFOLIO_SLIDESHOW_VERSION ) { // If the version numbers don't match, run the upgrade script
 	require ( PORTFOLIO_SLIDESHOW_PATH . 'inc/upgrader.php' );
 }
@@ -81,13 +79,11 @@ if ( ! function_exists( 'ps_get_image_sizes' ) ) {
 
 		// Loop through each of the image sizes.
 		foreach ( $sizes as $size ) {
-			if ( $size != "ps-thumb" ) {
-				echo "<option value='$size'";
-				if ( $ps_options['size'] == $size ){
-					echo " selected='selected'"; 
-				}
-				echo ">$size</option>";
+			echo "<option value='$size'";
+			if ( $ps_options['size'] == $size ){
+				echo " selected='selected'"; 
 			}
+			echo ">$size</option>";
 		}
 	}
 }
@@ -116,8 +112,6 @@ if ( !function_exists('ps_setup') ) {
 					break;
 					
 				default :
-					wp_deregister_script( 'jquery' ); 
-					wp_register_script( 'jquery', ( "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" ), false, '1.7.1', false ); 
 					wp_enqueue_script( 'jquery' );
 					break;
 			} 
@@ -129,16 +123,12 @@ if ( !function_exists('ps_setup') ) {
 		
 			if ( $ps_options['debug'] == "true" ) {
 				//our script
-				wp_register_script( 'portfolio-slideshow', plugins_url( 'js/portfolio-slideshow.js', dirname(__FILE__) ), false, $ps_options['version'], true ); 
-				wp_enqueue_script( 'portfolio-slideshow' );
+				wp_enqueue_script( 'portfolio-slideshow', plugins_url( 'js/portfolio-slideshow.js', dirname(__FILE__) ), false, $ps_options['version'], true ); 
 				//our style 
-				wp_register_style( 'portfolio_slideshow', plugins_url( "css/portfolio-slideshow.css", dirname(__FILE__) ), false, $ps_options['version'], 'screen' );
-				wp_enqueue_style( 'portfolio_slideshow' ); 
+				wp_enqueue_style( 'portfolio_slideshow', plugins_url( "css/portfolio-slideshow.css", dirname(__FILE__) ), false, $ps_options['version'], 'screen' );
 			} else {
-				wp_register_script( 'portfolio-slideshow', plugins_url( 'js/portfolio-slideshow.min.js', dirname(__FILE__) ), false, $ps_options['version'], true ); 
-				wp_enqueue_script( 'portfolio-slideshow' );
-				wp_register_style( 'portfolio_slideshow', plugins_url( "css/portfolio-slideshow.min.css", dirname(__FILE__) ), false, $ps_options['version'], 'screen' );
-				wp_enqueue_style( 'portfolio_slideshow' ); 
+				wp_enqueue_script( 'portfolio-slideshow', plugins_url( 'js/portfolio-slideshow.min.js', dirname(__FILE__) ), false, $ps_options['version'], true ); 
+				wp_enqueue_style( 'portfolio_slideshow', plugins_url( "css/portfolio-slideshow.min.css", dirname(__FILE__) ), false, $ps_options['version'], 'screen' ); 
 			}
 			
 		} else { /* If we're on the admin page */
@@ -147,10 +137,8 @@ if ( !function_exists('ps_setup') ) {
 				wp_enqueue_script( 'jquery' );
 				wp_enqueue_script( 'jquery-ui-core' );
 				wp_enqueue_script( 'jquery-ui-tabs' );
-				wp_register_script( 'portfolio-slideshow-admin', PORTFOLIO_SLIDESHOW_URL . '/admin/js/portfolio-slideshow-admin.js', false, $ps_options['version'], true); 
-				wp_enqueue_script( 'portfolio-slideshow-admin' );
-				wp_register_style( 'portfolio-slideshow-admin', PORTFOLIO_SLIDESHOW_URL . '/admin/css/portfolio-slideshow-admin.css', false, $ps_options['version'], 'screen' ); 
-				wp_enqueue_style( 'portfolio-slideshow-admin' );
+				wp_enqueue_script( 'portfolio-slideshow-admin', PORTFOLIO_SLIDESHOW_URL . '/admin/js/portfolio-slideshow-admin.js', false, $ps_options['version'], true); 
+				wp_enqueue_style( 'portfolio-slideshow-admin', PORTFOLIO_SLIDESHOW_URL . '/admin/css/portfolio-slideshow-admin.css', false, $ps_options['version'], 'screen' ); 
 			}
 		}	
 	}
@@ -182,41 +170,4 @@ echo "<script type='text/javascript'>/* <![CDATA[ */ var portfolioSlideshowOptio
 }
 
 add_action( 'wp_footer', 'portfolio_slideshow_foot' );
-
-
-/* 
-* Get's the actual image source if we're in WPMU
-* Via http://www.binarymoon.co.uk/2009/10/timthumb-wordpress-mu/
-*/
-
-if ( !function_exists('get_image_path') ) {
-	function get_image_path ($attachment_id = null, $imgsize = "large", $return = "src") {
-		
-		$imageAtts = wp_get_attachment_image_src( $attachment_id, $imgsize );
-		$theImageSrc = $imageAtts[0];
-		global $blog_id;
-		if (isset($blog_id) && $blog_id > 1) { // if it's a WPMU installation, we need to dig up the actual path for the files
-			$imageParts = explode('/files/', $imageAtts[0]);
-			if (isset($imageParts[1])) {
-				$theImageSrc = '/' . str_replace( ABSPATH, '', WP_CONTENT_DIR ) . '/blogs.dir/' . $blog_id . '/files/' . $imageParts[1];
-			}
-		} else { // if it's a standard WP installation, just use the relative path (for TimThumb compatibility)
-		$url = 'http://' . $_SERVER['HTTP_HOST'];
-		$theImageSrc = str_replace( $url, '', $imageAtts[0] );
-		
-		}
-			
-		if ( $return === "src" ) {
-			return $theImageSrc;
-		}
-		
-		if ( $return === "width" ) {
-			return $imageAtts[1];
-		}
-		
-		if ( $return === "height" ) {
-			return $imageAtts[2];
-		}
-	}	
-}
 ?>
