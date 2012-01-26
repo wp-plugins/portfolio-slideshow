@@ -1,6 +1,3 @@
-/* @override http://dev.madebyraygun.com/portfolio/wp-content/plugins/portfolio-slideshow-pro/admin/css/portfolio-slideshow-admin.css?ver=1.3.5 */
-
-
 p#vtip { width: 400px;display: none; position: absolute; padding: 10px; left: 5px; font-size: 0.9em; line-height: 1.5em; background-color: white; border: 6px solid #9aabb7; -moz-border-radius: 5px;border-radius: 5px; -webkit-border-radius: 5px; z-index: 9999}
 
 span.vtip { margin: 0 10px 0 2px !important; width: 16px; height: 16px;display: inline-block;	background: url(../img/q.png) no-repeat; text-indent: -9999px; opacity: .7; filter:Alpha(Opacity=70); 

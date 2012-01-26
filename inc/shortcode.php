@@ -257,17 +257,19 @@ if ( $nowrap == "true" && $ps_count - 1 != $slideID || $nowrap != "true" ) { $sl
 			$ps_placeholder = PORTFOLIO_SLIDESHOW_URL . '/img/tiny.png';
 					 
 			/* Otherwise it's just one of the WP defaults */
+			
+			$img =  wp_get_attachment_image_src( $attachment->ID, $size );
 					
-			$slideshow .= '<img class="psp-active" data-img="' . get_image_path( $attachment->ID, $size ) . '"'; 
+			$slideshow .= '<img class="psp-active" data-img="' . $img[0] . '"'; 
 				
 			if ( $slideID < 1 ) { 
-				$slideshow .= ' src="' . get_image_path( $attachment->ID, $size ) . '"';
+				$slideshow .= ' src="' . $img[0] . '"';
 			} else {
 				$slideshow .= ' src="' . $ps_placeholder . '"';
 			}
 			//include the src attribute for the first slide only
 				
-			$slideshow .= ' height="' . get_image_path( $attachment->ID, $size, "height" ) . '" width="' . get_image_path( $attachment->ID, $size, "width" ) . '" alt="' . $alttext . '" /><noscript><img src="' . get_image_path( $attachment->ID, $size ) . '" height="' . get_image_path( $attachment->ID, $size, "height" ) . '" width="' . get_image_path( $attachment->ID, $size, "width" ) . '" alt="' . $alttext . '" /></noscript>';
+			$slideshow .= ' height="' . $img[2] . '" width="' . $img[1] . '" alt="' . $alttext . '" /><noscript><img src="' . $img[0] . '" height="' . $img[2] . '" width="' . $img[1] . '" alt="' . $alttext . '" /></noscript>';
 									
 			
 /*
@@ -303,7 +305,7 @@ if ( $nowrap == "true" && $ps_count - 1 != $slideID || $nowrap != "true" ) { $sl
 			if ( $showdesc == "true" ) {			
 				$description = $attachment->post_content;
 				if ( $description ) { 
-					$slideshow .= '<p class="slideshow-description">'. wpautop( $description ) .'</p>'; 
+					$slideshow .= '<div class="slideshow-description">'. wpautop( $description ) .'</div>'; 
 				}
 			}
 			if ( $showtitles == "true" || $showcaps == "true" || $showdesc == "true" ) {
