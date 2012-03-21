@@ -2,8 +2,8 @@
 Contributors: daltonrooney 
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit, mobile, iphone, slider
 Requires at least: 3.0
-Tested up to: 3.3
-Stable tag: 1.3.5
+Tested up to: 3.3.1
+Stable tag: 1.3.6
 
 Easily add a clean and simple javascript slideshow to your site. The slideshow integrates well into any design, supports fluid-width themes, and offers lots of options for power users, too. 
 
@@ -186,6 +186,10 @@ Attention upgraders! The plugin has been completely re-written based on our Port
 
 == Changelog ==
 
+1.3.6 
+
+* Version bump because of SVN problem with WP repository
+
 1.3.5 
 
 * Compatibility fix for WordPress multisite networks.
@@ -222,17 +226,11 @@ Attention upgraders! The plugin has been completely re-written based on our Port
 * Thumbnails can now be placed above or below the main image.
 * Internationalization was not carried over from previous version. It's a work in progress.
 
-1.2.2
+1.2 series
 
 * Minor CSS fix for thumbnails.
-
-1.2.1
-
 * Compatibility with fluid-width themes like TwentyEleven. Slideshows now resize dynamically depending on window size.
 * IE fix for squished image display in TwentyEleven.
-
-1.2.0
-
 * Fixed slideshow overlap with page content in some themes.
 * Updated to the latest version of Mike Alsup's Cycle script (1.99).
 * Updated to jQuery 1.6.1 as default.
