@@ -226,7 +226,7 @@ $options = get_option( 'portfolio_slideshow_settings' );
 	</div><!--#tabs-->
 
 		<a href="http://madebyraygun.com"><img style="margin-top:30px;" src="<?php echo plugins_url( 'img/logo.png', __FILE__ );?>" width="225" height="70" alt="Made by Raygun" /></a>
-		<p>You're using Portfolio Slideshow, made by <a href="http://madebyraygun.com">Raygun</a>. Check out our <a href="http://madebyraygun.com/lab/" target="_blank">other plugins</a>, and if you have any problems, stop by our <a href="http://madebyraygun.com/support/forum/" target="_blank">support forum</a>!</p>
+		<p>Made by <a href="http://madebyraygun.com">Raygun</a>, powered by <a href="http://wpengine.com/?a_aid=4f373201159cb">WP</a> Engine. Check out our <a href="http://madebyraygun.com/lab/" target="_blank">other plugins</a>, and if you have any problems, stop by our <a href="http://madebyraygun.com/support/forum/" target="_blank">support forum</a>!</p>
 		</div>
 	<?php
 }
