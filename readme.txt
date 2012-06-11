@@ -7,9 +7,18 @@ Stable tag: 1.3.6
 
 Easily add a clean and simple javascript slideshow to your site. The slideshow integrates well into any design, supports fluid-width themes, and offers lots of options for power users, too. 
 
-For more advanced features be sure to check out our premium version of the plugin, [Portfolio Slideshow Pro](http://madebyraygun.com/wordpress/plugins/portfolio-slideshow-pro/).
+For more advanced features, please be sure to check out [Portfolio Slideshow Pro](http://madebyraygun.com/wordpress/plugins/portfolio-slideshow-pro/). Portfolio Slideshow Pro includes:
 
-Version 1.3 is a nearly complete rewrite of the original plugin based on our more advanced Portfolio Slideshow Pro plugin. Be sure to test carefully if you are upgrading from a previous version of Portfolio Slideshow. If you have any problems getting the plugin to work, please post to the forum and let us help before leaving a negative review! Most problems are caused by incorrectly coded themes or plugins, and can be solved quite easily.
+* Unlimited custom slideshow sizes
+* Standalone slideshow editor
+* Graphical navigation
+* Additional pagers: bullets, carousel, numbers, and slide titles
+* Inline video
+* Full-screen mobile galleries
+* Touch/swipe and keyboard navigation
+* [Much more](http://madebyraygun.com/wordpress/plugins/portfolio-slideshow-pro/)!
+
+If you have any problems getting the plugin to work, please post to the forum and let us help before leaving a negative review! Most problems are caused by incorrectly coded themes or plugins, and can be solved quite easily.
 
 == Installation ==
 
