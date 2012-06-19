@@ -2,7 +2,7 @@
 Contributors: daltonrooney 
 Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit, mobile, iphone, slider
 Requires at least: 3.0
-Tested up to: 3.3.1
+Tested up to: 3.4.0
 Stable tag: 1.3.6
 
 Easily add a clean and simple javascript slideshow to your site. The slideshow integrates well into any design, supports fluid-width themes, and offers lots of options for power users, too. 
