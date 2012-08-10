@@ -153,7 +153,7 @@ function portfolio_slideshow_shortcode( $atts ) {
 		}
 
 		if ( $trans == 'fade') {
-			$slideshow .= ' fade';
+			$slideshow .= ' ps-fade';
 		}		
 
 		if ( $ps_options['showloader'] == "true" ) { 

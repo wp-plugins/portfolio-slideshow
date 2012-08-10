@@ -4,7 +4,7 @@ Plugin Name: Portfolio Slideshow
 Plugin URI: http://madebyraygun.com/wordpress/plugins/portfolio-slideshow
 Description: An easy to use, mobile-friendly slideshow for WordPress.
 Author: Raygun
-Version: 1.3.6
+Version: 1.3.7
 Author URI: http://madebyraygun.com
 
 Copyright 2012 Raygun Design LLC (email : contact@madebyraygun.com)
@@ -19,7 +19,7 @@ define( 'PORTFOLIO_SLIDESHOW_LOCATION', plugin_basename(__FILE__) );
 
 define ( 'PORTFOLIO_SLIDESHOW_URL', plugins_url( '' ,  __FILE__ ) );
 
-define( "PORTFOLIO_SLIDESHOW_VERSION", "1.3.6" );
+define( "PORTFOLIO_SLIDESHOW_VERSION", "1.3.7" );
 
 //our main functions file
 require ( PORTFOLIO_SLIDESHOW_PATH . 'inc/functions.php'); 

@@ -45,7 +45,7 @@
 	max-width: none!important
 }
 
-.fluid.fade .slideshow-content img {
+.fluid.ps-fade .slideshow-content img {
 	max-width: 100%!important;
 	width: auto;
 	height: auto
@@ -57,7 +57,7 @@
 	clear: both
 }
 
-.fade .slideshow-content {
+.ps-fade .slideshow-content {
 	width: 100%
 }
 
@@ -116,7 +116,9 @@
 	margin: 0;
 	float: left;
 	width: 75px;
+
 	height: auto
+
 }
 
 .slideshow-wrapper .pager img.activeSlide {
