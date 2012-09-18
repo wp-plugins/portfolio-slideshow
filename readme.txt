@@ -1,11 +1,11 @@
 === Portfolio Slideshow ===
 Contributors: daltonrooney 
-Tags: slideshow, gallery, images, photos, photographs, portfolio, jquery, cycle, indexexhibit, mobile, iphone, slider
+Tags: slideshow, responsive, gallery, images, photos, photographs, portfolio, jquery, cycle,mobile, iphone, slider
 Requires at least: 3.0
-Tested up to: 3.4.0
-Stable tag: 1.3.7
+Tested up to: 3.4.2
+Stable tag: 1.4.0
 
-Easily add a clean and simple javascript slideshow to your site. The slideshow integrates well into any design, supports fluid-width themes, and offers lots of options for power users, too. 
+Easily add a clean, responsive javascript slideshow to your site. The slideshow integrates well into any design, supports fluid-width themes, and offers lots of options for power users, too. 
 
 For more advanced features, please be sure to check out [Portfolio Slideshow Pro](http://madebyraygun.com/wordpress/plugins/portfolio-slideshow-pro/). Portfolio Slideshow Pro includes:
 
@@ -195,6 +195,12 @@ Attention upgraders! The plugin has been completely re-written based on our Port
 
 == Changelog ==
 
+1.4.0
+
+* Smarter jQuery loading for better compatibility with more themes. You may need to check your options to make sure this is set correctly.
+* ScrollHorz transition is now responsive.
+* Nowrap setting is now called "loop". 
+
 1.3.7
 
 * Fix for minor CSS conflict with Twitter bootstrap.
@@ -217,6 +223,7 @@ Attention upgraders! The plugin has been completely re-written based on our Port
 1.3.3 
 
 * External links weren't opening in some situations.
+
 1.3.2
 
 * Fix for "click to advance" problem in new installations. 
