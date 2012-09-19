@@ -3,7 +3,7 @@ Contributors: daltonrooney
 Tags: slideshow, responsive, gallery, images, photos, photographs, portfolio, jquery, cycle,mobile, iphone, slider
 Requires at least: 3.0
 Tested up to: 3.4.2
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 
 Easily add a clean, responsive javascript slideshow to your site. The slideshow integrates well into any design, supports fluid-width themes, and offers lots of options for power users, too. 
 
@@ -194,6 +194,10 @@ Attention upgraders! The plugin has been completely re-written based on our Port
 
 
 == Changelog ==
+
+1.4.1
+
+* Fixed typo in minified script that prevented some slideshows from loading.
 
 1.4.0
 
