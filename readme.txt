@@ -172,7 +172,7 @@ If you would like to change the size of the images system-wide (for example, you
 
 == Upgrade Notice ==
 
-= 1.5 =
+= 1.5.0 =
 WordPress 3.5 removed the ability to sort your attached images so we've added a custom metabox to bring back this functionality. We'll be adding more flexible media management tools in Portfolio Slideshow 2.0!
 
 == Screenshots ==
