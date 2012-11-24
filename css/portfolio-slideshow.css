@@ -105,6 +105,10 @@
 	display: none
 }
 
+.slideshow-wrapper .pager {
+	margin: 10px 0;
+}
+
 .slideshow-wrapper .pager img {
 	opacity: .5;
 	filter: alpha(opacity=50);
@@ -113,9 +117,7 @@
 	margin: 0;
 	float: left;
 	width: 75px;
-
 	height: auto
-
 }
 
 .slideshow-wrapper .pager img.activeSlide {
@@ -126,6 +128,7 @@
 .slideshow-wrapper .pager img:hover {
 	cursor: pointer
 }
+
 .slideshow-info {
 	font-size: .9em;
 	margin-right: 20px

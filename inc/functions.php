@@ -6,6 +6,16 @@ if ( $ps_options['version']  < PORTFOLIO_SLIDESHOW_VERSION ) { // If the version
 	require ( PORTFOLIO_SLIDESHOW_PATH . 'inc/upgrader.php' );
 }
 
+
+/* A small function to determine if a particular plugin is active */
+if ( ! function_exists( 'ps_plugin_is_active' ) ) {
+	function ps_plugin_is_active($plugin_var) {
+		return in_array( $plugin_var. '/' .$plugin_var. '.php', apply_filters( 'active_plugins',get_option( 'active_plugins' ) ) );
+	}
+}
+
+require ( PORTFOLIO_SLIDESHOW_PATH . 'inc/metabox.php' );
+
 $ps_options = get_option( 'portfolio_slideshow_options' ); 
 
 //lets set up the shortcode
