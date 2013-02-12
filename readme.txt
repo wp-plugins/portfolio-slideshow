@@ -2,8 +2,8 @@
 Contributors: daltonrooney 
 Tags: slideshow, responsive, gallery, images, photos, photographs, portfolio, jquery, cycle,mobile, iphone, slider
 Requires at least: 3.0
-Tested up to: 3.5.0
-Stable tag: 1.5.0
+Tested up to: 3.5.1
+Stable tag: 1.5.1
 
 Add a clean, responsive javascript slideshow to your site. The slideshow integrates well into any design, supports fluid-width themes, and offers lots of options for power users, too. 
 
@@ -172,7 +172,7 @@ If you would like to change the size of the images system-wide (for example, you
 
 == Upgrade Notice ==
 
-= 1.5.0 =
+= 1.5 =
 WordPress 3.5 removed the ability to sort your attached images so we've added a custom metabox to bring back this functionality. We'll be adding more flexible media management tools in Portfolio Slideshow 2.0!
 
 == Screenshots ==
@@ -190,6 +190,10 @@ WordPress 3.5 removed the ability to sort your attached images so we've added a 
 6. Adding an external URL to a slide.
 
 == Changelog ==
+
+1.5.1 
+
+* Compatibility update for jQuery 1.9.
 
 1.5.0 
 

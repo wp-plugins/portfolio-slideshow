@@ -67,7 +67,7 @@
 		psFluid = portfolioSlideshowOptions.psFluid;
 		psHash = portfolioSlideshowOptions.psHash;
 	
-		if ( jQuery.browser.msie && parseInt( jQuery.browser.version ) < 8 ) { //sets ie var to true if IE is 7 or below. Necessary for some style & functionality issues.
+		if ( navigator.userAgent.match(/msie/i) && navigator.userAgent.match(/8/) ) { //sets ie var to true if 
 			ie = true; 
 		} else { 
 			ie = false 
