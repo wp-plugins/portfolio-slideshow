@@ -2,8 +2,8 @@
 Contributors: daltonrooney 
 Tags: slideshow, responsive, gallery, images, photos, photographs, portfolio, jquery, cycle,mobile, iphone, slider
 Requires at least: 3.0
-Tested up to: 3.5.0
-Stable tag: 1.5.0
+Tested up to: 3.5.1
+Stable tag: 1.5.1
 
 Add a clean, responsive javascript slideshow to your site. The slideshow integrates well into any design, supports fluid-width themes, and offers lots of options for power users, too. 
 
@@ -27,6 +27,8 @@ Extract the zip file and upload the contents to the wp-content/plugins/ director
 The settings & reference page for the plugin is in "Settings -> Portfolio Slideshow" 
 
 To use the plugin, upload your photos to your post or page using the "Upload and Manage Images" button in the Portfolio Slideshow metabox. Use the [portfolio_slideshow] shortcode to display the slideshow in your page or post (see screenshots for an example).
+
+Since WordPress 3.5, the media uploader looks slightly different than it used to, but everything works the same as it always has. [Here's a video](http://www.youtube.com/watch?v=K1mNLv4GfgU) of how to upload images in WordPress 3.5. 
 
 By default, the slideshow will use the medium version of the image that WordPress generates when you upload an image. You can change this default in the Settings panel or on a per-slideshow basis. The image sizes available are  "thumbnail", "medium", "large", and "full". 
 
@@ -146,7 +148,7 @@ On single posts and pages, you can enable this feature to udpate the URL of the 
 
 Q: How do I insert a slideshow into a post or page?
 
-A: Upload your photos to the post or page using the media uploader. The media uploader also allows you to assign titles and captions, sort, and delete photos. Then add the shortcode [portfolio_slideshow] where you want the slideshow to appear in the page. See screenshots 2 and 3 for an example.
+A: Upload your photos to the post or page using the media uploader. The media uploader also allows you to assign titles and captions, sort, and delete photos. Then add the shortcode [portfolio_slideshow] where you want the slideshow to appear in the page. See screenshots 2 and 3 for an example. [Here's a video](http://www.youtube.com/watch?v=K1mNLv4GfgU) of how to upload images in WordPress 3.5.
 
 One common mistake is to insert the images into the post using the content editor. This is not necessary--the plugin detects all images attached to the post and creates the slideshow automatically. 
 
@@ -172,7 +174,7 @@ If you would like to change the size of the images system-wide (for example, you
 
 == Upgrade Notice ==
 
-= 1.5.0 =
+= 1.5 =
 WordPress 3.5 removed the ability to sort your attached images so we've added a custom metabox to bring back this functionality. We'll be adding more flexible media management tools in Portfolio Slideshow 2.0!
 
 == Screenshots ==
@@ -190,6 +192,10 @@ WordPress 3.5 removed the ability to sort your attached images so we've added a 
 6. Adding an external URL to a slide.
 
 == Changelog ==
+
+1.5.1 
+
+* Compatibility update for jQuery 1.9.
 
 1.5.0 
 
