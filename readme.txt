@@ -28,6 +28,8 @@ The settings & reference page for the plugin is in "Settings -> Portfolio Slides
 
 To use the plugin, upload your photos to your post or page using the "Upload and Manage Images" button in the Portfolio Slideshow metabox. Use the [portfolio_slideshow] shortcode to display the slideshow in your page or post (see screenshots for an example).
 
+Since WordPress 3.5, the media uploader looks slightly different than it used to, but everything works the same as it always has. [Here's a video](http://www.youtube.com/watch?v=K1mNLv4GfgU) of how to upload images in WordPress 3.5. 
+
 By default, the slideshow will use the medium version of the image that WordPress generates when you upload an image. You can change this default in the Settings panel or on a per-slideshow basis. The image sizes available are  "thumbnail", "medium", "large", and "full". 
 
 **The shortcode supports the following attributes:**
@@ -146,7 +148,7 @@ On single posts and pages, you can enable this feature to udpate the URL of the 
 
 Q: How do I insert a slideshow into a post or page?
 
-A: Upload your photos to the post or page using the media uploader. The media uploader also allows you to assign titles and captions, sort, and delete photos. Then add the shortcode [portfolio_slideshow] where you want the slideshow to appear in the page. See screenshots 2 and 3 for an example.
+A: Upload your photos to the post or page using the media uploader. The media uploader also allows you to assign titles and captions, sort, and delete photos. Then add the shortcode [portfolio_slideshow] where you want the slideshow to appear in the page. See screenshots 2 and 3 for an example. [Here's a video](http://www.youtube.com/watch?v=K1mNLv4GfgU) of how to upload images in WordPress 3.5.
 
 One common mistake is to insert the images into the post using the content editor. This is not necessary--the plugin detects all images attached to the post and creates the slideshow automatically. 
 
