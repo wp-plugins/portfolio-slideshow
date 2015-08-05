@@ -10,7 +10,7 @@ Add a clean, responsive JavaScript slideshow to your site.
 == Description ==
 
 ><strong>Requirements:</strong> PHP 5.3 or higher is required to use this plugin.
-
+>
 ><strong>Support:</strong> I'll do my best to help troubleshoot bugs, but should set expectations early that customer support is not provided for this plugin at this time.
 
 Portfolio Slideshow adds a simple slideshow builder to posts and pages on your site. Upload images there, drag them around to order them as desired, and publish the post or page.
