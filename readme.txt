@@ -7,10 +7,17 @@ Stable tag: 1.9.9
 
 Add a clean, responsive JavaScript slideshow to your site.
 
-><strong>Requirements:</strong> PHP 5.3 or higher is required to use this plugin.
-><strong>Support:</strong> I'll do my best to help troubleshoot bugs, but should set expectations early that customer support is not for this plugin at this time.
+== Description ==
 
-More information about this plugin – and version 1.9.9 – is coming soon.
+><strong>Requirements:</strong> PHP 5.3 or higher is required to use this plugin.
+
+><strong>Support:</strong> I'll do my best to help troubleshoot bugs, but should set expectations early that customer support is not provided for this plugin at this time.
+
+Portfolio Slideshow adds a simple slideshow builder to posts and pages on your site. Upload images there, drag them around to order them as desired, and publish the post or page.
+
+Then just drop the handy `[portfolio_slideshow]` shortcode anywhere in that post or page, and voila – a simple, customizable slideshow will appear on your site.
+
+More information about this plugin is coming soon – as is version 1.10.0, which is already full of many improvements. Stay tuned!
 
 == Installation ==
 
