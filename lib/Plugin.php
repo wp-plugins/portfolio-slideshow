@@ -6,7 +6,7 @@ defined( 'WPINC' ) or die;
 
 class Plugin {
 
-	const VERSION = '1.9.9';
+	const VERSION = '1.10.0';
 
 	protected static $instance;
 
@@ -127,7 +127,7 @@ class Plugin {
 		}
 
 		if ( in_array( $hook, $slugs ) && in_array( get_post_type(), $this->get_supported_types() ) || 'settings_page_portfolio_slideshow' == $hook ) {
-			wp_enqueue_style( 'portfolio-slideshow-admin-css', self::asset_url( 'admin.css', true ), $css_deps, self::VERSION, 'all' );
+			wp_enqueue_style( 'portfolio-slideshow-admin-css', self::asset_url( 'admin.css' ), $css_deps, self::VERSION, 'all' );
 			wp_enqueue_script( 'portfolio-slideshow-admin-js', self::asset_url( 'admin.js', true ), $js_deps, self::VERSION, true );
 
 			wp_localize_script( 'portfolio-slideshow-admin-js', 'portfolio_slideshow_admin_i18n', [
@@ -155,21 +155,14 @@ class Plugin {
 		$js_deps  = [];
 
 		wp_register_style( 'psp-noscript-css', self::asset_url( 'noscript.css' ), [], self::VERSION, 'all' );
-		wp_register_style( 'psp-fancybox-css', self::asset_url( 'vendor/fancybox/jquery.fancybox-1.3.4.css' ), [], '1.3.4', 'all' );
 		wp_register_style( 'psp-photoswipe-css', self::asset_url( 'vendor/photoswipe.css', true ), [], self::VERSION, 'all' );
 
 		wp_register_script( 'psp-scrollable', self::asset_url( 'vendor/scrollable.js', true ), [ 'jquery' ], '1.2.5', true );
-		wp_register_script( 'psp-fancybox-js', self::asset_url( 'vendor/fancybox/jquery.fancybox-1.3.4.pack.js' ), [ 'jquery' ], '1.3.4', true );
 		wp_register_script( 'psp-photoswipe-js', self::asset_url( 'vendor/code.photoswipe.jquery-3.0.4.js' ), [ 'jquery' ], self::VERSION, true );
 		wp_register_script( 'psp-cycle', self::asset_url( 'vendor/jquery-cycle/jquery.cycle.all.min.js' ), [ 'jquery' ], '2.99', true );
 
 		if ( 'true' == self::get_option( 'scrollable' ) ) {
 			$js_deps[] = 'psp-scrollable';
-		}
-
-		if ( 'true' == self::get_option( 'fancybox' ) ) {
-			$css_deps[] = 'psp-fancybox-css';
-			$js_deps[]  = 'psp-fancybox-js';
 		}
 
 		if ( 'true' == self::get_option( 'photoswipe' ) ) {
