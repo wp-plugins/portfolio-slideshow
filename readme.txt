@@ -175,9 +175,7 @@ If you would like to change the size of the images system-wide (for example, you
 
 = 1.10.0 =
 
-Some users have reported their slideshows not working after updating. While you should backup your site before installing or updating *any* theme or plugin, it's important to note that your slideshow data *is not gone*. It's just not showing up.
-
-If you encounter issues like this, your best option is to temporarily downgrade to version 1.5.1, [which you can download here](https://wordpress.org/plugins/portfolio-slideshow/developers/).
+Some users have reported their slideshow images not appearing after updating. Version 1.10.0 should fix this. If you find that it doesn't your best option is to temporarily downgrade to version 1.5.1, [which you can download here](https://wordpress.org/plugins/portfolio-slideshow/developers/).
 
 == Screenshots ==
 
