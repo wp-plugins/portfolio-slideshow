@@ -3,7 +3,7 @@ Contributors: ggwicz, daltonrooney
 Tags: slideshow, responsive, gallery, images, photos, photographs, portfolio, jquery, cycle, mobile, iphone, slider
 Requires at least: 4.1
 Tested up to: 4.2.4
-Stable tag: 1.9.9
+Stable tag: 1.10.0
 
 Add a clean, responsive JavaScript slideshow to your site.
 
@@ -143,36 +143,41 @@ On single posts and pages, you can enable this feature to udpate the URL of the 
 
 == Frequently Asked Questions ==
 
-Q: How do I insert a slideshow into a post or page?
+= Q: How do I insert a slideshow into a post or page? =
 
-A: Upload your photos to the post or page using the media uploader. The media uploader also allows you to assign titles and captions, sort, and delete photos. Then add the shortcode [portfolio_slideshow] where you want the slideshow to appear in the page. See screenshots 2 and 3 for an example. [Here's a video](http://www.youtube.com/watch?v=K1mNLv4GfgU) of how to upload images in WordPress 3.5.
+A: Upload your photos to the post or page using the "Add Slides" metabox. You can drag-n-drop images into the uploader that pops up, add captions and descriptions to these images, etc.
 
-One common mistake is to insert the images into the post using the content editor. This is not necessary--the plugin detects all images attached to the post and creates the slideshow automatically. 
+Then, simply add the shortcode `[portfolio_slideshow]` where you want the slideshow to appear in the page, and publish the post. Nice!
 
+One common mistake is to insert the images into the post using the content editor. This is not necessary – the plugin detects all images attached to the post and creates the slideshow automatically. 
 
-Q: Does the plugin support images that are not uploaded via the media uploader?
+= Q: Does the plugin support images that are not uploaded via the media uploader? =
 
-A: No, the plugin does not support random folders of images or images on a third-party site. All images must be uploaded using the media uploader, which creates the database entries the plugin relies on to generate the slideshow. This behavior will not change in future versions of the plugin.
+A: No, the plugin does not support random folders of images or images on a third-party site at this time.
 
+= Q: Why isn't my slideshow loading? =
 
-Q: Why isn't my slideshow loading?
+A: If the images show up fine in the "Add Slides" metabox in your admin, but don't on the front-end, this could be a theme conflict. Your best option is to inspect the page with a browser console open, and/or to set `WP_DEBUG` to `true` in your site's `wp-config.php` file to see if any PHP errors show up on your site.
 
-A: If you can see the first slide, but clicking doesn't do anything, this is often caused by a jQuery library conflict. View the HTML source of the page which is supposed to show the slideshow. Do you see more than one copy of jQuery or the Cycle plugin being loaded? This plugin uses the wp_enqueue() function to load the necessary javascript libraries, which is the generally accepted way to do it. If your theme or other plugins load those same files directly, you will have a conflict.
+If you can see the first slide of the slideshow, but clicking doesn't do anything, this is almost always a JavaScript conflict from your theme (or another plugin). It could caused by a jQuery library conflict. View the HTML source of the page which is supposed to show the slideshow. Do you see more than one copy of jQuery or the Cycle plugin being loaded? If your theme or other plugins load those same files directly, you will have a conflict. Your best option here is to manually dequeue conflicting scripts. Check out [the `wp_dequeue_script()` function](https://codex.wordpress.org/Function_Reference/wp_dequeue_script) for more information on doing so.
 
-Try disabling other plugins and switching to the default theme and see if that fixes the problem. You may need to get in touch with the author of that plugin to make sure they are loading jQuery correctly.
+= Q: I haven't found multiple versions of a conflicting file. In fact, I can't see jQuery Cycle or Portfolio Slideshow's CSS loading at all! What gives? =
 
-One other problem that I've seen is the missing "cycle" plugin. View your source to see if "jquery.cycle.all.min.js" is being loaded. If not, make sure your theme has the line <?php wp_footer() ?> in footer.php, which is where the cycle script is loaded. All themes should have this line, but every once in a while it goes missing.
+If you don't see the jQuery Cycle plugin or Portfoliio Slideshow JavaScript and CSS files being loaded on posts and pages with the `[portfolio_slideshow]`, then 99 times out of 100 this means that your theme is not using the required WordPress theme functions `wp_head()` and/or `wp_footer()`. These functions are *required* for almost all plugins to work correctly, not just Portfolio Slideshow. Consider the lobster. Then consider using a different theme.
 
-Q: How do I change the size of the images?
+= Q: How do I change the size of the images? =
 
 A: By default, the slideshow uses the large-size images that are generated by WordPress when you upload an image. You can change this default in the settings panel for the plugin, or on a per-page basis using the size attribute (see installation instructions for usage).
 
-If you would like to change the size of the images system-wide (for example, you want a large image to be 800px instead of 1025px) you can change the WordPress settings in the "Settings -> Media" control panel. You will need to regenerate your thumbnails to make the setting retroactive.
+If you would like to change the size of the images system-wide (for example, you want a large image to be 800px instead of 1025px) you can change the WordPress settings in the "Settings -> Media" control panel. You will need to regenerate your thumbnails to make the setting retroactive. If you're in this situation, I cannot recommend the aptly named Regenerate Thumbnails plugin enough! [Download it here](https://wordpress.org/plugins/regenerate-thumbnails/). I have used that on sites with thousands and thousands of large images, and it works wonders.
 
 == Upgrade Notice ==
 
-= 1.5 =
-WordPress 3.5 removed the ability to sort your attached images so we've added a custom metabox to bring back this functionality. We'll be adding more flexible media management tools in Portfolio Slideshow 2.0!
+= 1.10.0 =
+
+Some users have reported their slideshows not working after updating. While you should backup your site before installing or updating *any* theme or plugin, it's important to note that your slideshow data *is not gone*. It's just not showing up.
+
+If you encounter issues like this, your best option is to temporarily downgrade to version 1.5.1, [which you can download here](https://wordpress.org/plugins/portfolio-slideshow/developers/).
 
 == Screenshots ==
 
@@ -190,7 +195,17 @@ WordPress 3.5 removed the ability to sort your attached images so we've added a 
 
 == Changelog ==
 
-1.9.9
+= 1.10.0 =
+
+* FIX: A few fixes to address the retrieval of slides, which should mean your pre-1.9.9 slideshows will work fine in many more cases than with the 1.9.9 release itself.
+
+* FIX: Fixed some "Undefined Index" PHP notices with a few slideshow arguments.
+
+* FIX: Removal of unnecessary "protected" access on several class methods and properties.
+
+* FIX: Removal of a handful of unnecessary JavaScript and CSS files that could cause 404 errors on pages if loaded.
+
+= 1.9.9 =
 
 * Ported the existing plugin to PHP 5.3-compatible code and laid the foundation for some major changes in the next few versions: 1.10.x, and then  2.0.0
 

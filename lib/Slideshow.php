@@ -8,11 +8,11 @@ defined( 'WPINC' ) or die;
 
 class Slideshow {
 
-	protected $args;
-	protected $ID;
-	protected $slides;
+	public $args;
+	public $ID;
+	public $slides;
 
-	protected $key;
+	public $key;
 
 	public function __construct( $args = [] ) {
 		$this->args = $args;
@@ -39,7 +39,7 @@ class Slideshow {
 	 * @param string $arg
 	 * @return string|array|false
 	 */
-	protected function arg( $arg ) {
+	public function arg( $arg ) {
 		return isset( $this->args[ $arg ] ) ? $this->args[ $arg ] : false;
 	}
 
@@ -48,14 +48,12 @@ class Slideshow {
 	 *
 	 * @return array
 	 */
-	protected function get_slides() {
+	public function get_slides() {
 
 		$slides   = get_post_meta( $this->ID, '_portfolio_slideshow', true );
 		$excluded = [];
 
-		/**
-		 * @todo Remove this?– just for testing right now.
-		 */
+
 		if ( empty( $slides ) ) {
 			
 			$slides = [];
@@ -87,8 +85,9 @@ class Slideshow {
 			$slides_query_args = apply_filters( 'portfolio_slideshow_slides_query_args', $slides_query_args );
 	
 			$slides_query = new WP_Query( $slides_query_args );
-	
+
 			if ( $slides_query->have_posts() ) {
+
 				while ( $slides_query->have_posts() ) {
 					$slides_query->the_post();
 
@@ -97,6 +96,7 @@ class Slideshow {
 						'caption' => isset( $slides_query->post->post_excerpt ) && is_string( $slides_query->post->post_excerpt ) ? $slides_query->post->post_excerpt : '',
 						'url'     => sanitize_text_field( get_post_meta( $slides_query->post->ID, '_ps_image_link', true ) )
 					];
+
 				}
 			}
 
@@ -111,7 +111,7 @@ class Slideshow {
 			shuffle( $slides );
 		}
 
-		if ( 'true' == $this->args['exclude_featured'] && current_theme_supports( 'post-thumbnails' ) ) {
+		if (  'true' == $this->arg( 'exclude_featured' ) && current_theme_supports( 'post-thumbnails' ) ) {
 			$excluded[] = get_post_thumbnail_id( $this->ID );
 		}
 
@@ -137,7 +137,7 @@ class Slideshow {
 			}
 		}
 
-		return portfolio_slideshow_sanitize_text_field_deep( array_values( $slides ) );
+		return array_values( $slides );
 	}
 
 	/**
@@ -205,7 +205,7 @@ class Slideshow {
 	 *
 	 * @return void
 	 */
-	protected function the_slides() {
+	public function the_slides() {
 		$key = absint( $this->key );
 		$slides_count     = count( $this->slides );
 		$maybe_min_height = '';
@@ -227,7 +227,7 @@ class Slideshow {
 	 *
 	 * @return void
 	 */
-	protected function the_nav() {
+	public function the_nav() {
 		$key = absint( $this->key );
 
 		include Plugin::plugin_path() . 'views/nav/text.php';
@@ -238,7 +238,7 @@ class Slideshow {
 	 *
 	 * @return void
 	 */
-	protected function the_pager() {
+	public function the_pager() {
 		$key    = absint( $this->key );
 		$slides = $this->slides;
 
@@ -250,7 +250,7 @@ class Slideshow {
 	 *
 	 * @return void
 	 */
-	protected function the_meta() {
+	public function the_meta() {
 		$slides     = $this->slides;
 		$showtitles = $this->arg( 'showtitles' );
 		$showcaps   = $this->arg( 'showcaps' );
@@ -264,7 +264,7 @@ class Slideshow {
 	 *
 	 * @return string
 	 */
-	protected function public_add_slides_notice() {
+	public function public_add_slides_notice() {
 		$post_type    = get_post_type( $this->ID );
 		$current_user = get_current_user_id();
 
@@ -285,7 +285,7 @@ class Slideshow {
 	 *
 	 * @return string
 	 */
-	protected function public_is_feed_notice() {
+	public function public_is_feed_notice() {
 		echo wp_get_attachment_image( $this->slides[0]['image'], $this->arg( 'size' ) );
 	}
 }

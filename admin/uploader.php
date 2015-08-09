@@ -8,14 +8,19 @@
  * @since 1.9.9
  * @return void
  */
+
 $post_id         = absint( $post->ID );
-$existing_slides = get_post_meta( $post_id, '_portfolio_slideshow', true );
+$slideshow       = new \Portfolio_Slideshow\Slideshow( [ 'id' => $post_id ] );
+
+$existing_slides = $slideshow->slides;
 
 wp_nonce_field( 'portfolio_slideshow_save_metabox_slides', 'portfolio_slideshow_metabox_slides_' . $post_id ); ?>
 
+<?php if ( ! is_array( $existing_slides ) || empty( $existing_slides ) ) : ?>
 <p class="portfolio-slideshow-no-slides-prompt" style="<?php echo empty( $existing_slides ) ? '' : 'display: none;' ?>">
 	<?php esc_html_e( 'Get started by adding some slides – use the "Add Slides" button below.', 'portfolio-slideshow-pro' ); ?>
 </p>
+<?php endif; ?>
 
 <ol class="portfolio-slideshow-metabox-slides portfolio-slideshow-draggable-area clearfix">
 
